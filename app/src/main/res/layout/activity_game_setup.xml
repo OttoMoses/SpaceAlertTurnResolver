@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:minWidth="25px"
+    android:minHeight="25px">
+
+    <TextView
+        android:id="@+id/SetupLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Input board state before resolving"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+    <Button
+        android:text="Players"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/PlayersEditButton" />
+
+    <Button
+        android:id="@+id/ThreatTracksButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Threat Tracks" />
+
+    <Button
+        android:id="@+id/ThreatsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Threats" />
+
+    <Button
+        android:text="Resolve"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/ResolveButton" />
+</LinearLayout>
