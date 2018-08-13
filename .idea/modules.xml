@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SpacealertResolver.iml" filepath="$PROJECT_DIR$/SpacealertResolver.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SpaceAlertTurnResolver.iml" filepath="$PROJECT_DIR$/SpaceAlertTurnResolver.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>

@@ -1213,8 +1213,8 @@
         <health>4</health>
         <speed>2</speed>
         <locations>
-            <location section="1" zone="0"/>
-            <location section="0" zone="2"/>
+            <location section="0" zone="0"/>
+            <location section="1 " zone="2"/>
         </locations>
         <threatType>malfC</threatType>
         <xAction>
@@ -1234,7 +1234,10 @@
                 <locationY>1</locationY>
             </effect>
         </zAction>
-        <damageAction type="malfMultiBonus">C</damageAction>
+        <damageAction type="malfMultiBonus">
+            <target>C</target>
+            <bonus>1</bonus>
+        </damageAction>
         <deathAction/>
         <spawnAction>
             <effect type="setPosition" />

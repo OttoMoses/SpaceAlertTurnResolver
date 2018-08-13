@@ -36,7 +36,7 @@ public class SetInternalPosition extends ActionEffectInternal {
                 {
                     location = ship[p.first][p.second];
                     location.malfC = true;
-                    message += "A Malfunction of the type " + threat.name + " occurs in the " + location.sectionName + " " + location.zoneName + " C system!";
+                    message += "A Malfunction of the type " + threat.name + " occurs in the " + location.sectionName + " " + location.zoneName + " C system!\n";
                 }
                 break;
             case malfB:

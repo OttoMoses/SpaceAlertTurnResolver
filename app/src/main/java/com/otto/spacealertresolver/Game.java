@@ -65,6 +65,7 @@ import com.otto.spacealertresolver.ThreatActions.External.ActionExternalToggle;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalTurboLift;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternal;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalCombat;
+import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfMultiBonus;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfSingle;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnSpawnSetHealth;
 import com.otto.spacealertresolver.ThreatActions.Internal.SetInternalPosition;
@@ -155,6 +156,7 @@ public class Game
                 new BlankAction(),
                 new MoveRedAction(),
                 new MoveBlueAction(),
+                new HeroicMoveAction(),
                 new AAction(),
                 new BAction(),
                 new CAction(),
@@ -1263,7 +1265,7 @@ public class Game
 
         expression = xPath.compile("./damageAction");
         data = (Element)expression.evaluate(node,XPathConstants.NODE);
-        threat.damageEffect = GetInternalDamageEffect(data);
+        threat.damageEffect = GetInternalDamageEffect(data,xPath);
         return threat;
     }
     private ThreatExternal BuildThreatExternal(XPath xPath, Node node, int trackNum) throws XPathExpressionException
@@ -1542,8 +1544,7 @@ public class Game
         }
         return effect;
     }
-    private OnDamageInternal GetInternalDamageEffect(Element damType)
-    {
+    private OnDamageInternal GetInternalDamageEffect(Element damType,XPath xPath) throws XPathExpressionException {
         OnDamageInternal effect = null;
         String type = damType.getAttribute("type");
         switch (type)
@@ -1558,6 +1559,14 @@ public class Game
 
                 effect = new OnDamageInternalMalfSingle(damType.getTextContent());
                 break;
+            }
+            case "malfMultiBonus":
+            {
+                XPathExpression expression = xPath.compile("./target");
+                String target = (String) expression.evaluate(damType, XPathConstants.STRING);
+                expression = xPath.compile("./bonus");
+                int bonus = Integer.parseInt((String) expression.evaluate(damType, XPathConstants.STRING));
+                effect = new OnDamageInternalMalfMultiBonus(target,bonus);
             }
         }
         return effect;

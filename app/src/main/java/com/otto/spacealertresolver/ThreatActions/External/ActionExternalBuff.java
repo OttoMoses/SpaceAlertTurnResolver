@@ -38,7 +38,7 @@ public class ActionExternalBuff extends ActionEffectExternal
                 {
                     damage = 0;
                     threat.damage = damage;
-                    actionText += "The " + threat.name + " Heals to all of it's damage!\n";
+                    actionText += "The " + threat.name + " Heals all of it's damage!\n";
                 }
                 else
                 {

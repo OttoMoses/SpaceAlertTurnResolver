@@ -27,11 +27,15 @@ public class OnDamageInternalMalfSingle extends OnDamageInternal
             {
                 if(!location.malfBDamage.isEmpty())
                 {
-                    for (InternalDamageBundle db:location.malfBDamage)
+                    for (InternalDamageBundle db:location.malfCDamage)
                     {
-                        message += ProcessDamageBundle(db,threat);
+                        if (threat.damage < threat.health)
+                        {
+                            message += ProcessDamageBundle(db, threat);
+                        }
                     }
                 }
+                break;
             }
             case "C" :
             {
@@ -39,13 +43,18 @@ public class OnDamageInternalMalfSingle extends OnDamageInternal
                 {
                     for (InternalDamageBundle db:location.malfCDamage)
                     {
-                        message += ProcessDamageBundle(db,threat);
+                        if (threat.damage < threat.health)
+                        {
+                            message += ProcessDamageBundle(db, threat);
+                        }
                     }
                 }
+                break;
             }
             default :
             {
                 System.out.print(threat.name + " has an error in it's damage action");
+                break;
             }
         }
         return message;
