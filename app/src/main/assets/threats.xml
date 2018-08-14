@@ -9,7 +9,7 @@
             <movement>2</movement>
             <health>5</health>
             <shield>1</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="damage">
                     <zone>1</zone>
@@ -55,7 +55,7 @@
             <movement>2</movement>
             <health>5</health>
             <shield>2</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="damage">
                     <zone>2</zone>
@@ -101,7 +101,7 @@
             <movement>4</movement>
             <health>4</health>
             <shield>2</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="toggle">
                 </effect>
@@ -142,7 +142,7 @@
             <movement>2</movement>
             <health>5</health>
             <shield>3</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="shieldDrain">
                     <amount>all</amount>
@@ -185,7 +185,7 @@
             <movement>2</movement>
             <health>5</health>
             <shield>2</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="damage">
                     <zone>2</zone>
@@ -231,7 +231,7 @@
             <movement>3</movement>
             <health>4</health>
             <shield>1</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="damage">
                     <zone>2</zone>
@@ -277,7 +277,7 @@
             <movement>3</movement>
             <health>4</health>
             <shield>2</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="damage">
                     <zone>2</zone>
@@ -323,7 +323,7 @@
             <movement>2</movement>
             <health>4</health>
             <shield>3</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="damage">
                     <zone>2</zone>
@@ -366,7 +366,7 @@
             <movement>2</movement>
             <health>8</health>
             <shield>0</shield>
-            <rocketImmune>true</rocketImmune>
+            <rocketImmune>1</rocketImmune>
             <xAction>
                 <effect type="buff">
                     <stat>damage</stat>
@@ -406,7 +406,7 @@
             <movement>5</movement>
             <health>5</health>
             <shield>0</shield>
-            <rocketImmune>true</rocketImmune>
+            <rocketImmune>1</rocketImmune>
             <zAction>
                 <effect type="damage">
                     <zone>2</zone>
@@ -434,7 +434,7 @@
             <movement>2</movement>
             <health>7</health>
             <shield>2</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="damage">
                     <zone>2</zone>
@@ -480,7 +480,7 @@
             <movement>1</movement>
             <health>9</health>
             <shield>2</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="damage">
                     <zone>2</zone>
@@ -534,7 +534,7 @@
             <movement>2</movement>
             <health>8</health>
             <shield>3</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="damage">
                     <zone>2</zone>
@@ -584,7 +584,7 @@
             <movement>3</movement>
             <health>4</health>
             <shield>2</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="damage">
                     <zone>1</zone>
@@ -630,7 +630,7 @@
             <movement>2</movement>
             <health>7</health>
             <shield>1</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="damage">
                     <zone>2</zone>
@@ -676,7 +676,7 @@
             <movement>2</movement>
             <health>8</health>
             <shield>1</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="damage">
                 <zone>1</zone>
@@ -723,7 +723,7 @@
             <movement>5</movement>
             <health>5</health>
             <shield>3</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <xAction>
                 <effect type="shieldDrain">
                     <amount>all</amount>
@@ -766,7 +766,7 @@
             <movement>3</movement>
             <health>9</health>
             <shield>0</shield>
-            <rocketImmune>false</rocketImmune>
+            <rocketImmune>0</rocketImmune>
             <zAction>
                 <effect type="damage">
                     <zone>2</zone>
@@ -794,7 +794,7 @@
         <movement>4</movement>
         <health>5</health>
         <shield>2</shield>
-        <rocketImmune>false</rocketImmune>
+        <rocketImmune>0</rocketImmune>
         <xAction>
             <effect type="buff">
                 <stat>speed</stat>
@@ -839,7 +839,7 @@
         <movement>2</movement>
         <health>3</health>
         <shield>1</shield>
-        <rocketImmune>false</rocketImmune>
+        <rocketImmune>0</rocketImmune>
         <xAction>
             <effect type="globalDamageBuff">
                 <stat>attack</stat>
@@ -867,6 +867,47 @@
         </damageAction>
         <deathAction>
             <effect type="removeGlobalBuff" />
+        </deathAction>
+    </threat>
+    <threat>
+        <type>external</type>
+        <cardID>E2-03</cardID>
+        <name>Phantom Fighter</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <movement>3</movement>
+        <health>3</health>
+        <shield>3</shield>
+        <rocketImmune>2</rocketImmune>
+        <xAction>
+            <effect type="toggle">
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>2</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>3</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </zAction>
+        <damageAction>
+            <effect type="toggleExt">
+            </effect>
+        </damageAction>
+        <deathAction>
+            <effect type="none">
+            </effect>
         </deathAction>
     </threat>
     <threat>
