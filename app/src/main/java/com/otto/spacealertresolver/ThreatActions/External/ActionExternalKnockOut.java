@@ -22,21 +22,22 @@ public class ActionExternalKnockOut extends ActionEffectExternal
                 {
                     if(p.unconscious)
                     {
-                        message += p.playerName + " can't be knocked out because they are already knocked out!";
+                        message += p.playerName + " can't be knocked out because they are already knocked out!\n";
                     }
                     else
                     {
                         if(p.flyingInterceptors)
                         {
-                            message += p.playerName + " is safely off the ship flying interceptors!";
+                            message += p.playerName + " is safely off the ship flying interceptors!\n";
                         }
                         else
                         {
-                            message += p.playerName + " is knocked out!";
+                            message += p.playerName + " is knocked out!\n";
                             p.unconscious = true;
                         }
                     }
                 }
+                break;
             }
             case "self":
             {
@@ -48,22 +49,23 @@ public class ActionExternalKnockOut extends ActionEffectExternal
                     {
                         if(p.unconscious)
                         {
-                            message += p.playerName + " can't be delayed because they are already knocked out!";
+                            message += p.playerName + " can't be delayed because they are already knocked out!\n";
                         }
                         else
                         {
                             if(p.flyingInterceptors)
                             {
-                                message += p.playerName + " is safely off the ship flying interceptors!";
+                                message += p.playerName + " is safely off the ship flying interceptors!\n";
                             }
                             else
                             {
-                                message += p.playerName + " is knocked out!";
+                                message += p.playerName + " is knocked out!\n";
                                 p.unconscious = true;
                             }
                         }
                     }
                 }
+                break;
             }
         }
         return message;

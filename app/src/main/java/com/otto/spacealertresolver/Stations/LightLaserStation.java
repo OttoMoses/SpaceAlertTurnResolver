@@ -18,7 +18,10 @@ public class LightLaserStation extends ActionStation
         if(!location.hasFired)
         {
             location.hasFired = true;
-            //code to fire gun goes here
+            if(heroic)
+            {
+                location.heroicFire = true;
+            }
             message += "fires the light laser cannon in " + location.sectionName+ " " + location.zoneName;
         }
         else

@@ -33,7 +33,7 @@ public class OnDamageExternalDestroyInterceptors extends OnDamageExternal
                 }
             }
         }
-        if(DBDamage == 0)
+        if(DBDamage != 0)
         {
             damage = DBDamage - t.shield;
             if(damage > 0)

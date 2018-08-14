@@ -35,16 +35,16 @@ public class Player
         String message = "";
         for(int roundCount = actions.length - 1; roundCount >= round; roundCount--)
         {
-            if(roundCount == actions.length)
+            if(roundCount == actions.length-1)
             {
-                actions[actions.length] = MainActivity.game.actions[0];
+                actions[actions.length-1] = MainActivity.game.actions[0];
             }
             else
             {
                 actions[roundCount] = actions[roundCount - 1];
             }
         }
-        message +="\n" +  playerName + " delays their actions starting at T + " + round;
+        message +="\n" +  playerName + " delays their actions starting at T + " + round + "\n";
         return  message;
     }
 }

@@ -10,7 +10,8 @@ public class ActionExternalDie extends ActionEffectExternal
     @Override
     public String Execute(Section[][] ship, ThreatExternal threat)
     {
+        game.activeThreats.remove(threat);
         game.deadThreats.add(threat);
-        return game.KillThreats(game.deadThreats);
+        return "The " + threat.name + " is destroyed!\n";
     }
 }

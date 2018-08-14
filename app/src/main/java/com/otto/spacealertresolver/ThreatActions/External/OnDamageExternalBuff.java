@@ -5,7 +5,7 @@ import android.util.Pair;
 import com.otto.spacealertresolver.ExternalDamageBundle;
 import com.otto.spacealertresolver.Threats.ThreatExternal;
 
-public class OnDamageBuff extends OnDamageExternal
+public class OnDamageExternalBuff extends OnDamageExternal
 {
     private int value;
     private String stat;
@@ -26,6 +26,7 @@ public class OnDamageBuff extends OnDamageExternal
                     case "shield":
                     {
                         t.shield += value;
+                        message += "The " + t.name + " gains " + value + " " + stat + " from being attacked with a " + source + "!\n";
                     }
                 }
             }
@@ -36,17 +37,17 @@ public class OnDamageBuff extends OnDamageExternal
             if(damage > 0)
             {
                 t.damage += damage;
-                message += "\nThe " + t.name + " takes " + damage + " damage!\n";
+                message += "The " + t.name + " takes " + damage + " damage!\n";
             }
             else
             {
-                message += "\nThe " + t.name + " blocks all damage!";
+                message += "The " + t.name + " blocks all damage!\n";
             }
         }
         return message;
     }
 
-    public OnDamageBuff(int value, String stat, String source) {
+    public OnDamageExternalBuff(int value, String stat, String source) {
         this.value = value;
         this.stat = stat;
         this.source = source;

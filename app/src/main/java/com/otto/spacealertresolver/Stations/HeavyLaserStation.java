@@ -22,6 +22,10 @@ public class HeavyLaserStation extends ActionStation
             {
                 powerSource.powerCubes--;
                 location.hasFired = true;
+                if(heroic)
+                {
+                    location.heroicFire = true;
+                }
                 //code for gun to do damage here
                 message += "fires the heavy laser cannon in the " + location.sectionName + " " + location.zoneName + " section";
                 if(powerSource.powerCubes != 0)

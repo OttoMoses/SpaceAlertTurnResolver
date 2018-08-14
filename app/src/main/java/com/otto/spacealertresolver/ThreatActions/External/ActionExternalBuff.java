@@ -24,21 +24,23 @@ public class ActionExternalBuff extends ActionEffectExternal
             case "halfHealth":
             {
                 value = threat.damage / 2;
+                break;
             }
-            case "default":
+            default:
             {
                 value = Integer.parseInt(amount);
+                break;
             }
         }
         switch (Stats.valueOf(stat))
         {
             case shieldBuff:
                 threat.shield += value;
-                actionText += "The " + threat.name + " raises it's shield by " + amount + "!\n";
+                actionText += "The " + threat.name + " raises its shield by " + value + "!\n";
                 break;
             case speed:
                 threat.speed += value;
-                actionText += "The " + threat.name + " raises it's speed by " + amount + "!\n";
+                actionText += "The " + threat.name + " raises its speed by " + value + "!\n";
                 break;
             case damage:
                 int damage = threat.damage;
@@ -46,22 +48,22 @@ public class ActionExternalBuff extends ActionEffectExternal
                 {
                     actionText += "The " + threat.name + " tries to heal but hasn't taken any damage!\n";
                 }
-                else if(value <= damage)
+                else if(value >= damage)
                 {
                     damage = 0;
                     threat.damage = damage;
-                    actionText += "The " + threat.name + " Heals all of it's damage!\n";
+                    actionText += "The " + threat.name + " Heals all of its damage!\n";
                 }
                 else
                 {
                     damage -= value;
                     threat.damage = damage;
-                    actionText += "The " + threat.name + " Heals " + amount + " damage!\n";
+                    actionText += "The " + threat.name + " Heals " + value + " damage!\n";
                 }
                 break;
             case shieldSet:
                 threat.shield = value;
-                actionText += "The " + threat.name + " sets it's shield to " + amount + "!\n";
+                actionText += "The " + threat.name + " sets its shield to " + value + "!\n";
         }
         return actionText;
     }

@@ -27,6 +27,7 @@ public class ActionExternalGlobalBuff extends ActionEffectExternal
                     action.stat = stat;
                 }
                 message += "The " + threat.name + " increases attack value for all external threats by" + value + "!";
+                break;
             }
             case "shield" :
             {
@@ -45,6 +46,7 @@ public class ActionExternalGlobalBuff extends ActionEffectExternal
                 }
                 game.globalDamageBuff += value;
                 message += "The " + threat.name + " increases shield value for all external threats by" + value + "!";
+                break;
             }
         }
         return message;

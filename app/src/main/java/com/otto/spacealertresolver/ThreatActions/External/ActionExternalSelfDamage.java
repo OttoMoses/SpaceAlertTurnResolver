@@ -10,7 +10,7 @@ public class ActionExternalSelfDamage extends ActionEffectExternal
     public String Execute(Section[][] ship, ThreatExternal threat)
     {
         threat.damage += value;
-        return "The " + threat.name + " takes " + value + " damage from its own attack!";
+        return "The " + threat.name + " takes " + value + " damage from its own attack!\n";
     }
 
     public ActionExternalSelfDamage(int value)
