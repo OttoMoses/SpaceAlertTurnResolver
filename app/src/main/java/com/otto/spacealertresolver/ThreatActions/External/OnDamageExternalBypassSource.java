@@ -32,7 +32,23 @@ public class OnDamageExternalBypassSource extends OnDamageExternal
                 {
                     if(!threat.name.equals(t.name) && threat.track == t.track)
                     {
-                        targets.add(threat);
+                        int range;
+                        if (t.position <= game.threatTracks[t.track].rangeTwo) {
+                            if (game.threatTracks[t.track].rangeTwo == 0) {
+                                range = 2;
+                            } else {
+                                t.rangeThree = true;
+                                range = 3;
+                            }
+                        } else if (t.position >= game.threatTracks[t.track].rangeTwo && t.position < game.threatTracks[t.track].rangeOne) {
+                            range = 2;
+                        } else {
+                            range = 1;
+                        }
+                        if(range <= game.ship[t.track][1].getGunRange())
+                        {
+                            targets.add(threat);
+                        }
                     }
                     if(targets.size() != 0)
                     {

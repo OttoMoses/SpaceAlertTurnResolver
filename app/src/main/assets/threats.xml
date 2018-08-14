@@ -613,7 +613,7 @@
                 </effect>
             </zAction>
             <damageAction>
-                <effect type="noRange">
+                <effect type="default">
                 </effect>
             </damageAction>
             <deathAction>
@@ -1227,7 +1227,7 @@
             </effect>
         </zAction>
         <damageAction>
-            <effect type="noRange">
+            <effect type="default">
             </effect>
         </damageAction>
         <deathAction>

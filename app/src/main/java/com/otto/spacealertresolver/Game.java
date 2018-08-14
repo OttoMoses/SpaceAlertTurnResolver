@@ -66,7 +66,6 @@ import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalLeakPowe
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalMoveBlue;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalMoveRed;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalDefault;
-import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalExcludeRange;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalToggle;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalSelfToggle;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalNoShield;
@@ -603,12 +602,26 @@ public class Game {
 
     private String ExternalThreatDamage(ArrayList<Threat> targets) {
         StringBuilder message = new StringBuilder();
-
-        //clear existing damage bundles
+        ArrayList<Threat> invalid = new ArrayList<>();
         for(Threat t : targets)
         {
+            //clear existing damage bundles
             ((ThreatExternal)t).bundle = null;
+
+            //remove invalid targets
+            if(t.name.contains("Satellite") && ((ThreatExternal) t).rangeThree)
+            {
+                invalid.add(t);
+            }
+            if(((ThreatExternal) t).damageAction.getClass() == OnDamageExternalToggle.class)
+            {
+                if(((OnDamageExternalToggle)(((ThreatExternal) t).damageAction)).toggle);
+                {
+                    invalid.add(t);
+                }
+            }
         }
+        targets.removeAll(invalid);
 
         //computeDamage
         ArrayList<ThreatExternal> redThreats = new ArrayList<>();
@@ -1501,11 +1514,8 @@ public class Game {
                 XPathExpression expression = xPath.compile("./trigger");
                 String trigger = (String) expression.evaluate(damType, XPathConstants.STRING);
                 effect = new OnDamageExternalNoShield(trigger);
-            }
-            break;
-            case "noRange":
-                effect = new OnDamageExternalExcludeRange();
                 break;
+            }
             case "bypass": {
                 XPathExpression expression = xPath.compile("./source");
                 String source = (String) expression.evaluate(damType, XPathConstants.STRING);
