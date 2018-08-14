@@ -911,6 +911,67 @@
         </deathAction>
     </threat>
     <threat>
+        <type>external</type>
+        <cardID>E2-04</cardID>
+        <name>Swarm</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <movement>2</movement>
+        <health>3</health>
+        <shield>0</shield>
+        <rocketImmune>1</rocketImmune>
+        <xAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>1</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>2</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+            <effect type="damage">
+                <zone>3</zone>
+                <damage>1</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>3</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+            <effect type="damage">
+                <zone>3</zone>
+                <damage>2</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </zAction>
+        <damageAction>
+            <effect type="maxValue">
+                <value>1</value>
+            </effect>
+        </damageAction>
+        <deathAction>
+            <effect type="none">
+            </effect>
+        </deathAction>
+    </threat>
+    <threat>
         <type>internal</type>
         <plural>true</plural>
         <cardID>I1-01</cardID>
