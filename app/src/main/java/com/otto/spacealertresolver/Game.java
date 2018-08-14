@@ -38,8 +38,12 @@ import com.otto.spacealertresolver.Stations.SuperHeavyLaserStation;
 import com.otto.spacealertresolver.Stations.WindowStation;
 import com.otto.spacealertresolver.ThreatActions.External.ActionExternalBuff;
 import com.otto.spacealertresolver.ThreatActions.External.ActionExternalDamageShip;
+import com.otto.spacealertresolver.ThreatActions.External.ActionExternalGlobalBuff;
+import com.otto.spacealertresolver.ThreatActions.External.ActionExternalMoveOthers;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternal;
+import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalBypassSource;
 import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternal;
+import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternalRemoveGlobalBonus;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionEffectInternal;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalConditionDamageMove;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDamageShip;
@@ -140,6 +144,8 @@ public class Game
     public boolean strafeHeroic;
     public int fissureMod;
     private boolean gameEnd;
+    public int globalDamageBuff;
+    public int globalShieldBuff;
 
     public Game(Context c) throws ParserConfigurationException, SAXException, IOException {
         colors = new String[]
@@ -219,6 +225,7 @@ public class Game
         observationThree = 0;
         phase = 1;
         fissureMod = 0;
+        globalDamageBuff = 0;
         BuildDamageDecks();
 
         //set player starting values
@@ -383,7 +390,7 @@ public class Game
         roundMessage += DamageThreats(externalTargets,internalTargets);
         roundMessage += KillThreats(activeThreats);
         roundMessage += "\n----Threat Move Step----\n";
-        roundMessage += MoveThreats();
+        roundMessage += MoveThreats("game");
         if(escapedThreats.size() != 0)
         {
             activeThreats.removeAll(escapedThreats);
@@ -427,16 +434,25 @@ public class Game
         return message;
     }
 
-    private String MoveThreats()
+    public String MoveThreats(String source)
     {
         String message = "\n";
         for(Threat t:activeThreats)
         {
+            int movement;
+            if(source.equals("game"))
+            {
+                 movement = t.speed;
+            }
+            else
+            {
+                movement = Integer.parseInt(source);
+            }
             ThreatTrack track = threatTracks[t.track];
-            int newPosition = t.position + t.speed;
+            int newPosition = t.position + movement;
             if(t.getClass().equals(ThreatExternal.class))
             {
-                message += "\nThe " + t.name + " moves " + t.speed + " spaces closer to the ship\n";
+                message += "\nThe " + t.name + " moves " + movement + " spaces closer to the ship\n";
             }
             else
             {
@@ -450,7 +466,7 @@ public class Game
                 {
                     message += " moves ";
                 }
-                message += t.speed +  " spaces on the internal track\n";
+                message += movement +  " spaces on the internal track\n";
             }
             //check for attack spaces
             for (int space : track.XSpace)
@@ -578,6 +594,10 @@ public class Game
         {
             if (builtThreats[currentRound - 1] != null) {
                 Threat t = builtThreats[round - 1];
+                if(t.getClass() == ThreatExternal.class)
+                {
+                    ((ThreatExternal)t).shield += globalShieldBuff;
+                }
                 activeThreats.add(t);
                 message += t.ExecuteSpawnAction(ship);
             }
@@ -978,6 +998,7 @@ public class Game
 
     public String ShipDamage(int zone, int damage,boolean bypassBonus, boolean internal,boolean plural)
     {
+        int realDamage = damage + globalDamageBuff;
         ArrayList<DamageToken> tokens = null;
         String damageMessage = "";
         if(plural)
@@ -988,7 +1009,7 @@ public class Game
         {
             damageMessage += " attacks";
         }
-        damageMessage += " the " + colors[zone] + " zone " + " for " + damage + " damage!\n";
+        damageMessage += " the " + colors[zone] + " zone " + " for " + realDamage + " damage!\n";
         Section shield = ship[zone][1];
         switch (zone)
         {
@@ -1004,11 +1025,11 @@ public class Game
         }
         if(shield.powerCubes != 0 && !internal)
         {
-            if(shield.powerCubes >= damage)
+            if(shield.powerCubes >= realDamage)
             {
                 damageMessage += "The shield in the " + shield.zoneName + " zone blocks all the damage!\n";
-                shield.powerCubes -= damage;
-                damage = 0;
+                shield.powerCubes -= realDamage;
+                realDamage = 0;
                 if(shield.powerCubes != 0)
                 {
                     damageMessage += "There is " + shield.powerCubes + " power left in the " + shield.zoneName + " zone shield.\n";
@@ -1020,7 +1041,7 @@ public class Game
             }
             else
             {
-                damage -= shield.powerCubes;
+                realDamage -= shield.powerCubes;
                 damageMessage += "The " + shield.zoneName + " zone shield blocked " + shield.powerCubes + "damage\n";
                 shield.powerCubes = 0;
                 damageMessage += "there is no power remaining in the " + shield.zoneName + " zone shield\n";
@@ -1029,15 +1050,15 @@ public class Game
         }
         if(bypassBonus)
         {
-            damage = damage * 2;
+            realDamage = realDamage * 2;
         }
         if((fissureMod == 1 && zone == 0) || fissureMod == 2)
         {
-            damage = damage *2;
+            realDamage = realDamage *2;
             damageMessage += "\n Damage is doubled by the fissure!";
         }
         damageMessage += "\n";
-        for(int i = 0; i < damage; i++)
+        for(int i = 0; i < realDamage; i++)
         {
             if(tokens.size() != 0)
             {
@@ -1353,21 +1374,41 @@ public class Game
                     effects.add(new ActionExternalDamageShip(zone, damage, bypassBonus, condition, conditionValue, damageMulti));
                     break;
                 case "buff":
+                    {
                     expression = xPath.compile("./stat");
                     String stat = (String) expression.evaluate(item, XPathConstants.STRING);
-
                     expression = xPath.compile("./amount");
                     int value = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
                     effects.add(new ActionExternalBuff(stat, value));
                     break;
+                    }
                 case "shieldDrain":
+                    {
                     expression = xPath.compile("./amount");
                     String amount = (String) expression.evaluate(item, XPathConstants.STRING);
                     effects.add(new ActionExternalShieldDrain(amount));
                     break;
+                    }
                 case "toggle":
+                    {
                     effects.add(new ActionExternalToggle());
                     break;
+                    }
+                case "globalDamageBuff" :
+                    {
+                    expression = xPath.compile("./stat");
+                    String stat = (String) expression.evaluate(item, XPathConstants.STRING);
+                    expression = xPath.compile("./value");
+                    int value = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
+                    effects.add(new ActionExternalGlobalBuff(stat,value));
+                    break;
+                    }
+                case "moveOthers" :
+                {
+                    expression = xPath.compile("./value");
+                    int value = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
+                    effects.add(new ActionExternalMoveOthers(value));
+                }
             }
         }
         threatAction = new ThreatActionExternal(effects);
@@ -1528,16 +1569,27 @@ public class Game
                 effect = new OnDamageExternalToggle();
                 break;
             case "toggleInt":
+                {
                 effect = new OnDamageExternalSelfToggle();
                 break;
+                }
             case "noShield":
+                {
                 XPathExpression expression = xPath.compile("./trigger");
                 String trigger = (String) expression.evaluate(damType, XPathConstants.STRING);
                 effect = new OnDamageExternalNoShield(trigger);
+                }
                 break;
             case "noRange":
                 effect = new OnDamageExternalExcludeRange();
                 break;
+            case "bypass" :
+            {
+                XPathExpression expression = xPath.compile("./source");
+                String source = (String) expression.evaluate(damType, XPathConstants.STRING);
+                effect = new OnDamageExternalBypassSource(source);
+                break;
+            }
             default:
                 effect = new OnDamageExternalDefault();
                 break;
@@ -1577,14 +1629,25 @@ public class Game
         String type = deathType.getAttribute("type");
         switch (type) {
             case "damageOthers":
+            {
                 effect = new OnDeathExternalDamageOthers();
                 break;
+            }
             case "damageSpaceCount":
+            {
                 effect = new OnDeathExternalDamageSpaceCount();
                 break;
+            }
+            case "removeGlobalBonus":
+            {
+                effect = new OnDeathExternalRemoveGlobalBonus();
+                break;
+            }
             default:
+            {
                 effect = null;
                 break;
+            }
         }
         return effect;
     }

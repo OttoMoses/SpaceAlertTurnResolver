@@ -22,7 +22,6 @@ public class ThreatInternal extends Threat
     public OnDeathInternal deathAction;
     public ThreatActionInternal spawnAction;
     public boolean plural;
-    public int lastDamaged;
 
     @Override
     public String ExecuteXAction(Section[][] ship, Player[] players)

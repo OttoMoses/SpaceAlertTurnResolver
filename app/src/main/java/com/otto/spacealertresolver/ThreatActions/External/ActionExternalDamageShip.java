@@ -35,60 +35,72 @@ public class ActionExternalDamageShip extends ActionEffectExternal
                 break;
         }
         String actionText = "";
-        switch (DamageConditions.valueOf(condition))
+        switch (condition)
         {
-            case none:
-                actionText = DealDamage(ship,threat);
+            case "none":
+                {
+                actionText = DealDamage(ship, threat,false);
+                }
             break;
-            case ifDamaged:
-                if(threat.damage != 0)
+            case "ifDamaged":
                 {
-                    actionText = DealDamage(ship,threat);
+                    if (threat.damage != 0)
+                    {
+                        actionText = DealDamage(ship, threat,false);
+                    }
+                    else
+                    {
+                        actionText = "Because the " + threat.name + " is undamaged it skips it's attack!";
+                    }
+                break;
                 }
-                else
+            case "ifDamagedAmount":
                 {
-                    actionText = "Because the " + threat.name + " is undamaged it skips it's attack!";
+                DealDamage(ship, threat,false);
+                break;
                 }
+            case "noShield":
+            {
+
+                actionText = DealDamage(ship, threat,true);
                 break;
-            case ifDamagedAmount:
-                DealDamage(ship,threat);
-                break;
+            }
         }
         return actionText;
     }
-    private String DealDamage(Section[][] ship, ThreatExternal threat)
+    private String DealDamage(Section[][] ship, ThreatExternal threat,boolean ignoreShields)
     {
         String damageMessage = "\n";
         switch (target)
         {
             case 1:
                 //damage all zones for given damage value
-                damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(0,damageValue,bypassBonus,false,false);
-                damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(1,damageValue,bypassBonus,false,false);
-                damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(2,damageValue,bypassBonus,false,false);
+                damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(0,damageValue,bypassBonus,ignoreShields,false);
+                damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(1,damageValue,bypassBonus,ignoreShields,false);
+                damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(2,damageValue,bypassBonus,ignoreShields,false);
                 break;
             case 2:
                 //damage the zone the threat is in for given damage value
                 damageMessage += "The " + threat.name + " attacks the " + MainActivity.game.colors[threat.track] + " zone for " + damageValue + " damage!\n"
-                        + MainActivity.game.ShipDamage(threat.track,damageValue,bypassBonus,false,false);
+                        + MainActivity.game.ShipDamage(threat.track,damageValue,bypassBonus,ignoreShields,false);
                 break;
             case 3:
             {
                 //damage zones other than the one the threat is in for given damage value
                 if(threat.track != 0)
                 {
-                    damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(1,damageValue,bypassBonus,false,false);
-                    damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(2,damageValue,bypassBonus,false,false);
+                    damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(1,damageValue,bypassBonus,ignoreShields,false);
+                    damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(2,damageValue,bypassBonus,ignoreShields,false);
                 }
                 if(threat.track != 1)
                 {
-                    damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(0,damageValue,bypassBonus,false,false);
-                    damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(2,damageValue,bypassBonus,false,false);
+                    damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(0,damageValue,bypassBonus,ignoreShields,false);
+                    damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(2,damageValue,bypassBonus,ignoreShields,false);
                 }
                 if(threat.track != 2)
                 {
-                    damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(0,damageValue,bypassBonus,false,false);
-                    damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(1,damageValue,bypassBonus,false,false);
+                    damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(0,damageValue,bypassBonus,ignoreShields,false);
+                    damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(1,damageValue,bypassBonus,ignoreShields,false);
                 }
             }
 
@@ -103,6 +115,5 @@ public class ActionExternalDamageShip extends ActionEffectExternal
         this.bypassBonus = bypassBonus;
         this.condition = condition;
         this.damage = damage;
-
     }
 }

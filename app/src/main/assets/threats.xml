@@ -786,6 +786,90 @@
             </deathAction>
         </threat>
     <threat>
+        <type>external</type>
+        <cardID>E2-01</cardID>
+        <name>Kamikaze</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <movement>4</movement>
+        <health>5</health>
+        <shield>2</shield>
+        <rocketImmune>false</rocketImmune>
+        <xAction>
+            <effect type="buff">
+                <stat>speed</stat>
+                <amount>1</amount>
+            </effect>
+            <effect type="buff">
+                <stat>shieldSet</stat>
+                <amount>1</amount>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="buff">
+                <stat>speed</stat>
+                <amount>1</amount>
+            </effect>
+            <effect type="buff">
+                <stat>shieldSet</stat>
+                <amount>0</amount>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>6</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </zAction>
+        <damageAction>
+            <effect type="default">
+            </effect>
+        </damageAction>
+        <deathAction />
+    </threat>
+    <threat>
+        <type>external</type>
+        <cardID>E2-02</cardID>
+        <name>Scout</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <movement>2</movement>
+        <health>3</health>
+        <shield>1</shield>
+        <rocketImmune>false</rocketImmune>
+        <xAction>
+            <effect type="globalDamageBuff">
+                <stat>attack</stat>
+                <value>1</value>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="moveOthers">
+                <value>1</value>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>3</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>noShield</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </zAction>
+        <damageAction>
+            <effect type="bypass">
+                <source>heavy laser cannon</source>
+            </effect>
+        </damageAction>
+        <deathAction>
+            <effect type="removeGlobalBuff" />
+        </deathAction>
+    </threat>
+    <threat>
         <type>internal</type>
         <plural>true</plural>
         <cardID>I1-01</cardID>
