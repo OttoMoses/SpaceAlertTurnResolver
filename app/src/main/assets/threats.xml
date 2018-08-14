@@ -781,8 +781,7 @@
                 </effect>
             </damageAction>
             <deathAction>
-                <effect type="damageSpaceCount">
-                </effect>
+                <effect type="damageSpaceCount">2</effect>
             </deathAction>
         </threat>
     <threat>
@@ -841,7 +840,7 @@
         <shield>1</shield>
         <rocketImmune>0</rocketImmune>
         <xAction>
-            <effect type="globalDamageBuff">
+            <effect type="globalBuff">
                 <stat>attack</stat>
                 <value>1</value>
             </effect>
@@ -969,6 +968,387 @@
         <deathAction>
             <effect type="none">
             </effect>
+        </deathAction>
+    </threat>
+    <threat>
+        <type>external</type>
+        <cardID>E2-05</cardID>
+        <name>Jellyfish</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <movement>2</movement>
+        <health>13</health>
+        <shield>-2</shield>
+        <rocketImmune>1</rocketImmune>
+        <xAction>
+            <effect type="damage">
+                <zone>1</zone>
+                <damage>1</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+            <effect type="buff">
+                <stat>damage</stat>
+                <amount>halfHealth</amount>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="damage">
+                <zone>1</zone>
+                <damage>1</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+            <effect type="buff">
+                <stat>damage</stat>
+                <amount>halfHealth</amount>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damage">
+                <zone>1</zone>
+                <damage>2</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </zAction>
+        <damageAction>
+            <effect type="default" />
+        </damageAction>
+        <deathAction>
+            <effect type="none">
+            </effect>
+        </deathAction>
+    </threat>
+    <threat>
+        <type>external</type>
+        <cardID>E2-06</cardID>
+        <name>Marauder</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <movement>3</movement>
+        <health>6</health>
+        <shield>1</shield>
+        <rocketImmune>0</rocketImmune>
+        <xAction>
+            <effect type="globalBuff">
+                <stat>shield</stat>
+                <value>1</value>
+            </effect>
+            <effect type="buff">
+                <stat>damage</stat>
+                <amount>halfHealth</amount>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="shieldDrain">
+                <amount>1</amount>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damage">
+                <zone>1</zone>
+                <damage>4</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </zAction>
+        <damageAction>
+            <effect type="default" />
+        </damageAction>
+        <deathAction>
+            <effect type="removeGlobalBuff" />
+        </deathAction>
+    </threat>
+    <threat>
+        <type>external</type>
+        <cardID>E2-07</cardID>
+        <name>Minor Asteroid</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <movement>4</movement>
+        <health>7</health>
+        <shield>0</shield>
+        <rocketImmune>0</rocketImmune>
+        <zAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>health</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </zAction>
+        <damageAction>
+            <effect type="default">
+            </effect>
+        </damageAction>
+        <deathAction>
+            <effect type="damageSpaceCount">1</effect>
+        </deathAction>
+    </threat>
+    <threat>
+        <type>external</type>
+        <cardID>SE2-01</cardID>
+        <name>Behemoth</name>
+        <deathScore>12</deathScore>
+        <escapeScore>6</escapeScore>
+        <movement>2</movement>
+        <health>7</health>
+        <shield>4</shield>
+        <rocketImmune>0</rocketImmune>
+        <xAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>2</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>2</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>3</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>3</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>6</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>6</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </zAction>
+        <damageAction>
+            <effect type="destroyInterceptors">
+            </effect>
+        </damageAction>
+        <deathAction>
+            <effect type="none">
+            </effect>
+        </deathAction>
+    </threat>
+    <threat>
+        <type>external</type>
+        <cardID>SE2-02</cardID>
+        <name>Juggernaut</name>
+        <deathScore>12</deathScore>
+        <escapeScore>6</escapeScore>
+        <movement>1</movement>
+        <health>10</health>
+        <shield>3</shield>
+        <rocketImmune>0</rocketImmune>
+        <xAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>2</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+            <effect type="buff">
+                <stat>speed</stat>
+                <amount>1</amount>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>3</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+            <effect type="buff">
+                <stat>speed</stat>
+                <amount>1</amount>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>7</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+            <effect type="buff">
+                <stat>speed</stat>
+                <amount>1</amount>
+            </effect>
+        </zAction>
+        <damageAction>
+            <effect type="buff">
+                <value>1</value>
+                <stat>shield</stat>
+                <source>rocket</source>
+            </effect>
+        </damageAction>
+        <deathAction>
+            <effect type="none">
+            </effect>
+        </deathAction>
+    </threat>
+    <threat>
+        <type>external</type>
+        <cardID>SE2-03</cardID>
+        <name>Psionic Satellite</name>
+        <deathScore>12</deathScore>
+        <escapeScore>6</escapeScore>
+        <movement>2</movement>
+        <health>5</health>
+        <shield>2</shield>
+        <rocketImmune>0</rocketImmune>
+        <xAction>
+            <effect type="delay">
+                <target>self</target>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="delay">
+                <target>all</target>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="knockOut">
+                <target>all</target>
+            </effect>
+        </zAction>
+        <damageAction>
+            <effect type="default">
+            </effect>
+        </damageAction>
+        <deathAction>
+            <effect type="none">
+            </effect>
+        </deathAction>
+    </threat>
+    <threat>
+        <type>external</type>
+        <cardID>SE2-04</cardID>
+        <name>Nebula Crab</name>
+        <deathScore>12</deathScore>
+        <escapeScore>6</escapeScore>
+        <movement>2</movement>
+        <health>7</health>
+        <shield>2</shield>
+        <rocketImmune>1</rocketImmune>
+        <xAction>
+            <effect type="buff">
+                <stat>shieldSet</stat>
+                <amount>4</amount>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="buff">
+                <stat>speed</stat>
+                <amount>2</amount>
+            </effect>
+            <effect type="buff">
+                <stat>shieldSet</stat>
+                <amount>2</amount>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damage">
+                <zone>4</zone>
+                <damage>5</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </zAction>
+        <damageAction>
+            <effect type="default">
+            </effect>
+        </damageAction>
+        <deathAction>
+            <effect type="none">
+            </effect>
+        </deathAction>
+    </threat>
+    <threat>
+        <type>external</type>
+        <cardID>SE2-05</cardID>
+        <name>Nemesis</name>
+        <deathScore>12</deathScore>
+        <escapeScore>6</escapeScore>
+        <movement>3</movement>
+        <health>9</health>
+        <shield>1</shield>
+        <rocketImmune>1</rocketImmune>
+        <xAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>1</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+            <effect type="selfDamage">
+                <value>1</value>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>2</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+            <effect type="selfDamage">
+                <value>2</value>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="endGame"></effect>
+            <effect type="die"></effect>
+        </zAction>
+        <damageAction>
+            <effect type="count">
+                <value>1</value>
+            </effect>
+        </damageAction>
+        <deathAction>
+            <effect type="none">
+            </effect>
+        </deathAction>
+    </threat>
+    <threat>
+        <type>external</type>
+        <cardID>SE2-06</cardID>
+        <name>Major Asteroid</name>
+        <deathScore>12</deathScore>
+        <escapeScore>6</escapeScore>
+        <movement>2</movement>
+        <health>11</health>
+        <shield>0</shield>
+        <rocketImmune>0</rocketImmune>
+        <zAction>
+            <effect type="damage">
+                <zone>2</zone>
+                <damage>health</damage>
+                <bypassBonus>False</bypassBonus>
+                <condition>none</condition>
+                <conditionValue>0</conditionValue>
+            </effect>
+        </zAction>
+        <damageAction>
+            <effect type="default">
+            </effect>
+        </damageAction>
+        <deathAction>
+            <effect type="damageSpaceCount">3</effect>
         </deathAction>
     </threat>
     <threat>
