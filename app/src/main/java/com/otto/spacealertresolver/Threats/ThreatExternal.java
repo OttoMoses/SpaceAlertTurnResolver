@@ -18,7 +18,7 @@ public class ThreatExternal extends Threat
     public Boolean rangeThree = false;
     public OnDamageExternal damageAction;
     public int shield;
-    public boolean missileImmune;
+    public int missileImmune;
     public ThreatActionExternal xAction;
     public ThreatActionExternal yAction;
     public ThreatActionExternal zAction;

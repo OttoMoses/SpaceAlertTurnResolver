@@ -837,43 +837,93 @@ public class Game
         }
 
         //check for missile and push missile damage bundle
-        if(missileDamage) {
+        if(missileDamage)
+        {
             ArrayList<ThreatExternal> missileTargets = new ArrayList<>();
+            ThreatExternal priotiryTarget = null;
 
             //build list of valid missile targets
             if (rangeOneThreats.size() != 0) {
-                for (ThreatExternal t : rangeOneThreats) {
-                    if (!t.missileImmune) {
-                        missileTargets.add(t);
+                for (ThreatExternal t : rangeOneThreats)
+                {
+                    switch (t.missileImmune)
+                    {
+                        case 0:
+                        {
+                            missileTargets.add(t);
+                            break;
+                        }
+                        case 1:
+                        {
+                            break;
+                        }
+                        case 2:
+                        {
+                            missileTargets.add(t);
+                            break;
+                        }
+                        case 3:
+                        {
+                            priotiryTarget = t;
+                            break;
+                        }
                     }
                 }
             }
 
             if (rangeTwoThreats.size() != 0) {
                 for (ThreatExternal t : rangeTwoThreats) {
-                    if (!t.missileImmune) {
+                    if (t.missileImmune != 1) {
                         missileTargets.add(t);
                     }
                 }
             }
 
-            // sort target list
-            Collections.sort(missileTargets, new Comparator<Threat>() {
-                @Override
-                public int compare(Threat threat, Threat t1) {
-                    return threat.compareTo(t1);
-                }
-            });
+            if(priotiryTarget == null)
+            {
+                // sort target list
+                Collections.sort(missileTargets, new Comparator<Threat>() {
+                    @Override
+                    public int compare(Threat threat, Threat t1) {
+                        return threat.compareTo(t1);
+                    }
+                });
 
-            //push missile damage bundle to closest valid target
-            ThreatExternal target = missileTargets.get(0);
-            Pair<String, Integer> damageSource = new Pair<>("missile", 3);
-            if (target.bundle != null) {
-                target.bundle.damageSources.add(damageSource);
-            } else {
-                ExternalDamageBundle db = new ExternalDamageBundle();
-                db.damageSources.add(damageSource);
-                target.bundle = db;
+                //push missile damage bundle to closest valid target
+                ThreatExternal target = missileTargets.get(0);
+                Pair<String, Integer> damageSource = new Pair<>("missile", 3);
+                if(target.missileImmune == 2)
+                {
+                    message += "The " + target.name + "is targeted by a missile but it dodges!\n";
+                }
+                else
+                {
+                    if (target.bundle != null)
+                    {
+                        target.bundle.damageSources.add(damageSource);
+                    }
+                    else
+                    {
+                        ExternalDamageBundle db = new ExternalDamageBundle();
+                        db.damageSources.add(damageSource);
+                        target.bundle = db;
+                    }
+                }
+            }
+            else
+            {
+                Pair<String, Integer> damageSource = new Pair<>("missile", 3);
+                message += "The " + priotiryTarget.name + " forces a missile to target it!\n";
+                if (priotiryTarget.bundle != null)
+                {
+                    priotiryTarget.bundle.damageSources.add(damageSource);
+                }
+                else
+                {
+                    ExternalDamageBundle db = new ExternalDamageBundle();
+                    db.damageSources.add(damageSource);
+                    priotiryTarget.bundle = db;
+                }
             }
         }
         //check for fighters and push fighter damage bundles
@@ -1307,7 +1357,7 @@ public class Game
         expression = xPath.compile("./escapeScore");
         threat.escapeScore = Integer.parseInt((String) expression.evaluate(node,XPathConstants.STRING));
         expression = xPath.compile("./rocketImmune");
-        threat.missileImmune = Boolean.parseBoolean((String) expression.evaluate(node,XPathConstants.STRING));
+        threat.missileImmune = Integer.parseInt((String) expression.evaluate(node,XPathConstants.STRING));
         expression = xPath.compile(("./spawnMessage"));
         threat.spawnMessage = (String) expression.evaluate(node, XPathConstants.STRING);
 
