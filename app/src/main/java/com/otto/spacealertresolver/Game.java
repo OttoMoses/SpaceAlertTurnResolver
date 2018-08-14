@@ -42,6 +42,7 @@ import com.otto.spacealertresolver.ThreatActions.External.ActionExternalGlobalBu
 import com.otto.spacealertresolver.ThreatActions.External.ActionExternalMoveOthers;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternal;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalBypassSource;
+import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalMaxValue;
 import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternal;
 import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternalRemoveGlobalBonus;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionEffectInternal;
@@ -1638,6 +1639,13 @@ public class Game
                 XPathExpression expression = xPath.compile("./source");
                 String source = (String) expression.evaluate(damType, XPathConstants.STRING);
                 effect = new OnDamageExternalBypassSource(source);
+                break;
+            }
+            case "maxValue" :
+            {
+                XPathExpression expression = xPath.compile("./value");
+                int value = Integer.parseInt((String) expression.evaluate(damType, XPathConstants.STRING));
+                effect = new OnDamageExternalMaxValue(maxValue);
                 break;
             }
             default:
