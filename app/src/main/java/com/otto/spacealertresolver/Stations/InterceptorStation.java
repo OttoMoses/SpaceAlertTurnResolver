@@ -2,7 +2,6 @@ package com.otto.spacealertresolver.Stations;
 
 import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.Player;
-import com.otto.spacealertresolver.Section;
 
 /**
  * Created by Otto on 1/28/2018.

@@ -16,7 +16,7 @@ public class ActionInternalEnergyDrain extends ActionEffectInternal
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)
     {
-        String message = "";
+        StringBuilder message = new StringBuilder();
 
         //get target or targets
         switch (target)
@@ -24,58 +24,58 @@ public class ActionInternalEnergyDrain extends ActionEffectInternal
             case "self":
             {
                 Section location = ship[threat.locations.get(0).first][threat.locations.get(0).second];
-                message += "\n" + DrainPower(location,threat);
+                message.append("\n").append(DrainPower(location, threat));
                 break;
             }
             case "selfMult":
             {
-                for (Pair<Integer,Integer> p :threat.locations)
+                for (Pair<Integer,Integer> p : threat.locations)
                 {
                     Section location = ship[p.first][p.second];
-                    message += "\n" +  DrainPower(location,threat);
+                    message.append("\n").append(DrainPower(location, threat));
                     break;
                 }
             }
             case "allReactors" :
             {
                 ArrayList<Pair<Integer,Integer>> locations = new ArrayList<>();
-                locations.add(new Pair<Integer, Integer>(0,0));
-                locations.add(new Pair<Integer, Integer>(1,0));
-                locations.add(new Pair<Integer, Integer>(2,0));
+                locations.add(new Pair<>(0, 0));
+                locations.add(new Pair<>(1, 0));
+                locations.add(new Pair<>(2, 0));
                 for (Pair<Integer,Integer> p :locations)
                 {
                     Section location = ship[p.first][p.second];
-                    message += "\n" +  DrainPower(location,threat);
+                    message.append("\n").append(DrainPower(location, threat));
                 }
                 break;
             }
             case "allShields" :
             {
                 ArrayList<Pair<Integer,Integer>> locations = new ArrayList<>();
-                locations.add(new Pair<Integer, Integer>(0,1));
-                locations.add(new Pair<Integer, Integer>(1,1));
-                locations.add(new Pair<Integer, Integer>(2,1));
+                locations.add(new Pair<>(0, 1));
+                locations.add(new Pair<>(1, 1));
+                locations.add(new Pair<>(2, 1));
                 for (Pair<Integer,Integer> p :locations)
                 {
                     Section location = ship[p.first][p.second];
-                    message += "\n" +  DrainPower(location,threat);
+                    message.append("\n").append(DrainPower(location, threat));
                 }
                 break;
             }
             case "selfReactor" :
             {
                 Section location = ship[threat.locations.get(0).first][0];
-                message += "\n" +  DrainPower(location,threat);
+                message.append("\n").append(DrainPower(location, threat));
                 break;
             }
             case "selfShield" :
             {
                 Section location = ship[threat.locations.get(0).first][1];
-                message += "\n" +  DrainPower(location,threat);
+                message.append("\n").append(DrainPower(location, threat));
                 break;
             }
         }
-        return message;
+        return message.toString();
     }
 
     private String DrainPower(Section location, ThreatInternal threat)

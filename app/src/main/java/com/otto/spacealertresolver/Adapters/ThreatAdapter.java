@@ -20,7 +20,7 @@ public class ThreatAdapter extends BaseAdapter
 {
     private ThreatString[] threats;
     private ArrayList<String> names = MainActivity.game.threatNames;
-    private Activity context = null;
+    private Activity context;
 
     @Override
     public int getCount() {

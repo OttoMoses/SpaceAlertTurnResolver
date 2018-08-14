@@ -1,12 +1,10 @@
 package com.otto.spacealertresolver.ThreatActions.Internal;
 
 import android.util.Pair;
-import android.util.Printer;
 
 import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
-import com.otto.spacealertresolver.Threats.Threat;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
 
 import java.util.ArrayList;
@@ -17,19 +15,19 @@ public class ActionInternalKnockOut extends ActionEffectInternal {
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)
     {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         switch (target) {
             case "self": {
                 Pair<Integer, Integer> location = threat.locations.get(0);
                 for (Player p : MainActivity.game.players) {
                     if (p.zonePosition == location.second && p.sectionPosition == location.first) {
-                        message += "The " + threat.name;
+                        message.append("The ").append(threat.name);
                         if (threat.plural) {
-                            message += " attack ";
+                            message.append(" attack ");
                         } else {
-                            message += " attacks ";
+                            message.append(" attacks ");
                         }
-                        message += p.playerName + " knocking them out!\n";
+                        message.append(p.playerName).append(" knocking them out!\n");
                         p.unconscious = true;
                     }
                 }
@@ -40,13 +38,13 @@ public class ActionInternalKnockOut extends ActionEffectInternal {
                 for (Pair<Integer, Integer> location : locations) {
                     for (Player p : MainActivity.game.players) {
                         if (p.zonePosition == location.second && p.sectionPosition == location.first) {
-                            message += "The " + threat.name;
+                            message.append("The ").append(threat.name);
                             if (threat.plural) {
-                                message += " attack ";
+                                message.append(" attack ");
                             } else {
-                                message += " attacks ";
+                                message.append(" attacks ");
                             }
-                            message += p.playerName + " knocking them out!\n";
+                            message.append(p.playerName).append(" knocking them out!\n");
                             p.unconscious = true;
                         }
                     }
@@ -57,15 +55,15 @@ public class ActionInternalKnockOut extends ActionEffectInternal {
                 Pair<Integer, Integer> location = exclude;
                 for (Player p : MainActivity.game.players) {
                     Pair<Integer,Integer> playerLocation = new Pair<>(p.zonePosition,p.sectionPosition);
-                    if (!(playerLocation.first == location.first && playerLocation.second == location.second))
+                    if (!(playerLocation.first.equals(location.first) && playerLocation.second.equals(location.second)))
                     {
-                        message += "The " + threat.name;
+                        message.append("The ").append(threat.name);
                         if (threat.plural) {
-                            message += " attack ";
+                            message.append(" attack ");
                         } else {
-                            message += " attacks ";
+                            message.append(" attacks ");
                         }
-                        message += p.playerName + " knocking them out!\n";
+                        message.append(p.playerName).append(" knocking them out!\n");
                         p.unconscious = true;
                     }
                 }
@@ -76,20 +74,20 @@ public class ActionInternalKnockOut extends ActionEffectInternal {
                 for (Player p : MainActivity.game.players) {
                     if (p.leadingBots)
                     {
-                        message += "The " + threat.name;
+                        message.append("The ").append(threat.name);
                         if (threat.plural) {
-                            message += " attack ";
+                            message.append(" attack ");
                         } else {
-                            message += " attacks ";
+                            message.append(" attacks ");
                         }
-                        message += p.playerName + " knocking them out!\n";
+                        message.append(p.playerName).append(" knocking them out!\n");
                         p.unconscious = true;
                     }
                 }
                 break;
             }
         }
-        return message;
+        return message.toString();
     }
 
     public ActionInternalKnockOut(String target)

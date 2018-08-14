@@ -16,8 +16,6 @@ import com.otto.spacealertresolver.ThreatString;
 public class ThreatsList extends AppCompatActivity
 {
     private ListView threatsListView;
-    private ThreatString[] threatStrings;
-    private ThreatAdapter threatAdapter;
     private Context context = this;
     Button saveButton;
 
@@ -42,8 +40,8 @@ public class ThreatsList extends AppCompatActivity
     protected  void onResume()
     {
         super.onResume();
-        threatStrings = MainActivity.game.selectedThreats;
-        threatAdapter = new ThreatAdapter(this, threatStrings);
+        ThreatString[] threatStrings = MainActivity.game.selectedThreats;
+        ThreatAdapter threatAdapter = new ThreatAdapter(this, threatStrings);
         threatsListView.setAdapter(threatAdapter);
     }
 }

@@ -19,7 +19,7 @@ public class ActionInternalDamageShip extends ActionEffectInternal
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)
     {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         //determine which location or locations this action affects
         switch (target)
         {
@@ -37,13 +37,13 @@ public class ActionInternalDamageShip extends ActionEffectInternal
                 case "healthMulti" :
                 {
                     damageValue = (threat.health - threat.damage) * 3;
-                    message += "The " + threat.name +  MainActivity.game.ShipDamage(p.first, damageValue,false,true,threat.plural);
+                    message.append("The ").append(threat.name).append(MainActivity.game.ShipDamage(p.first, damageValue, false, true, threat.plural));
                     break;
                 }
                 case "EnergyValue":
                 {
                     damageValue = ship[p.first][p.second].powerCubes;
-                    message += "The " + threat.name +  MainActivity.game.ShipDamage(p.first, damageValue,false,true,threat.plural);
+                    message.append("The ").append(threat.name).append(MainActivity.game.ShipDamage(p.first, damageValue, false, true, threat.plural));
                     break;
                 }
                 case "perPlayer":
@@ -57,18 +57,18 @@ public class ActionInternalDamageShip extends ActionEffectInternal
                             playerCount++;
                         }
                     }
-                    message += "The " + threat.name +  MainActivity.game.ShipDamage(p.first, playerCount,false,true,threat.plural);
+                    message.append("The ").append(threat.name).append(MainActivity.game.ShipDamage(p.first, playerCount, false, true, threat.plural));
                     break;
                 }
                 default:
                 {
                     damageValue = Integer.parseInt(damage);
-                    message += "The " + threat.name +  MainActivity.game.ShipDamage(p.first, damageValue,false,true,threat.plural);
+                    message.append("The ").append(threat.name).append(MainActivity.game.ShipDamage(p.first, damageValue, false, true, threat.plural));
                     break;
                 }
             }
         }
-        return message;
+        return message.toString();
     }
     public ActionInternalDamageShip(String target,String damage)
     {

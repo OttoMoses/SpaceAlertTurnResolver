@@ -9,14 +9,6 @@ import android.view.View;
 import android.widget.*;
 
 import com.otto.spacealertresolver.R;
-import com.otto.spacealertresolver.Stations.ActionStation;
-
-import org.xml.sax.SAXException;
-
-import java.io.IOException;
-import java.util.Objects;
-
-import javax.xml.parsers.ParserConfigurationException;
 
 public class SettingsScreen extends AppCompatActivity
 {
@@ -25,7 +17,6 @@ public class SettingsScreen extends AppCompatActivity
     private String shipName;
     private EditText shipNameEntry;
     private EditText playerCount;
-    private Button setupGame;
     private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) 
@@ -37,7 +28,7 @@ public class SettingsScreen extends AppCompatActivity
         //Get Controls
         shipNameEntry = findViewById(R.id.ShipNameEntry);
         playerCount = findViewById(R.id.PlayerCountEntry);
-        setupGame = findViewById(R.id.SetupGameButton);
+        Button setupGame = findViewById(R.id.SetupGameButton);
         context = this;
 
         //setup button

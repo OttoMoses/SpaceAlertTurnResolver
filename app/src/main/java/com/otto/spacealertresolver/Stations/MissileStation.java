@@ -1,7 +1,6 @@
 package com.otto.spacealertresolver.Stations;
 
 import com.otto.spacealertresolver.Activities.MainActivity;
-import com.otto.spacealertresolver.Game;
 import com.otto.spacealertresolver.Player;
 
 /**

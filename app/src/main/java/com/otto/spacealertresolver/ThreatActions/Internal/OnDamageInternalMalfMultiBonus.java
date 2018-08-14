@@ -8,15 +8,13 @@ import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
 
-import java.util.ArrayList;
-
 public class OnDamageInternalMalfMultiBonus extends OnDamageInternal {
     private String target;
     private int potentialBonus;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat, Player[] players)
     {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         int realBonus = 0;
         int systemCount = 0;
         switch (target)
@@ -44,7 +42,7 @@ public class OnDamageInternalMalfMultiBonus extends OnDamageInternal {
                         {
                             if (threat.damage < threat.health)
                             {
-                                message += ProcessDamageBundle(db, threat, realBonus);
+                                message.append(ProcessDamageBundle(db, threat, realBonus));
                             }
                         }
                     }
@@ -75,7 +73,7 @@ public class OnDamageInternalMalfMultiBonus extends OnDamageInternal {
                         {
                             if (threat.damage < threat.health)
                             {
-                                message += ProcessDamageBundle(db, threat, realBonus);
+                                message.append(ProcessDamageBundle(db, threat, realBonus));
                             }
                         }
                     }
@@ -88,7 +86,7 @@ public class OnDamageInternalMalfMultiBonus extends OnDamageInternal {
                 break;
             }
         }
-        return message;
+        return message.toString();
     }
     private String ProcessDamageBundle(InternalDamageBundle bundle, ThreatInternal threat,int bonus)
     {

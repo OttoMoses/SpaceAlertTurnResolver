@@ -14,25 +14,21 @@ import com.otto.spacealertresolver.ThreatTrack;
 
 public class ThreatTrackEdit extends AppCompatActivity
 {
-    private Spinner redSpinner;
-    private Spinner whiteSpinner;
-    private Spinner blueSpinner;
     Spinner internalSpinner;
     private int redTrackID;
     private int whiteTrackID;
     private int blueTrackID;
     private int internalTrackID;
-    private Button saveButton;
     Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_threat_track_edit);
-        saveButton = findViewById(R.id.SaveTracks);
-        redSpinner = findViewById(R.id.RedTrackSpinner);
-        whiteSpinner = findViewById(R.id.WhiteTrackSpinner);
-        blueSpinner = findViewById(R.id.BlueTrackSpinner);
+        Button saveButton = findViewById(R.id.SaveTracks);
+        Spinner redSpinner = findViewById(R.id.RedTrackSpinner);
+        Spinner whiteSpinner = findViewById(R.id.WhiteTrackSpinner);
+        Spinner blueSpinner = findViewById(R.id.BlueTrackSpinner);
         internalSpinner = findViewById(R.id.InternalTrackSpinner);
 
 

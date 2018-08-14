@@ -46,7 +46,6 @@ import com.otto.spacealertresolver.ThreatActions.External.ActionExternalGlobalBu
 import com.otto.spacealertresolver.ThreatActions.External.ActionExternalKnockOut;
 import com.otto.spacealertresolver.ThreatActions.External.ActionExternalMoveOthers;
 import com.otto.spacealertresolver.ThreatActions.External.ActionExternalSelfDamage;
-import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalBuff;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternal;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalBuff;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalBypassSource;
@@ -401,28 +400,28 @@ public class Game {
     }
 
     private String MaintenanceCheck() {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         if (currentRound == 3 || currentRound == 6 || currentRound == 10) {
-            message += "\n----Computer Maintenance Check----\n";
+            message.append("\n----Computer Maintenance Check----\n");
             if (!computerMaintained) {
-                message += "\nThe computer shuts down delaying all players on the ship this round \n";
+                message.append("\nThe computer shuts down delaying all players on the ship this round \n");
                 for (Player p : players) {
                     if (!p.flyingInterceptors) {
-                        message += p.Delay(currentRound);
+                        message.append(p.Delay(currentRound));
                     } else {
-                        message += p.playerName + "\nis safely off the ship and unaffected by the blackout \n";
+                        message.append(p.playerName).append("\nis safely off the ship and unaffected by the blackout \n");
                     }
                 }
             } else {
-                message += "\nThe computer was correctly maintained and stays on this round \n";
+                message.append("\nThe computer was correctly maintained and stays on this round \n");
             }
             computerMaintained = false;
         }
-        return message;
+        return message.toString();
     }
 
     public String MoveThreats(String source) {
-        String message = "\n";
+        StringBuilder message = new StringBuilder("\n");
         for (Threat t : activeThreats) {
             if (!gameEnd) {
                 int movement;
@@ -434,38 +433,37 @@ public class Game {
                 ThreatTrack track = threatTracks[t.track];
                 int newPosition = t.position + movement;
                 if (t.getClass().equals(ThreatExternal.class)) {
-                    message += "\nThe " + t.name + " moves " + movement + " spaces closer to the ship\n";
+                    message.append("\nThe ").append(t.name).append(" moves ").append(movement).append(" spaces closer to the ship\n");
                 } else {
-                    message +=
-                            "The " + t.name;
+                    message.append("The ").append(t.name);
                     if (((ThreatInternal) t).plural) {
-                        message += " move ";
+                        message.append(" move ");
                     } else {
-                        message += " moves ";
+                        message.append(" moves ");
                     }
-                    message += movement + " spaces on the internal track\n";
+                    message.append(movement).append(" spaces on the internal track\n");
                 }
                 //check for attack spaces
                 for (int space : track.XSpace) {
                     if ((space < newPosition && space > t.position) || space == newPosition) {
-                        message += t.ExecuteXAction(ship, players);
+                        message.append(t.ExecuteXAction(ship, players));
                     }
                 }
                 for (int space : track.YSpaces) {
                     if ((space < newPosition && space > t.position) || space == newPosition) {
-                        message += t.ExecuteYAction(ship, players);
+                        message.append(t.ExecuteYAction(ship, players));
                     }
                 }
                 for (int space : track.EndSpace) {
                     if (space < newPosition || space == newPosition) {
 
-                        message += t.ExecuteZAction(ship, players);
-                        message += "\n";
+                        message.append(t.ExecuteZAction(ship, players));
+                        message.append("\n");
                         if(!gameEnd)
                         {
                             if (t.getClass().equals(ThreatExternal.class))
                             {
-                                message += "The " + t.name + " Escapes!";
+                                message.append("The ").append(t.name).append(" Escapes!");
                             }
                             else
                             {
@@ -473,22 +471,22 @@ public class Game {
                                 {
                                     if (((ThreatInternal) t).plural)
                                     {
-                                        message += "The " + t.name + " escape!";
+                                        message.append("The ").append(t.name).append(" escape!");
                                     }
                                     else
                                     {
-                                        message += "The " + t.name + " escapes!";
+                                        message.append("The ").append(t.name).append(" escapes!");
                                     }
                                 }
                                 else
                                 {
                                     if (((ThreatInternal) t).plural)
                                     {
-                                        message += "The " + t.name + " are now unfixable!";
+                                        message.append("The ").append(t.name).append(" are now unfixable!");
                                     }
                                     else
                                     {
-                                        message += "The " + t.name + " is now unfixable!";
+                                        message.append("The ").append(t.name).append(" is now unfixable!");
                                     }
                                 }
                             }
@@ -496,15 +494,15 @@ public class Game {
                         escapedThreats.add(t);
                     } else {
                         if (t.getClass().equals(ThreatExternal.class)) {
-                            message += "The " + t.name + " is now  " + (threatTracks[t.track].EndSpace[0] - t.position) + " space away from the ship!";
+                            message.append("The ").append(t.name).append(" is now  ").append(threatTracks[t.track].EndSpace[0] - t.position).append(" space away from the ship!");
                         } else {
-                            message += "The " + t.name;
+                            message.append("The ").append(t.name);
                             if (((ThreatInternal) t).plural) {
-                                message += " are now  ";
+                                message.append(" are now  ");
                             } else {
-                                message += " is now ";
+                                message.append(" is now ");
                             }
-                            message += (threatTracks[t.track].EndSpace[0] - t.position) + " space away from escaping!";
+                            message.append(threatTracks[t.track].EndSpace[0] - t.position).append(" space away from escaping!");
                         }
                         t.position = newPosition;
                     }
@@ -514,13 +512,13 @@ public class Game {
         for (Threat t : escapedThreats) {
             activeThreats.remove(t);
         }
-        if (message.equals("\n")) {
-            message += "There are no threats to move this turn.\n";
+        if (message.toString().equals("\n")) {
+            message.append("There are no threats to move this turn.\n");
         } else {
-            message += "\n";
+            message.append("\n");
         }
 
-        return message;
+        return message.toString();
     }
 
     private void ResetState() {
@@ -570,12 +568,12 @@ public class Game {
 
     private String ProcessActions(int round) {
         //process player actions
-        String message = "";
+        StringBuilder message = new StringBuilder();
         for (Player p : players)
         {
             if (p.unconscious)
             {
-                message += p.playerName + " is knocked out and can't take any actions!";
+                message.append(p.playerName).append(" is knocked out and can't take any actions!");
             }
             else
             {
@@ -591,20 +589,20 @@ public class Game {
                             actions[11].Execute(p);
                             break;
                         default:
-                            message += "\n" + p.playerName + " returns to the ship";
+                            message.append("\n").append(p.playerName).append(" returns to the ship");
                             p.flyingInterceptors = false;
                             interceptorsDocked = true;
                             break;
                     }
                 }
-                message += "\n" + p.playerName + " " + p.actions[round - 1].Execute(p) + "\n";
+                message.append("\n").append(p.playerName).append(" ").append(p.actions[round - 1].Execute(p)).append("\n");
             }
         }
-        return message;
+        return message.toString();
     }
 
     private String ExternalThreatDamage(ArrayList<Threat> targets) {
-        String message = "";
+        StringBuilder message = new StringBuilder();
 
         //clear existing damage bundles
         for(Threat t : targets)
@@ -813,7 +811,7 @@ public class Game {
                     Pair<String, Integer> damageSource = new Pair<>("missile", 3);
                     if (target.missileImmune == 2)
                     {
-                        message += "The " + target.name + " is targeted by a missile but it dodges!\n";
+                        message.append("The ").append(target.name).append(" is targeted by a missile but it dodges!\n");
                     }
                     else
                     {
@@ -831,13 +829,13 @@ public class Game {
                 }
                 else
                 {
-                    message += "The missile fired last turn has no valid targets!\n";
+                    message.append("The missile fired last turn has no valid targets!\n");
                 }
             }
             else
             {
                 Pair<String, Integer> damageSource = new Pair<>("missile", 3);
-                message += "The " + priotiryTarget.name + " forces a missile to target it!\n";
+                message.append("The ").append(priotiryTarget.name).append(" forces a missile to target it!\n");
                 if (priotiryTarget.bundle != null)
                 {
                     priotiryTarget.bundle.damageSources.add(damageSource);
@@ -884,41 +882,41 @@ public class Game {
         for (Threat t : targets) {
             if (t.getClass().equals(ThreatExternal.class)) {
                 if (((ThreatExternal) t).bundle != null) {
-                    message += ((ThreatExternal) t).ExecuteDamageAction();
+                    message.append(((ThreatExternal) t).ExecuteDamageAction());
                 }
             }
         }
-        if (message.equals("")) {
+        if (message.toString().equals("")) {
             return "No external threats have taken damage this turn.\n";
         } else {
-            return message;
+            return message.toString();
         }
     }
 
     private String InternalThreatDamage(ArrayList<Threat> targets) {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         for (Threat threat : targets) {
             ThreatInternal t = (ThreatInternal) threat;
-            message += t.ExecuteDamageAction(ship, players);
+            message.append(t.ExecuteDamageAction(ship, players));
         }
-        if (message.equals("")) {
+        if (message.toString().equals("")) {
             return "No internal threats have taken damage this turn.\n";
         } else {
-            return message;
+            return message.toString();
         }
     }
 
     private String DamageThreats(ArrayList<Threat> externalTargets, ArrayList<Threat> internalTargets) {
-        String message = "\n";
+        StringBuilder message = new StringBuilder("\n");
         if (!internalTargets.isEmpty()) {
-            message += InternalThreatDamage(internalTargets);
+            message.append(InternalThreatDamage(internalTargets));
         } else {
-            message += "There are no internal threats this turn.\n";
+            message.append("There are no internal threats this turn.\n");
         }
         if (!externalTargets.isEmpty()) {
-            message += ExternalThreatDamage(externalTargets);
+            message.append(ExternalThreatDamage(externalTargets));
         } else {
-            message += "There are no external threats this turn.";
+            message.append("There are no external threats this turn.");
         }
         //special check for nemesis threat
         for (Threat t : activeThreats) {
@@ -926,35 +924,35 @@ public class Game {
                 if (((ThreatExternal) t).damageAction.getClass() == OnDamageExternalCount.class) {
                     if (((OnDamageExternalCount) ((ThreatExternal) t).damageAction).damaged) {
                         int value = ((OnDamageExternalCount) ((ThreatExternal) t).damageAction).value;
-                        message += "Because it took damage this turn the " + t.name + " attacks all zones for " + value + " damage!\n";
+                        message.append("Because it took damage this turn the ").append(t.name).append(" attacks all zones for ").append(value).append(" damage!\n");
                         ((OnDamageExternalCount) ((ThreatExternal) t).damageAction).damaged = false;
-                        message += "The " + t.name + MainActivity.game.ShipDamage(0, value, false, false, false);
-                        message += "The " + t.name + MainActivity.game.ShipDamage(1, value, false, false, false);
-                        message += "The " + t.name + MainActivity.game.ShipDamage(2, value, false, false, false);
+                        message.append("The ").append(t.name).append(MainActivity.game.ShipDamage(0, value, false, false, false));
+                        message.append("The ").append(t.name).append(MainActivity.game.ShipDamage(1, value, false, false, false));
+                        message.append("The ").append(t.name).append(MainActivity.game.ShipDamage(2, value, false, false, false));
                     }
                 }
             }
         }
-        return message;
+        return message.toString();
     }
 
     public String KillThreats(ArrayList<Threat> targets) {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         for (Threat t : targets) {
             if (t.damage >= t.health) {
                 t.ExecuteDeathAction(ship, players);
                 deadThreats.add(t);
                 if (t.getClass().equals(ThreatInternal.class) && ((ThreatInternal) t).plural) {
-                    message += "The " + t.name + " were destroyed!\n";
+                    message.append("The ").append(t.name).append(" were destroyed!\n");
                 } else {
-                    message += "The " + t.name + " was destroyed!\n";
+                    message.append("The ").append(t.name).append(" was destroyed!\n");
                 }
             }
         }
         if (deadThreats.size() != 0) {
             activeThreats.removeAll(deadThreats);
         }
-        return message;
+        return message.toString();
     }
 
     public String ShipDamage(int zone, int damage, boolean bypassBonus, boolean internal, boolean plural) {

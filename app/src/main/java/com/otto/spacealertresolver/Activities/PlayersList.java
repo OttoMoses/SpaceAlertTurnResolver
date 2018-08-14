@@ -14,8 +14,6 @@ import com.otto.spacealertresolver.R;
 public class PlayersList extends AppCompatActivity
 {
     private ListView playerListView;
-    private Player[] players;
-    private PlayerAdapter playerList;
     private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +39,8 @@ public class PlayersList extends AppCompatActivity
     protected  void onResume()
     {
         super.onResume();
-        players = MainActivity.game.players;
-        playerList = new PlayerAdapter(this, players);
+        Player[] players = MainActivity.game.players;
+        PlayerAdapter playerList = new PlayerAdapter(this, players);
         playerListView.setAdapter(playerList);
     }
 }

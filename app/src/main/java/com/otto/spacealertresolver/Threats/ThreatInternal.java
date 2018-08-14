@@ -2,7 +2,6 @@ package com.otto.spacealertresolver.Threats;
 
 import android.util.Pair;
 
-import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternal;

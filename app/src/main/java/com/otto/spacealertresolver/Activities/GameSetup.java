@@ -11,12 +11,8 @@ import com.otto.spacealertresolver.R;
 
 public class GameSetup extends AppCompatActivity
 {
-    private Button playersButton;
-    private Button threatTracksButton;
-    private Button threatsButton;
-    private Button resolveButton;
     private Context context = this;
-    private TextView title;
+
     @Override
     protected void onCreate(final Bundle savedInstanceState)
     {
@@ -25,11 +21,11 @@ public class GameSetup extends AppCompatActivity
         setContentView(R.layout.activity_game_setup);
 
         //get controls
-        playersButton = findViewById(R.id.PlayersEditButton);
-        threatTracksButton = findViewById(R.id.ThreatTracksButton);
-        threatsButton = findViewById(R.id.ThreatsButton);
-        resolveButton = findViewById(R.id.ResolveButton);
-        title = findViewById(R.id.SetupLabel);
+        Button playersButton = findViewById(R.id.PlayersEditButton);
+        Button threatTracksButton = findViewById(R.id.ThreatTracksButton);
+        Button threatsButton = findViewById(R.id.ThreatsButton);
+        Button resolveButton = findViewById(R.id.ResolveButton);
+        TextView title = findViewById(R.id.SetupLabel);
 
         //setup clickers for buttons
         playersButton.setOnClickListener(new View.OnClickListener() {

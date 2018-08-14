@@ -11,12 +11,12 @@ public class ThreatActionInternal
 
     public String Execute(Section[][] ship, ThreatInternal threatInternal)
     {
-        String actionMessage = "";
+        StringBuilder actionMessage = new StringBuilder();
         for(ActionEffectInternal effect : effects)
         {
-            actionMessage += effect.Execute(ship,threatInternal);
+            actionMessage.append(effect.Execute(ship, threatInternal));
         }
-        return actionMessage;
+        return actionMessage.toString();
     }
     public ThreatActionInternal(ArrayList<ActionEffectInternal> effects) {this.effects = effects;}
 }

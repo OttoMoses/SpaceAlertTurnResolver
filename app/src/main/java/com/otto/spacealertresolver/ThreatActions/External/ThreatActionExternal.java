@@ -2,7 +2,6 @@ package com.otto.spacealertresolver.ThreatActions.External;
 
 import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.ThreatActions.External.ActionEffectExternal;
-import com.otto.spacealertresolver.Threats.Threat;
 import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 import java.util.ArrayList;
@@ -16,12 +15,12 @@ public class ThreatActionExternal
     private ArrayList<ActionEffectExternal> effects;
 
     public  String Execute(Section[][] ship, ThreatExternal threat)
-    { String actionMessage = "";
+    { StringBuilder actionMessage = new StringBuilder();
         for (ActionEffectExternal tsa :effects)
         {
-            actionMessage += tsa.Execute(ship,threat);
+            actionMessage.append(tsa.Execute(ship, threat));
         }
-        return actionMessage;
+        return actionMessage.toString();
     }
 
     public ThreatActionExternal(ArrayList<ActionEffectExternal> effects)

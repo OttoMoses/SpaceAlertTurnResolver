@@ -12,27 +12,27 @@ public class ActionExternalKnockOut extends ActionEffectExternal
     @Override
     public String Execute(Section[][] ship, ThreatExternal threat)
     {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         switch (target)
         {
             case "all" :
             {
-                message += "The " + threat.name + " attacks all players on the ship knocking them out!\n";
+                message.append("The ").append(threat.name).append(" attacks all players on the ship knocking them out!\n");
                 for (Player p : game.players)
                 {
                     if(p.unconscious)
                     {
-                        message += p.playerName + " can't be knocked out because they are already knocked out!\n";
+                        message.append(p.playerName).append(" can't be knocked out because they are already knocked out!\n");
                     }
                     else
                     {
                         if(p.flyingInterceptors)
                         {
-                            message += p.playerName + " is safely off the ship flying interceptors!\n";
+                            message.append(p.playerName).append(" is safely off the ship flying interceptors!\n");
                         }
                         else
                         {
-                            message += p.playerName + " is knocked out!\n";
+                            message.append(p.playerName).append(" is knocked out!\n");
                             p.unconscious = true;
                         }
                     }
@@ -42,24 +42,24 @@ public class ActionExternalKnockOut extends ActionEffectExternal
             case "self":
             {
 
-                message += "The " + threat.name + " attacks all players in the " + game.colors[threat.track] + " zone knocking them out!\n";
+                message.append("The ").append(threat.name).append(" attacks all players in the ").append(game.colors[threat.track]).append(" zone knocking them out!\n");
                 for (Player p : game.players)
                 {
                     if(p.zonePosition == threat.track)
                     {
                         if(p.unconscious)
                         {
-                            message += p.playerName + " can't be delayed because they are already knocked out!\n";
+                            message.append(p.playerName).append(" can't be delayed because they are already knocked out!\n");
                         }
                         else
                         {
                             if(p.flyingInterceptors)
                             {
-                                message += p.playerName + " is safely off the ship flying interceptors!\n";
+                                message.append(p.playerName).append(" is safely off the ship flying interceptors!\n");
                             }
                             else
                             {
-                                message += p.playerName + " is knocked out!\n";
+                                message.append(p.playerName).append(" is knocked out!\n");
                                 p.unconscious = true;
                             }
                         }
@@ -68,7 +68,7 @@ public class ActionExternalKnockOut extends ActionEffectExternal
                 break;
             }
         }
-        return message;
+        return message.toString();
     }
 
     public ActionExternalKnockOut(String target)

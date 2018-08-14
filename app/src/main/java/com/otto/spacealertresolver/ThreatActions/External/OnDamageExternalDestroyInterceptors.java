@@ -15,7 +15,7 @@ public class OnDamageExternalDestroyInterceptors extends OnDamageExternal
     {
         int DBDamage = 0;
         int damage;
-        String message = "";
+        StringBuilder message = new StringBuilder();
         for(Pair p : db.damageSources)
         {
             DBDamage += (int)p.second;
@@ -28,7 +28,7 @@ public class OnDamageExternalDestroyInterceptors extends OnDamageExternal
                     {
 
                         player.unconscious = true;
-                        message+= player.playerName + " is knocked out while leading their strafing run on the " + t.name + "!\nThe interceptors are no longer functional!";
+                        message.append(player.playerName).append(" is knocked out while leading their strafing run on the ").append(t.name).append("!\nThe interceptors are no longer functional!");
                     }
                 }
             }
@@ -39,13 +39,13 @@ public class OnDamageExternalDestroyInterceptors extends OnDamageExternal
             if(damage > 0)
             {
                 t.damage += damage;
-                message += "\nThe " + t.name + " takes " + damage + " damage!\n";
+                message.append("\nThe ").append(t.name).append(" takes ").append(damage).append(" damage!\n");
             }
             else
             {
-                message += "\nThe " + t.name + " blocks all damage!\n";
+                message.append("\nThe ").append(t.name).append(" blocks all damage!\n");
             }
         }
-        return message;
+        return message.toString();
     }
 }

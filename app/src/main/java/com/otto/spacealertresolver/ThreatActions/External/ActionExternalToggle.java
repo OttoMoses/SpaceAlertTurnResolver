@@ -12,10 +12,9 @@ public class ActionExternalToggle extends ActionEffectExternal
     @Override
     public String Execute(Section[][] ship, ThreatExternal threat)
     {
-        ThreatExternal t = (ThreatExternal) threat;
-        if(t.damageAction.getClass().toString().equals("class com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalToggle"))
+        if(threat.damageAction.getClass().toString().equals("class com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalToggle"))
         {
-            OnDamageExternalToggle damageEffect = (OnDamageExternalToggle)t.damageAction;
+            OnDamageExternalToggle damageEffect = (OnDamageExternalToggle)threat.damageAction;
             damageEffect.toggle = true;
             return "\nThe " + threat.name + " is no longer immune to damage!\n";
         }

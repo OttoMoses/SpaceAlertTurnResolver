@@ -1,9 +1,9 @@
 package com.otto.spacealertresolver.Threats;
 
+import android.support.annotation.NonNull;
+
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
-import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternal;
-import com.otto.spacealertresolver.ThreatActions.External.ThreatActionExternal;
 
 /**
  * Created by Otto on 1/22/2018.
@@ -30,7 +30,7 @@ public abstract String ExecuteZAction(Section[][] ship, Player[] players);
 public abstract String ExecuteSpawnAction(Section[][] ship);
 public abstract String ExecuteDeathAction(Section[][] ship, Player[] players);
     @Override
-    public int compareTo(Threat threat) {
+    public int compareTo(@NonNull Threat threat) {
         return (this.position < threat.position? -1 :
                 (this.position == threat.position ? 0 : 1));
     }

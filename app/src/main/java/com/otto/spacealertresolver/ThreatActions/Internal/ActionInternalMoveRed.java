@@ -3,8 +3,6 @@ package com.otto.spacealertresolver.ThreatActions.Internal;
 import android.util.Pair;
 
 import com.otto.spacealertresolver.Section;
-import com.otto.spacealertresolver.ThreatActions.External.ActionEffectExternal;
-import com.otto.spacealertresolver.Threats.Threat;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
 
 public class ActionInternalMoveRed extends ActionEffectInternal

@@ -12,17 +12,14 @@ import com.otto.spacealertresolver.Adapters.ActionAdapter;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Actions.PlayerAction;
 import com.otto.spacealertresolver.R;
-import com.otto.spacealertresolver.Stations.ActionStation;
 
 public class PlayerDetail extends AppCompatActivity
 {
     private int playerId;
     private Player player;
-    private ActionAdapter actionList;
     private PlayerAction[] actions;
     private EditText nameEntry;
     private ListView actionListView;
-    private Button saveButton;
     private Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +29,7 @@ public class PlayerDetail extends AppCompatActivity
 
         nameEntry = findViewById(R.id.PlayerNameEntry);
         actionListView = findViewById(R.id.ActionListView);
-        saveButton = findViewById(R.id.SavePlayer);
+        Button saveButton = findViewById(R.id.SavePlayer);
 
         //get the player object to edit
         playerId = this.getIntent().getIntExtra("PlayerID", 0);
@@ -81,7 +78,7 @@ public class PlayerDetail extends AppCompatActivity
     super.onResume();
 
     actions = MainActivity.game.players[playerId].actions;
-    actionList = new ActionAdapter(this, actions);
+    ActionAdapter actionList = new ActionAdapter(this, actions);
     actionListView.setAdapter(actionList);
 }
 }

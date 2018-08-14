@@ -3,8 +3,6 @@ package com.otto.spacealertresolver.ThreatActions.Internal;
 import android.util.Pair;
 
 import com.otto.spacealertresolver.Section;
-import com.otto.spacealertresolver.ThreatActions.External.ActionEffectExternal;
-import com.otto.spacealertresolver.Threats.Threat;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
 import com.otto.spacealertresolver.enums.InternalThreatTypes;
 
@@ -12,31 +10,30 @@ public class SetInternalPosition extends ActionEffectInternal {
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)
     {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         Section location;
         switch (InternalThreatTypes.valueOf(threat.threatType))
         {
             case combat:
                 location = ship[threat.locations.get(0).first][threat.locations.get(0).second];
                 location.combatThreat = true;
-                message +=
-                        "The " + threat.name;
+                message.append("The ").append(threat.name);
                 if(threat.plural)
                 {
-                    message += " appear ";
+                    message.append(" appear ");
                 }
                 else
                 {
-                    message += " appears ";
+                    message.append(" appears ");
                 }
-                message += "in the " + location.sectionName + " " + location.zoneName + " section!";
+                message.append("in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section!");
                 break;
             case malfC:
                 for (Pair<Integer,Integer> p: threat.locations)
                 {
                     location = ship[p.first][p.second];
                     location.malfC = true;
-                    message += "A Malfunction of the type " + threat.name + " occurs in the " + location.sectionName + " " + location.zoneName + " C system!\n";
+                    message.append("A Malfunction of the type ").append(threat.name).append(" occurs in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" C system!\n");
                 }
                 break;
             case malfB:
@@ -44,10 +41,10 @@ public class SetInternalPosition extends ActionEffectInternal {
                 {
                     location = ship[p.first][p.second];
                     location.malfB = true;
-                    message += "A Malfunction of the type " + threat.name + " occurs in the " + location.sectionName + " " + location.zoneName + " B system!";
+                    message.append("A Malfunction of the type ").append(threat.name).append(" occurs in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" B system!");
                 }
                 break;
         }
-        return message;
+        return message.toString();
     }
 }

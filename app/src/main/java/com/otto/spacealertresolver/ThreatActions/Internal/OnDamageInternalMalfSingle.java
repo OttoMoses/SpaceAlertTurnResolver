@@ -6,10 +6,7 @@ import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.InternalDamageBundle;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
-import com.otto.spacealertresolver.Threats.Threat;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
-
-import java.io.Console;
 
 public class OnDamageInternalMalfSingle extends OnDamageInternal
 {
@@ -17,7 +14,7 @@ public class OnDamageInternalMalfSingle extends OnDamageInternal
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat, Player[] players)
     {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         Pair<Integer,Integer> locationValue = threat.locations.get(0);
         Section location = ship[locationValue.first][locationValue.second];
 
@@ -31,7 +28,7 @@ public class OnDamageInternalMalfSingle extends OnDamageInternal
                     {
                         if (threat.damage < threat.health)
                         {
-                            message += ProcessDamageBundle(db, threat);
+                            message.append(ProcessDamageBundle(db, threat));
                         }
                     }
                 }
@@ -45,7 +42,7 @@ public class OnDamageInternalMalfSingle extends OnDamageInternal
                     {
                         if (threat.damage < threat.health)
                         {
-                            message += ProcessDamageBundle(db, threat);
+                            message.append(ProcessDamageBundle(db, threat));
                         }
                     }
                 }
@@ -57,7 +54,7 @@ public class OnDamageInternalMalfSingle extends OnDamageInternal
                 break;
             }
         }
-        return message;
+        return message.toString();
     }
     private String ProcessDamageBundle(InternalDamageBundle bundle, ThreatInternal threat)
     {

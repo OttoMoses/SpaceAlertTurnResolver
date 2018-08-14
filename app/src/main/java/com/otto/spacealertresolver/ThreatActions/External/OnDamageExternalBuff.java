@@ -13,7 +13,7 @@ public class OnDamageExternalBuff extends OnDamageExternal
     @Override
     public String Execute(ThreatExternal t, ExternalDamageBundle db)
     {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         int DBDamage = 0;
         int damage;
         for(Pair p : db.damageSources)
@@ -26,7 +26,7 @@ public class OnDamageExternalBuff extends OnDamageExternal
                     case "shield":
                     {
                         t.shield += value;
-                        message += "The " + t.name + " gains " + value + " " + stat + " from being attacked with a " + source + "!\n";
+                        message.append("The ").append(t.name).append(" gains ").append(value).append(" ").append(stat).append(" from being attacked with a ").append(source).append("!\n");
                     }
                 }
             }
@@ -37,14 +37,14 @@ public class OnDamageExternalBuff extends OnDamageExternal
             if(damage > 0)
             {
                 t.damage += damage;
-                message += "The " + t.name + " takes " + damage + " damage!\n";
+                message.append("The ").append(t.name).append(" takes ").append(damage).append(" damage!\n");
             }
             else
             {
-                message += "The " + t.name + " blocks all damage!\n";
+                message.append("The ").append(t.name).append(" blocks all damage!\n");
             }
         }
-        return message;
+        return message.toString();
     }
 
     public OnDamageExternalBuff(int value, String stat, String source) {

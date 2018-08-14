@@ -1,6 +1,5 @@
 package com.otto.spacealertresolver.ThreatActions.External;
 
-import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.Threats.ThreatExternal;
@@ -13,27 +12,27 @@ public class ActionExternalDelayPlayers extends ActionEffectExternal
     @Override
     public String Execute(Section[][] ship, ThreatExternal threat)
     {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         switch (target)
         {
             case "all" :
             {
-                message += "The " + threat.name + " attacks all players on the ship delaying their actions!\n";
+                message.append("The ").append(threat.name).append(" attacks all players on the ship delaying their actions!\n");
                 for (Player p : game.players)
                 {
                     if(p.unconscious)
                     {
-                        message += p.playerName + " can't be delayed because they are already knocked out!";
+                        message.append(p.playerName).append(" can't be delayed because they are already knocked out!");
                     }
                     else
                     {
                         if(p.flyingInterceptors)
                         {
-                            message += p.playerName + " is safely off the ship flying interceptors!";
+                            message.append(p.playerName).append(" is safely off the ship flying interceptors!");
                         }
                         else
                         {
-                            message += p.Delay(game.currentRound);
+                            message.append(p.Delay(game.currentRound));
                         }
                     }
                 }
@@ -41,31 +40,31 @@ public class ActionExternalDelayPlayers extends ActionEffectExternal
             case "self":
             {
 
-                message += "The " + threat.name + " attacks all players in the " + game.colors[threat.track] + " zone delaying their actions!\n";
+                message.append("The ").append(threat.name).append(" attacks all players in the ").append(game.colors[threat.track]).append(" zone delaying their actions!\n");
                 for (Player p : game.players)
                 {
                     if(p.zonePosition == threat.track)
                     {
                         if(p.unconscious)
                         {
-                            message += p.playerName + " can't be delayed because they are already knocked out!";
+                            message.append(p.playerName).append(" can't be delayed because they are already knocked out!");
                         }
                         else
                         {
                             if(p.flyingInterceptors)
                             {
-                                message += p.playerName + " is safely off the ship flying interceptors!";
+                                message.append(p.playerName).append(" is safely off the ship flying interceptors!");
                             }
                             else
                             {
-                                message += p.Delay(game.currentRound);
+                                message.append(p.Delay(game.currentRound));
                             }
                         }
                     }
                 }
             }
         }
-        return message;
+        return message.toString();
     }
 
     public ActionExternalDelayPlayers(String target)

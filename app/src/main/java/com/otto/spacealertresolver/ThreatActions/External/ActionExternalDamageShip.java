@@ -4,7 +4,6 @@ import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.ThreatActions.External.ActionEffectExternal;
 import com.otto.spacealertresolver.Threats.ThreatExternal;
-import com.otto.spacealertresolver.enums.DamageConditions;
 
 /**
  * Created by Otto on 3/4/2018.

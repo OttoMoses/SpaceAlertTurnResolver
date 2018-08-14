@@ -9,10 +9,6 @@ import android.widget.TextView;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.R;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
-
 /**
  * Created by Otto on 1/26/2018.
  */
@@ -20,7 +16,7 @@ import java.util.ArrayList;
 public class PlayerAdapter extends BaseAdapter {
 
     private Player[] players;
-    private Activity context = null;
+    private Activity context;
 
     @Override
     public int getCount() {

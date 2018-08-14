@@ -1,6 +1,5 @@
 package com.otto.spacealertresolver.ThreatActions.External;
 
-import com.otto.spacealertresolver.Threats.Threat;
 import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 /**

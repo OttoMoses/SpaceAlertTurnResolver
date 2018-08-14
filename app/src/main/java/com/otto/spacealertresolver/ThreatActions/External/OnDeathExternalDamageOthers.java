@@ -16,7 +16,7 @@ public class OnDeathExternalDamageOthers extends OnDeathExternal
     @Override
     public String Execute(ThreatExternal threat)
     {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         ArrayList<Threat> targets = MainActivity.game.activeThreats;
         for(Threat t : targets)
         {
@@ -28,8 +28,8 @@ public class OnDeathExternalDamageOthers extends OnDeathExternal
                     ((OnDamageExternalCount)((ThreatExternal) t).damageAction).damaged = true;
                 }
             }
-            message += "On dying the " + t.name + " did damage to all other external threats!";
+            message.append("On dying the ").append(t.name).append(" did damage to all other external threats!");
         }
-        return message;
+        return message.toString();
     }
 }

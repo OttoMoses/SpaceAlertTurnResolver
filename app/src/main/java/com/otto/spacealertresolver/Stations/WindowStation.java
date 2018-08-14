@@ -26,6 +26,7 @@ public class WindowStation extends ActionStation {
                     {
                         message += "looks out the window but all the data this phase already been confirmed!";
                     }
+                    MainActivity.game.observationOne = count;
                     break;
                 case 2:
                     count = MainActivity.game.observationTwo;
@@ -38,6 +39,7 @@ public class WindowStation extends ActionStation {
                     {
                         message += "looks out the window but all the data this phase already been confirmed!";
                     }
+                    MainActivity.game.observationTwo = count;
                     break;
                 case 3:
                     count = MainActivity.game.observationThree;
@@ -50,6 +52,8 @@ public class WindowStation extends ActionStation {
                     {
                         message += "looks out the window but all the data this phase already been confirmed!";
                     }
+                    MainActivity.game.observationThree = count;
+                    break;
             }
         return  message;
     }

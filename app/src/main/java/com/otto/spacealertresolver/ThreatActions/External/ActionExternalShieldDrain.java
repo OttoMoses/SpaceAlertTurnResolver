@@ -2,7 +2,6 @@ package com.otto.spacealertresolver.ThreatActions.External;
 
 import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.ThreatActions.External.ActionEffectExternal;
-import com.otto.spacealertresolver.Threats.Threat;
 import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 /**

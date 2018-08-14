@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Pair;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.*;
 
@@ -18,10 +17,8 @@ public class ActionDetail extends AppCompatActivity
 {
     private int playerId;
     private int actionId;
-    private ActionAdapter actionList;
     private PlayerAction[] actionOptions;
     private ListView actionListView;
-    private TextView actionLabel;
     private String[] heroicMoves;
     private Pair<Integer,Integer> heroicLocation;
     @Override
@@ -31,7 +28,7 @@ public class ActionDetail extends AppCompatActivity
         setContentView(R.layout.activity_action_detail);
 
         actionListView = findViewById(R.id.ActionOptionsView);
-        actionLabel = findViewById(R.id.ActionDetailLabel);
+        TextView actionLabel = findViewById(R.id.ActionDetailLabel);
 
         actionLabel.setText("Select an action for time T+" + actionId + 1);
 
@@ -113,7 +110,7 @@ public class ActionDetail extends AppCompatActivity
 {
     super.onResume();
     actionOptions = MainActivity.game.actions;
-    actionList = new ActionAdapter(this, actionOptions);
+    ActionAdapter actionList = new ActionAdapter(this, actionOptions);
     actionListView.setAdapter(actionList);
     heroicMoves = new String[]{"Upper Red","Lower Red","Upper White","Lower White","Upper Blue","Lower Blue"};
 }
