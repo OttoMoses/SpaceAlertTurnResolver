@@ -19,7 +19,7 @@ public class OnDamageExternalDestroyInterceptors extends OnDamageExternal
         for(Pair p : db.damageSources)
         {
             DBDamage += (int)p.second;
-            if(p.first.equals("fighters"))
+            if(p.first.equals("fighters")&&((int)p.second)>2)
             {
                 DBDamage += 6;
                 for(Player player : game.players)
