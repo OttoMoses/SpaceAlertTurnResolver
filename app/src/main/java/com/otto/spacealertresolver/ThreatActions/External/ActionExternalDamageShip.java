@@ -54,17 +54,24 @@ public class ActionExternalDamageShip extends ActionEffectExternal
                     }
                 break;
                 }
-            case "ifDamagedAmount":
-                {
-                DealDamage(ship, threat,false);
-                break;
-                }
             case "noShield":
-            {
+                {
 
-                actionText = DealDamage(ship, threat,true);
-                break;
-            }
+                    actionText = DealDamage(ship, threat,true);
+                    break;
+                }
+                default:
+                {
+                    int value = Integer.parseInt(condition);
+                    if(threat.damage < value)
+                    {
+                        actionText = DealDamage(ship, threat,false);
+                    }
+                    else
+                    {
+                        actionText = "Because the " + threat.name + " has at least " + value + " damage it skips it's attack!";
+                    }
+                }
         }
         return actionText;
     }
@@ -102,6 +109,12 @@ public class ActionExternalDamageShip extends ActionEffectExternal
                     damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(0,damageValue,bypassBonus,ignoreShields,false);
                     damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(1,damageValue,bypassBonus,ignoreShields,false);
                 }
+            }
+            case 4:
+            {
+                //damage only the side zones
+                damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(0,damageValue,bypassBonus,ignoreShields,false);
+                damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(2,damageValue,bypassBonus,ignoreShields,false);
             }
 
         }

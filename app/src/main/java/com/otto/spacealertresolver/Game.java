@@ -16,6 +16,7 @@ import com.otto.spacealertresolver.Actions.MoveBlueAction;
 import com.otto.spacealertresolver.Actions.MoveRedAction;
 import com.otto.spacealertresolver.Actions.PlayerAction;
 import com.otto.spacealertresolver.Actions.TurboLiftAction;
+import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.DamageTokens.DamageToken;
 import com.otto.spacealertresolver.DamageTokens.ElevatorDamage;
 import com.otto.spacealertresolver.DamageTokens.GunDamage;
@@ -38,10 +39,18 @@ import com.otto.spacealertresolver.Stations.SuperHeavyLaserStation;
 import com.otto.spacealertresolver.Stations.WindowStation;
 import com.otto.spacealertresolver.ThreatActions.External.ActionExternalBuff;
 import com.otto.spacealertresolver.ThreatActions.External.ActionExternalDamageShip;
+import com.otto.spacealertresolver.ThreatActions.External.ActionExternalDelayPlayers;
+import com.otto.spacealertresolver.ThreatActions.External.ActionExternalDie;
+import com.otto.spacealertresolver.ThreatActions.External.ActionExternalEndGame;
 import com.otto.spacealertresolver.ThreatActions.External.ActionExternalGlobalBuff;
+import com.otto.spacealertresolver.ThreatActions.External.ActionExternalKnockOut;
 import com.otto.spacealertresolver.ThreatActions.External.ActionExternalMoveOthers;
+import com.otto.spacealertresolver.ThreatActions.External.ActionExternalSelfDamage;
+import com.otto.spacealertresolver.ThreatActions.External.OnDamageBuff;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternal;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalBypassSource;
+import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalCount;
+import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalDestroyInterceptors;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalMaxValue;
 import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternal;
 import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternalRemoveGlobalBonus;
@@ -130,7 +139,7 @@ public class Game
     private ArrayList<DamageToken> redDamage;
     private ArrayList<DamageToken> whiteDamage;
     private ArrayList<DamageToken> blueDamage;
-    private ArrayList<Threat> deadThreats;
+    public ArrayList<Threat> deadThreats;
     private ArrayList<Threat> escapedThreats;
     private ArrayList<Threat> internalThreats;
     private ArrayList<Threat> externalThreats;
@@ -438,116 +447,81 @@ public class Game
     public String MoveThreats(String source)
     {
         String message = "\n";
-        for(Threat t:activeThreats)
-        {
+        for(Threat t:activeThreats) {
+            if(!gameEnd)
+            {
             int movement;
-            if(source.equals("game"))
-            {
-                 movement = t.speed;
-            }
-            else
-            {
+            if (source.equals("game")) {
+                movement = t.speed;
+            } else {
                 movement = Integer.parseInt(source);
             }
             ThreatTrack track = threatTracks[t.track];
             int newPosition = t.position + movement;
-            if(t.getClass().equals(ThreatExternal.class))
-            {
+            if (t.getClass().equals(ThreatExternal.class)) {
                 message += "\nThe " + t.name + " moves " + movement + " spaces closer to the ship\n";
-            }
-            else
-            {
+            } else {
                 message +=
-                "The " + t.name;
-                if(((ThreatInternal) t).plural)
-                {
+                        "The " + t.name;
+                if (((ThreatInternal) t).plural) {
                     message += " move ";
-                }
-                else
-                {
+                } else {
                     message += " moves ";
                 }
-                message += movement +  " spaces on the internal track\n";
+                message += movement + " spaces on the internal track\n";
             }
             //check for attack spaces
-            for (int space : track.XSpace)
-            {
-                if((space < newPosition && space > t.position) || space == newPosition)
-                {
-                    message += t.ExecuteXAction(ship,players);
+            for (int space : track.XSpace) {
+                if ((space < newPosition && space > t.position) || space == newPosition) {
+                    message += t.ExecuteXAction(ship, players);
                 }
             }
-            for (int space : track.YSpaces)
-            {
-                if((space < newPosition && space > t.position) || space == newPosition)
-                {
-                    message += t.ExecuteYAction(ship,players);
+            for (int space : track.YSpaces) {
+                if ((space < newPosition && space > t.position) || space == newPosition) {
+                    message += t.ExecuteYAction(ship, players);
                 }
             }
-            for (int space : track.EndSpace)
-            {
-                if( space < newPosition || space == newPosition)
-                {
+            for (int space : track.EndSpace) {
+                if (space < newPosition || space == newPosition) {
 
-                    message += t.ExecuteZAction(ship,players);
+                    message += t.ExecuteZAction(ship, players);
                     message += "\n";
-                    if(t.getClass().equals(ThreatExternal.class))
-                    {
+                    if (t.getClass().equals(ThreatExternal.class)) {
                         message += "The " + t.name + " Escapes!";
-                    }
-                    else
-                    {
-                        if(((ThreatInternal) t).threatType.contains("combat"))
-                        {
-                            if(((ThreatInternal) t).plural)
-                            {
+                    } else {
+                        if (((ThreatInternal) t).threatType.contains("combat")) {
+                            if (((ThreatInternal) t).plural) {
                                 message += "The " + t.name + " escape!";
-                            }
-                            else
-                            {
+                            } else {
                                 message += "The " + t.name + " escapes!";
                             }
-                        }
-                        else
-                        {
-                            if(!gameEnd)
-                            {
-                                if(((ThreatInternal) t).plural)
-                                {
+                        } else {
+                            if (!gameEnd) {
+                                if (((ThreatInternal) t).plural) {
                                     message += "The " + t.name + " are now unfixable!";
-                                }
-                                else
-                                {
+                                } else {
                                     message += "The " + t.name + " is now unfixable!";
                                 }
                             }
                         }
                     }
                     escapedThreats.add(t);
-                }
-
-                else
-                {
-                    if(t.getClass().equals(ThreatExternal.class))
-                    {
-                        message += "The " + t.name + " is now  " + (threatTracks[t.track].EndSpace[0] -  t.position) +  " space away from the ship!";
-                    }
-                    else
-                    {
+                } else {
+                    if (t.getClass().equals(ThreatExternal.class)) {
+                        message += "The " + t.name + " is now  " + (threatTracks[t.track].EndSpace[0] - t.position) + " space away from the ship!";
+                    } else {
                         message += "The " + t.name;
-                                if(((ThreatInternal)t).plural)
-                                {
-                                   message += " are now  ";
-                                }
-                                else
-                                {
-                                    message += " is now ";
-                                }
-                                message += (threatTracks[t.track].EndSpace[0] -  t.position) +  " space away from escaping!";
+                        if (((ThreatInternal) t).plural) {
+                            message += " are now  ";
+                        } else {
+                            message += " is now ";
+                        }
+                        message += (threatTracks[t.track].EndSpace[0] - t.position) + " space away from escaping!";
                     }
                     t.position = newPosition;
                 }
             }
+        }
         }
         for(Threat t : escapedThreats)
         {
@@ -561,6 +535,7 @@ public class Game
         {
             message += "\n";
         }
+
         return message;
     }
     private void ResetState()
@@ -620,6 +595,32 @@ public class Game
         String message = "";
         for (Player p : players)
         {
+            if(p.unconscious)
+            {
+                message += p.playerName + " is knocked out and can't take any actions!";
+            }
+            else
+            {
+                //special check for players who are in space
+                if(p.flyingInterceptors)
+                {
+                    switch (p.actions[round - 1].name) {
+                        case "Battlebots action":
+                            actions[7].Execute(p);
+                            break;
+                        case "Heroic Battlebots action":
+                            actions[11].Execute(p);
+                            break;
+                        default:
+                            message += "\n" + p.playerName + " returns to the ship";
+                            p.flyingInterceptors = false;
+                            interceptorsDocked = true;
+                            break;
+                    }
+                }
+                message += "\n" + p.playerName + " " +
+                        p.actions[round - 1].Execute(p) + "\n";
+            }
             //special check for players who are in space
             if(p.flyingInterceptors)
             {
@@ -1017,11 +1018,30 @@ public class Game
         else{message += "There are no internal threats this turn.\n";}
         if(!externalTargets.isEmpty()){message += ExternalThreatDamage(externalTargets);}
         else{message += "There are no external threats this turn.";}
+        //special check for nemesis threat
+        for(Threat t : activeThreats)
+        {
+            if(t.getClass() == ThreatExternal.class)
+            {
+                if(((ThreatExternal)t).damageAction.getClass() == OnDamageExternalCount.class)
+                {
+                    if(((OnDamageExternalCount)((ThreatExternal) t).damageAction).damaged)
+                    {
+                        int value = ((OnDamageExternalCount)((ThreatExternal) t).damageAction).value;
+                        message += "Because it took damage this turn the " + t.name + " attacks all zones for " + value + " damage!";
+                        ((OnDamageExternalCount)((ThreatExternal) t).damageAction).damaged = false;
+                        message += "The " + t.name + MainActivity.game.ShipDamage(0,value,false,false,false);
+                        message += "The " + t.name +MainActivity.game.ShipDamage(1,value,false,false,false);
+                        message += "The " + t.name +MainActivity.game.ShipDamage(2,value,false,false,false);
+                    }
+                }
+            }
+        }
         message += "\n";
         return message;
     }
 
-    private String KillThreats(ArrayList<Threat> targets)
+    public String KillThreats(ArrayList<Threat> targets)
     {
         String message = "";
         for(Threat t : targets)
@@ -1429,7 +1449,7 @@ public class Game
                     expression = xPath.compile("./stat");
                     String stat = (String) expression.evaluate(item, XPathConstants.STRING);
                     expression = xPath.compile("./amount");
-                    int value = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
+                    String value = (String) expression.evaluate(item, XPathConstants.STRING);
                     effects.add(new ActionExternalBuff(stat, value));
                     break;
                     }
@@ -1445,7 +1465,7 @@ public class Game
                     effects.add(new ActionExternalToggle());
                     break;
                     }
-                case "globalDamageBuff" :
+                case "globalBuff" :
                     {
                     expression = xPath.compile("./stat");
                     String stat = (String) expression.evaluate(item, XPathConstants.STRING);
@@ -1459,6 +1479,40 @@ public class Game
                     expression = xPath.compile("./value");
                     int value = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
                     effects.add(new ActionExternalMoveOthers(value));
+                    break;
+                }
+                case "knockOut" :
+                {
+                    expression = xPath.compile("./target");
+                    String target = (String)expression.evaluate(item,XPathConstants.STRING);
+                    effects.add(new ActionExternalKnockOut(target));
+                    break;
+
+                }
+                case "delay" :
+                {
+                    expression = xPath.compile("./target");
+                    String target = (String)expression.evaluate(item,XPathConstants.STRING);
+                    effects.add(new ActionExternalDelayPlayers(target));
+                    break;
+
+                }
+                case "selfDamage" :
+                {
+                    expression = xPath.compile("./value");
+                    int value = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
+                    effects.add(new ActionExternalSelfDamage(value));
+                    break;
+                }
+                case "endGame" :
+                {
+                    effects.add(new ActionExternalEndGame());
+                    break;
+                }
+                case "die" :
+                {
+                    effects.add(new ActionExternalDie());
+                    break;
                 }
             }
         }
@@ -1645,8 +1699,30 @@ public class Game
             {
                 XPathExpression expression = xPath.compile("./value");
                 int value = Integer.parseInt((String) expression.evaluate(damType, XPathConstants.STRING));
-                effect = new OnDamageExternalMaxValue(maxValue);
+                effect = new OnDamageExternalMaxValue(value);
                 break;
+            }
+            case "destroyInterceptors" :
+            {
+                effect = new OnDamageExternalDestroyInterceptors();
+                break;
+            }
+            case "buff" :
+            {
+                XPathExpression expression = xPath.compile("./value");
+                int value = Integer.parseInt((String) expression.evaluate(damType, XPathConstants.STRING));
+                expression = xPath.compile("./stat");
+                String stat = (String) expression.evaluate(damType, XPathConstants.STRING);
+                expression = xPath.compile("./source");
+                String source = (String) expression.evaluate(damType, XPathConstants.STRING);
+                effect = new OnDamageBuff(value,stat,source);
+                break;
+            }
+            case "count" :
+            {
+                XPathExpression expression = xPath.compile("./value");
+                int value = Integer.parseInt((String) expression.evaluate(damType, XPathConstants.STRING));
+                effect = new OnDamageExternalCount(value);
             }
             default:
                 effect = new OnDamageExternalDefault();
@@ -1693,7 +1769,8 @@ public class Game
             }
             case "damageSpaceCount":
             {
-                effect = new OnDeathExternalDamageSpaceCount();
+                int multi = Integer.parseInt(deathType.getTextContent());
+                effect = new OnDeathExternalDamageSpaceCount(multi);
                 break;
             }
             case "removeGlobalBonus":

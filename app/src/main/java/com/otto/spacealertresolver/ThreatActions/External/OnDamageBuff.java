@@ -5,9 +5,11 @@ import android.util.Pair;
 import com.otto.spacealertresolver.ExternalDamageBundle;
 import com.otto.spacealertresolver.Threats.ThreatExternal;
 
-public class OnDamageExternalMaxValue extends OnDamageExternal
+public class OnDamageBuff extends OnDamageExternal
 {
-    private int maxValue;
+    private int value;
+    private String stat;
+    private String source;
     @Override
     public String Execute(ThreatExternal t, ExternalDamageBundle db)
     {
@@ -17,14 +19,19 @@ public class OnDamageExternalMaxValue extends OnDamageExternal
         for(Pair p : db.damageSources)
         {
             DBDamage += (int)p.second;
+            if (p.first.equals(source))
+            {
+                switch (stat)
+                {
+                    case "shield":
+                    {
+                        t.shield += value;
+                    }
+                }
+            }
         }
         if(DBDamage != 0)
         {
-            if(DBDamage > maxValue)
-            {
-                message += "\nThe " + t.name + " reduces damage by " + (DBDamage - maxValue) + " and only takes " + maxValue + "!\n";
-                DBDamage = maxValue;
-            }
             damage = DBDamage - t.shield;
             if(damage > 0)
             {
@@ -39,8 +46,9 @@ public class OnDamageExternalMaxValue extends OnDamageExternal
         return message;
     }
 
-    public OnDamageExternalMaxValue(int maxValue)
-    {
-        this.maxValue = maxValue;
+    public OnDamageBuff(int value, String stat, String source) {
+        this.value = value;
+        this.stat = stat;
+        this.source = source;
     }
 }

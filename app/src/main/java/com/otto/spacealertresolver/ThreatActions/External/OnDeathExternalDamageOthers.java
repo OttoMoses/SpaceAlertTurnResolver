@@ -20,8 +20,15 @@ public class OnDeathExternalDamageOthers extends OnDeathExternal
         ArrayList<Threat> targets = MainActivity.game.activeThreats;
         for(Threat t : targets)
         {
-            t.damage += 1;
-            message += "On dying the " + t.name + " did damage to all other threats!";
+            if(t.getClass() == ThreatExternal.class)
+            {
+                t.damage += 1;
+                if(((ThreatExternal)t).damageAction.getClass() == OnDamageExternalCount.class)
+                {
+                    ((OnDamageExternalCount)((ThreatExternal) t).damageAction).damaged = true;
+                }
+            }
+            message += "On dying the " + t.name + " did damage to all other external threats!";
         }
         return message;
     }

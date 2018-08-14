@@ -1,8 +1,6 @@
 package com.otto.spacealertresolver.ThreatActions.External;
 
 import com.otto.spacealertresolver.Activities.MainActivity;
-import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternal;
-import com.otto.spacealertresolver.Threats.Threat;
 import com.otto.spacealertresolver.ThreatTrack;
 import com.otto.spacealertresolver.Threats.ThreatExternal;
 
@@ -12,6 +10,7 @@ import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 public class OnDeathExternalDamageSpaceCount extends OnDeathExternal
 {
+    public int multiplier;
     @Override
     public String Execute(ThreatExternal threat)
     {
@@ -32,11 +31,16 @@ public class OnDeathExternalDamageSpaceCount extends OnDeathExternal
                 spaceCount++;
             }
         }
-        int damage = spaceCount * 2;
+        int damage = spaceCount * multiplier;
         if(damage > 0)
         {
             message += "On dying the " + threat.name + MainActivity.game.ShipDamage(threat.track,spaceCount,false,false,false);
         }
         return message;
+    }
+
+    public OnDeathExternalDamageSpaceCount(int multiplier)
+    {
+        this.multiplier = multiplier;
     }
 }
