@@ -8,15 +8,23 @@ import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
 
+import static com.otto.spacealertresolver.Activities.MainActivity.game;
+
 public class OnDamageInternalMalfMultiBonus extends OnDamageInternal {
     private String target;
     private int potentialBonus;
+    private int round;
+    private int systemCount = 0;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat, Player[] players)
     {
+        if(round != game.currentRound)
+        {
+            round = game.currentRound;
+            systemCount = 0;
+        }
         StringBuilder message = new StringBuilder();
         int realBonus = 0;
-        int systemCount = 0;
         switch (target)
         {
             case "C" :
@@ -24,58 +32,33 @@ public class OnDamageInternalMalfMultiBonus extends OnDamageInternal {
                 for(Pair<Integer,Integer> pair : threat.locations)
                 {
                     Section location = ship[pair.first][pair.second];
-                    if(!location.malfCDamage.isEmpty())
+                    if(location.malfCDamage != null)
                     {
                         systemCount++;
-                    }
-                }
-                if(systemCount == threat.locations.size())
-                {
-                    realBonus = potentialBonus;
-                }
-                for(Pair<Integer,Integer> pair : threat.locations)
-                {
-                    Section location = ship[pair.first][pair.second];
-                    if(!location.malfCDamage.isEmpty())
-                    {
-                        for (InternalDamageBundle db:location.malfCDamage)
+                        if(systemCount == threat.locations.size())
                         {
-                            if (threat.damage < threat.health)
-                            {
-                                message.append(ProcessDamageBundle(db, threat, realBonus));
-                            }
+                            realBonus = potentialBonus;
                         }
+                        ProcessDamageBundle(location.malfCDamage,threat,realBonus);
+                        location.malfCDamage = null;
                     }
                 }
                 break;
             }
             case "B" :
             {
-
                 for(Pair<Integer,Integer> pair : threat.locations)
                 {
                     Section location = ship[pair.first][pair.second];
-                    if(!location.malfBDamage.isEmpty())
+                    if(location.malfBDamage != null)
                     {
                         systemCount++;
-                    }
-                }
-                if(systemCount == threat.locations.size())
-                {
-                    realBonus = potentialBonus;
-                }
-                for(Pair<Integer,Integer> pair : threat.locations)
-                {
-                    Section location = ship[pair.first][pair.second];
-                    if(!location.malfBDamage.isEmpty())
-                    {
-                        for (InternalDamageBundle db:location.malfCDamage)
+                        if(systemCount == threat.locations.size())
                         {
-                            if (threat.damage < threat.health)
-                            {
-                                message.append(ProcessDamageBundle(db, threat, realBonus));
-                            }
+                            realBonus = potentialBonus;
                         }
+                        ProcessDamageBundle(location.malfBDamage,threat,realBonus);
+                        location.malfBDamage = null;
                     }
                 }
                 break;
@@ -94,12 +77,12 @@ public class OnDamageInternalMalfMultiBonus extends OnDamageInternal {
         if(bundle.heroic)
         {
             threat.damage += 2 + bonus;
-            message += MainActivity.game.players[bundle.playerID].playerName + " heroically repairs the " + threat.name + " for " + 2 + bonus + " damage!";
+            message += game.players[bundle.playerID].playerName + " heroically repairs the " + threat.name + " for " + (2 + bonus) + " damage!";
         }
         else
         {
             threat.damage += 1 + bonus;
-            message += MainActivity.game.players[bundle.playerID].playerName + " repairs the " + threat.name + " for " + 1 + bonus + " damage!";
+            message += game.players[bundle.playerID].playerName + " repairs the " + threat.name + " for " + (1 + bonus) + " damage!";
         }
         return message;
     }

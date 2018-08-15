@@ -1,13 +1,9 @@
 package com.otto.spacealertresolver.ThreatActions.Internal;
 
-import com.otto.spacealertresolver.Section;
+import com.otto.spacealertresolver.Threats.ThreatExternal;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
 
-public class OnDeathInternal extends ActionEffectInternal
+public abstract class OnDeathInternal
 {
-    @Override
-    public String Execute(Section[][] ship, ThreatInternal threat)
-    {
-        return null;
-    }
+    public abstract String Execute(ThreatInternal threat);
 }

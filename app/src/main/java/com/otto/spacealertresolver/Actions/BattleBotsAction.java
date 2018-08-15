@@ -24,7 +24,7 @@ public class BattleBotsAction extends PlayerAction
             if(MainActivity.game.ship[0][0].malfC)
             {
                 message += "attempts to repair the fissure with their interceptors!";
-                MainActivity.game.ship[0][0].malfCDamage.add(new InternalDamageBundle(player.playerID,false));
+                MainActivity.game.ship[0][0].malfCDamage =  new InternalDamageBundle(player.playerID,false);
             }
             else
             {
@@ -36,7 +36,7 @@ public class BattleBotsAction extends PlayerAction
         else if(location.combatThreat)
         {
             message += "leads their bots in combat in the " + location.sectionName + " " + location.zoneName + " zone!";
-            location.combatDamage.add(new InternalDamageBundle(player.playerID,false));
+            location.combatDamage =  new InternalDamageBundle(player.playerID,false);
         }
         else
         {

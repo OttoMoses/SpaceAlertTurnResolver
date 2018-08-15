@@ -81,7 +81,7 @@ public class ThreatInternal extends Threat
         String message = "";
         if(deathAction != null)
         {
-            return deathAction.Execute(ship,this);
+            return deathAction.Execute(this);
         }
         return message;
     }

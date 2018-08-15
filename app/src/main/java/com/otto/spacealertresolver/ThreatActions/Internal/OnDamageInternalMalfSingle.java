@@ -3,10 +3,13 @@ package com.otto.spacealertresolver.ThreatActions.Internal;
 import android.util.Pair;
 
 import com.otto.spacealertresolver.Activities.MainActivity;
+import com.otto.spacealertresolver.Game;
 import com.otto.spacealertresolver.InternalDamageBundle;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
+
+import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class OnDamageInternalMalfSingle extends OnDamageInternal
 {
@@ -22,29 +25,21 @@ public class OnDamageInternalMalfSingle extends OnDamageInternal
         {
             case "B" :
             {
-                if(!location.malfBDamage.isEmpty())
+                if(location.malfBDamage != null)
                 {
-                    for (InternalDamageBundle db:location.malfCDamage)
-                    {
-                        if (threat.damage < threat.health)
-                        {
-                            message.append(ProcessDamageBundle(db, threat));
-                        }
-                    }
+                    InternalDamageBundle db = location.malfBDamage;
+                    message.append(ProcessDamageBundle(db, threat));
+                    location.malfBDamage = null;
                 }
                 break;
             }
             case "C" :
             {
-                if(!location.malfCDamage.isEmpty())
+                if(location.malfCDamage != null)
                 {
-                    for (InternalDamageBundle db:location.malfCDamage)
-                    {
-                        if (threat.damage < threat.health)
-                        {
-                            message.append(ProcessDamageBundle(db, threat));
-                        }
-                    }
+                    InternalDamageBundle db = location.malfCDamage;
+                    message.append(ProcessDamageBundle(db, threat));
+                    location.malfCDamage = null;
                 }
                 break;
             }
@@ -62,12 +57,12 @@ public class OnDamageInternalMalfSingle extends OnDamageInternal
         if(bundle.heroic)
         {
             threat.damage+=2;
-            message += MainActivity.game.players[bundle.playerID].playerName + " heroically repairs the " + threat.name + " for 2 damage!";
+            message += game.players[bundle.playerID].playerName + " heroically repairs the " + threat.name + " for 2 damage!";
         }
         else
         {
             threat.damage++;
-            message += MainActivity.game.players[bundle.playerID].playerName + " repairs the " + threat.name + " for 1 damage!";
+            message += game.players[bundle.playerID].playerName + " repairs the " + threat.name + " for 1 damage!";
         }
         return message;
     }

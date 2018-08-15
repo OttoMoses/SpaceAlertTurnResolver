@@ -1811,7 +1811,7 @@
         <speed>2</speed>
         <locations>
             <location section="0" zone="0"/>
-            <location section="1 " zone="2"/>
+            <location section="1" zone="2"/>
         </locations>
         <threatType>malfC</threatType>
         <xAction>

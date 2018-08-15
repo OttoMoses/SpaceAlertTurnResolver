@@ -19,7 +19,6 @@ public class Section
     public ActionStation ASystem;
     public ActionStation BSystem;
     public ActionStation CSystem;
-    public boolean hasThreat;
     public boolean hasBots;
     public int powerX;
     public int powerY;
@@ -38,25 +37,24 @@ public class Section
     public int sectionPos;
     public boolean heroicFire;
     public boolean liftUsed;
-    public ArrayList<InternalDamageBundle> combatDamage;
-    public ArrayList<InternalDamageBundle> malfBDamage;
-    public ArrayList<InternalDamageBundle> malfCDamage;
+    public InternalDamageBundle combatDamage;
+    public InternalDamageBundle malfBDamage;
+    public InternalDamageBundle malfCDamage;
 
     public Section(String zoneName,String sectionName, boolean bots,int powerX, int powerY,int startPower,int maxPower,int gunDamage,int gunRange,int zonePos,int sectionPos)
     {
         this.zoneName = zoneName;
         this.sectionName = sectionName;
         LiftDamaged = false;
-        hasThreat = false;
         this.powerX = powerX;
         this.powerY = powerY;
         this.maxPower = maxPower;
         this.startPower = startPower;
         this.gunRange = gunRange;
         this.gunDamage = gunDamage;
-        this.combatDamage = new ArrayList<>();
-        this.malfBDamage = new ArrayList<>();
-        this.malfCDamage = new ArrayList<>();
+        this.combatDamage = null;
+        this.malfBDamage = null;
+        this.malfCDamage = null;
         this.zonePos = zonePos;
         this.sectionPos = sectionPos;
     }

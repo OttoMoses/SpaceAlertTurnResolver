@@ -1,5 +1,7 @@
 package com.otto.spacealertresolver.ThreatActions.Internal;
 
+import android.widget.ListView;
+
 import com.otto.spacealertresolver.InternalDamageBundle;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
@@ -13,9 +15,9 @@ public class OnDamageInternalCombat extends OnDamageInternal
     {
         StringBuilder message = new StringBuilder();
         Section location = ship[threat.locations.get(0).first][threat.locations.get(0).second];
-        while(!location.combatDamage.isEmpty() && threat.damage < threat.health)
+        if(location.combatDamage != null)
         {
-            InternalDamageBundle db = location.combatDamage.get(0);
+            InternalDamageBundle db = location.combatDamage;
             Player player = players[db.playerID];
             threat.damage++;
             message.append(player.playerName).append(" deals 1 damage against the ").append(threat.name).append(" in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section!\n\n");
@@ -31,7 +33,7 @@ public class OnDamageInternalCombat extends OnDamageInternal
                     message.append(player.playerName).append("'s bots were damaged in combat against the ").append(threat.name).append("!\n");
                 }
             }
-            location.combatDamage.remove(0);
+            location.combatDamage = null;
         }
         return message.toString();
     }

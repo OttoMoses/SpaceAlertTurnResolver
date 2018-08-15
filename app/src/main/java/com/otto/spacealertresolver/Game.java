@@ -80,6 +80,7 @@ import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternal;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalCombat;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfMultiBonus;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfSingle;
+import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternal;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnSpawnSetHealth;
 import com.otto.spacealertresolver.ThreatActions.Internal.SetInternalPosition;
 import com.otto.spacealertresolver.ThreatActions.Internal.ThreatActionInternal;
@@ -377,13 +378,11 @@ public class Game {
         roundMessage += ProcessActions(currentRound);
 
         //generate targets for damage processes
-        ArrayList<Threat> internalTargets = new ArrayList<>(activeThreats);
-        internalTargets.removeAll(externalThreats);
         ArrayList<Threat> externalTargets = new ArrayList<>(activeThreats);
         externalTargets.removeAll(internalThreats);
 
         roundMessage += "\n----Calculate Threat Damage Step----\n";
-        roundMessage += DamageThreats(externalTargets, internalTargets);
+        roundMessage += DamageThreats(externalTargets);
         roundMessage += KillThreats(activeThreats);
         roundMessage += "\n----Threat Move Step----\n";
         roundMessage += MoveThreats("game");
@@ -526,9 +525,9 @@ public class Game {
             for (Section s : aShip) {
                 s.hasFired = false;
                 s.heroicFire = false;
-                s.combatDamage.clear();
-                s.malfCDamage.clear();
-                s.malfBDamage.clear();
+                s.combatDamage = null;
+                s.malfCDamage = null;
+                s.malfBDamage= null;
             }
         }
         //reset strafing run boolean
@@ -596,6 +595,10 @@ public class Game {
                 }
                 message.append("\n").append(p.playerName).append(" ").append(p.actions[round - 1].Execute(p)).append("\n");
             }
+            ArrayList<Threat> internalTargets = new ArrayList<>(activeThreats);
+            internalTargets.removeAll(externalThreats);
+            message.append(InternalThreatDamage(internalTargets)).append("\n");
+            message.append(KillThreats(activeThreats));
         }
         return message.toString();
     }
@@ -906,26 +909,19 @@ public class Game {
         }
     }
 
-    private String InternalThreatDamage(ArrayList<Threat> targets) {
+    private String InternalThreatDamage(ArrayList<Threat> targets)
+    {
         StringBuilder message = new StringBuilder();
-        for (Threat threat : targets) {
+        for (Threat threat : targets)
+        {
             ThreatInternal t = (ThreatInternal) threat;
             message.append(t.ExecuteDamageAction(ship, players));
         }
-        if (message.toString().equals("")) {
-            return "No internal threats have taken damage this turn.\n";
-        } else {
-            return message.toString();
-        }
+        return message.toString();
     }
 
-    private String DamageThreats(ArrayList<Threat> externalTargets, ArrayList<Threat> internalTargets) {
+    private String DamageThreats(ArrayList<Threat> externalTargets) {
         StringBuilder message = new StringBuilder("\n");
-        if (!internalTargets.isEmpty()) {
-            message.append(InternalThreatDamage(internalTargets));
-        } else {
-            message.append("There are no internal threats this turn.\n");
-        }
         if (!externalTargets.isEmpty()) {
             message.append(ExternalThreatDamage(externalTargets));
         } else {
@@ -953,6 +949,7 @@ public class Game {
         StringBuilder message = new StringBuilder();
         for (Threat t : targets) {
             if (t.damage >= t.health) {
+                message.append("\n");
                 t.ExecuteDeathAction(ship, players);
                 deadThreats.add(t);
                 if (t.getClass().equals(ThreatInternal.class) && ((ThreatInternal) t).plural) {
@@ -1476,10 +1473,12 @@ public class Game {
                 case "setPosition": {
                     effect = new SetInternalPosition();
                     effects.add(effect);
+                    break;
                 }
                 case "setHealth": {
                     effect = new OnSpawnSetHealth();
                     effects.add(effect);
+                    break;
                 }
             }
         }
@@ -1603,4 +1602,17 @@ public class Game {
         }
         return effect;
     }
+    /*private OnDeathInternal GetInternalDeathEffect(Element deathType)
+    {
+        OnDeathInternal effect;
+        String type = deathType.getAttribute("type");
+        switch (type) {
+            case "none":
+                {
+                effect = new OnDeathInternal();
+                break;
+                }
+        }
+        return effect;
+    }*/
 }
