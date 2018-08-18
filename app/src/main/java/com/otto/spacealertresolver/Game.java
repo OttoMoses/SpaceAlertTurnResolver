@@ -81,6 +81,7 @@ import com.otto.spacealertresolver.ThreatActions.External.ActionExternalToggle;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalMoveToPlayerCount;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalSpread;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalTurboLift;
+import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageCountRequired;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternal;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalCombat;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfMultiBonus;
@@ -1641,6 +1642,11 @@ public class Game {
             case "combatMulti":
             {
                 effect = new OnDamageInternalCombat(Boolean.parseBoolean(damType.getTextContent()));
+                break;
+            }
+            case "countRequired" :
+            {
+                effect = new OnDamageCountRequired();
                 break;
             }
         }
