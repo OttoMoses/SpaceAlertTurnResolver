@@ -86,6 +86,24 @@ public class ActionInternalKnockOut extends ActionEffectInternal {
                 }
                 break;
             }
+            case "SelfNoBots":
+            {
+                Pair<Integer, Integer> location = threat.locations.get(0);
+                for (Player p : MainActivity.game.players) {
+                    if ((p.zonePosition == location.second && p.sectionPosition == location.first) && (!p.leadingBots))
+                    {
+                        message.append("The ").append(threat.name);
+                        if (threat.plural) {
+                            message.append(" attack ");
+                        } else {
+                            message.append(" attacks ");
+                        }
+                        message.append(p.playerName).append(" knocking them out!\n");
+                        p.unconscious = true;
+                    }
+                }
+                break;
+            }
         }
         return message.toString();
     }

@@ -2021,7 +2021,7 @@
     </threat>
     <threat>
         <type>internal</type>
-        <plural>true</plural>
+        <plural>false</plural>
         <cardID>I2-05</cardID>
         <name>Virus</name>
         <deathScore>6</deathScore>
@@ -2063,7 +2063,7 @@
     </threat>
     <threat>
         <type>internal</type>
-        <plural>true</plural>
+        <plural>false</plural>
         <cardID>I2-06</cardID>
         <name>Overheated Reactor</name>
         <deathScore>6</deathScore>
@@ -2094,6 +2094,48 @@
         <deathAction>
             <effect type="knockout">
                 <target>lateralReactors</target>
+            </effect>
+        </deathAction>
+        <spawnAction>
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
+        </spawnAction>
+    </threat>
+    <threat>
+        <type>internal</type>
+        <plural>false</plural>
+        <cardID>SI2-01</cardID>
+        <name>Executioner</name>
+        <deathScore>12</deathScore>
+        <escapeScore>6</escapeScore>
+        <health>2</health>
+        <speed>2</speed>
+        <locations>
+            <location section="1" zone="2"/>
+        </locations>
+        <threatType>combat</threatType>
+        <xAction>
+            <effect type="moveRed"/>
+            <effect type="knockOut">
+                <target>SelfNoBots</target>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="changeDeck"/>
+            <effect type="knockOut">
+                <target>SelfNoBots</target>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damageShip">
+                <target>self</target>
+                <damage>3</damage>
+            </effect>
+        </zAction>
+        <damageAction type="combat">true</damageAction>
+        <deathAction>
+            <effect type="none">
             </effect>
         </deathAction>
         <spawnAction>
