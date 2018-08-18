@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
-public class OnDeathKnockOut extends OnDeathInternal
+public class OnDeathInternalKnockOut extends OnDeathInternal
 {
     private String target;
     @Override
@@ -38,7 +38,7 @@ public class OnDeathKnockOut extends OnDeathInternal
         return message;
     }
 
-    public OnDeathKnockOut(String target)
+    public OnDeathInternalKnockOut(String target)
     {
         this.target = target;
     }
