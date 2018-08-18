@@ -153,6 +153,12 @@ public class ThreatTrackEdit extends AppCompatActivity
                 track.rangeTwo = 5;
                 track.rangeOne = 10;
                 break;
+            case 6:
+                track.XSpace = new int[]{5};
+                track.YSpaces = new int[]{9,12};
+                track.EndSpace = new int[]{16};
+                track.rangeTwo = 6;
+                track.rangeOne = 11;
         }
     }
 
