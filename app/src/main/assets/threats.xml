@@ -1867,7 +1867,6 @@
             </effect>
         </yAction>
         <zAction>
-            <effect type="changeDeck" />
             <effect type="damageShip">
                 <target>self</target>
                 <damage>2</damage>
@@ -1885,7 +1884,7 @@
     <threat>
         <type>internal</type>
         <plural>false</plural>
-        <cardID>I2-01</cardID>
+        <cardID>I2-02</cardID>
         <name>Slime</name>
         <deathScore>6</deathScore>
         <escapeScore>3</escapeScore>
@@ -1904,7 +1903,6 @@
             </effect>
         </yAction>
         <zAction>
-            <effect type="changeDeck" />
             <effect type="damageShip">
                 <target>self</target>
                 <damage>2</damage>
@@ -1913,6 +1911,74 @@
         <damageAction type="combat">false</damageAction>
         <deathAction>
             <effect type="removeDelay">
+            </effect>
+        </deathAction>
+        <spawnAction>
+            <effect type="setPosition" />
+        </spawnAction>
+    </threat>
+    <threat>
+        <type>internal</type>
+        <plural>true</plural>
+        <cardID>I2-03</cardID>
+        <name>Troopers</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <health>2</health>
+        <speed>2</speed>
+        <locations>
+            <location section="1" zone="0"/>
+        </locations>
+        <threatType>combat</threatType>
+        <xAction>
+            <effect type="changeDeck"/>
+        </xAction>
+        <yAction>
+            <effect type="moveRed" />
+        </yAction>
+        <zAction>
+            <effect type="damageShip">
+                <target>self</target>
+                <damage>4</damage>
+            </effect>
+        </zAction>
+        <damageAction type="combat">true</damageAction>
+        <deathAction>
+            <effect type="none">
+            </effect>
+        </deathAction>
+        <spawnAction>
+            <effect type="setPosition" />
+        </spawnAction>
+    </threat>
+    <threat>
+        <type>internal</type>
+        <plural>true</plural>
+        <cardID>I2-04</cardID>
+        <name>Troopers</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <health>2</health>
+        <speed>2</speed>
+        <locations>
+            <location section="0" zone="2"/>
+        </locations>
+        <threatType>combat</threatType>
+        <xAction>
+            <effect type="changeDeck"/>
+        </xAction>
+        <yAction>
+            <effect type="moveBlue" />
+        </yAction>
+        <zAction>
+            <effect type="damageShip">
+                <target>self</target>
+                <damage>4</damage>
+            </effect>
+        </zAction>
+        <damageAction type="combat">true</damageAction>
+        <deathAction>
+            <effect type="none">
             </effect>
         </deathAction>
         <spawnAction>
