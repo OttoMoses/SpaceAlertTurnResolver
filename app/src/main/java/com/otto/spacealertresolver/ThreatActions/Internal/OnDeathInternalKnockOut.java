@@ -18,7 +18,7 @@ public class OnDeathInternalKnockOut extends OnDeathInternal
         {
             case "lateralReactors":
             {
-                message += "The " + threat.name + " knocks out players in the lower red and blue sections!\n";
+                message += "The " + threat.name + " attacks players in the lower red and blue sections!\n";
                 for(Player p : game.players)
                 {
                     if((p.zonePosition == 0 && p.sectionPosition == 0) ||(p.zonePosition == 2 && p.sectionPosition == 0))
@@ -30,7 +30,7 @@ public class OnDeathInternalKnockOut extends OnDeathInternal
             }
             case "lastHit" :
             {
-                message += "The " + threat.name + " knocks out the last player to fight it!\n";
+                message += "The " + threat.name + " attacks the player who killed it!\n";
                 game.players[game.currentPlayer].unconscious = true;
                 message += "\n" + game.players[game.currentPlayer].playerName + " Is knocked out!";
             }

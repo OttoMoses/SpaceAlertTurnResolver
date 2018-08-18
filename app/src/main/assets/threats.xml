@@ -2144,4 +2144,44 @@
             </effect>
         </spawnAction>
     </threat>
+    <threat>
+        <type>internal</type>
+        <plural>false</plural>
+        <cardID>SI2-02</cardID>
+        <name>Seeker</name>
+        <deathScore>12</deathScore>
+        <escapeScore>6</escapeScore>
+        <health>2</health>
+        <speed>2</speed>
+        <locations>
+            <location section="1" zone="1"/>
+        </locations>
+        <threatType>combat</threatType>
+        <xAction>
+            <effect type="moveToPlayerCount"/>
+        </xAction>
+        <yAction>
+            <effect type="moveToPlayerCount"/>
+        </yAction>
+        <zAction>
+            <effect type="damageShip">
+                <target>self</target>
+                <damage>5</damage>
+            </effect>
+            <effect type="knockOut">
+                <target>self</target>
+            </effect>
+        </zAction>
+        <damageAction type="combat">false</damageAction>
+        <deathAction>
+            <effect type="knockout">
+                <target>lastHit</target>
+            </effect>
+        </deathAction>
+        <spawnAction>
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
+        </spawnAction>
+    </threat>
 </Threats>

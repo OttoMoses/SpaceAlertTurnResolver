@@ -78,6 +78,7 @@ import com.otto.spacealertresolver.ThreatActions.External.ActionExternalShieldDr
 import com.otto.spacealertresolver.ThreatActions.External.ThreatActionExternal;
 import com.otto.spacealertresolver.ThreatActions.External.ActionEffectExternal;
 import com.otto.spacealertresolver.ThreatActions.External.ActionExternalToggle;
+import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalMoveToPlayerCount;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalSpread;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalTurboLift;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternal;
@@ -1509,6 +1510,11 @@ public class Game {
                 case "comsumeFuel" :
                 {
                     effects.add(new ActionInternalDrainFuel());
+                    break;
+                }
+                case "moveToPlayerCount":
+                {
+                    effects.add(new ActionInternalMoveToPlayerCount());
                     break;
                 }
 
