@@ -48,7 +48,7 @@ public class Player
                 }
             }
             delayed = true;
-            message +="\n" +  playerName + " delays their actions starting at T + " + round + "\n";
+            message +="\n" +  playerName + " delays their actions starting at T + " + round;
         }
         return message;
     }
