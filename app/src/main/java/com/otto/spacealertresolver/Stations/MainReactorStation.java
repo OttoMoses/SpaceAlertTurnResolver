@@ -10,7 +10,7 @@ import com.otto.spacealertresolver.Section;
 
 public class MainReactorStation extends ActionStation
 {
-    private int fuelRods;
+    public int fuelRods;
     @Override
     public String Activate(Player player, boolean heroic)
     {

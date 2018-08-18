@@ -59,6 +59,7 @@ import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalConditio
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDamageShip;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDestroyRocket;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDisableBots;
+import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDrainFuel;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalEndGame;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalEnergyDrain;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalGlobalDamageModifier;
@@ -85,6 +86,7 @@ import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfMu
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfSingle;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternal;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternalRemoveDelay;
+import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathKnockOut;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnSpawnSetHealth;
 import com.otto.spacealertresolver.ThreatActions.Internal.SetInternalPosition;
 import com.otto.spacealertresolver.ThreatActions.Internal.ThreatActionInternal;
@@ -158,6 +160,7 @@ public class Game {
     private int[] observationScore;
     private boolean missileDamage;
     private boolean gameEnd;
+    public int currentPlayer;
 
     public Game(Context c) throws ParserConfigurationException, SAXException, IOException {
         colors = new String[]
@@ -242,7 +245,8 @@ public class Game {
         BuildDamageDecks();
 
         //set player starting values
-        for (Player p : players) {
+        for (Player p : players)
+        {
             p.zonePosition = 1;
             p.sectionPosition = 1;
             p.leadingBots = false;
@@ -583,11 +587,13 @@ public class Game {
         return message;
     }
 
-    private String ProcessActions(int round) {
+    private String ProcessActions(int round)
+    {
         //process player actions
         StringBuilder message = new StringBuilder();
         for (Player p : players)
         {
+            currentPlayer = p.playerID;
             if (p.unconscious)
             {
                 message.append(p.playerName).append(" is knocked out and can't take any actions!");
@@ -1249,7 +1255,7 @@ public class Game {
 
         expression = xPath.compile("./deathAction/effect");
         data = (Element) expression.evaluate(node, XPathConstants.NODE);
-        threat.deathAction = GetInternalDeathEffect(data);
+        threat.deathAction = GetInternalDeathEffect(data,xPath);
         return threat;
     }
 
@@ -1316,9 +1322,6 @@ public class Game {
 
                     expression = xPath.compile("./condition");
                     String condition = (String) expression.evaluate(item, XPathConstants.STRING);
-
-                    expression = xPath.compile("./conditionValue");
-                    int conditionValue = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
 
                     expression = xPath.compile("./bypassBonus");
                     boolean bypassBonus = Boolean.parseBoolean((String) expression.evaluate(item, XPathConstants.STRING));
@@ -1503,6 +1506,12 @@ public class Game {
                     effects.add(new ActionInternalDisableBots());
                     break;
                 }
+                case "comsumeFuel" :
+                {
+                    effects.add(new ActionInternalDrainFuel());
+                    break;
+                }
+
             }
         }
         threatAction = new ThreatActionInternal(effects);
@@ -1643,14 +1652,15 @@ public class Game {
                 effect = new OnDeathExternalRemoveGlobalBonus();
                 break;
             }
-            default: {
+            default:
+            {
                 effect = null;
                 break;
             }
         }
         return effect;
     }
-    private OnDeathInternal GetInternalDeathEffect(Element deathType)
+    private OnDeathInternal GetInternalDeathEffect(Element deathType,XPath xPath) throws XPathExpressionException
     {
         OnDeathInternal effect;
         String type = deathType.getAttribute("type");
@@ -1660,6 +1670,13 @@ public class Game {
                     effect = new OnDeathInternalRemoveDelay();
                     break;
                 }
+            case "knockout":
+            {
+                XPathExpression expression = xPath.compile("./target");
+                String target = (String) expression.evaluate(deathType, XPathConstants.STRING);
+                effect = new OnDeathKnockOut(target);
+                break;
+            }
                 default:
                     effect = null;
         }

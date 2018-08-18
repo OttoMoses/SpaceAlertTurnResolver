@@ -2061,4 +2061,45 @@
             </effect>
         </spawnAction>
     </threat>
+    <threat>
+        <type>internal</type>
+        <plural>true</plural>
+        <cardID>I2-06</cardID>
+        <name>Overheated Reactor</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <health>3</health>
+        <speed>3</speed>
+        <locations>
+            <location section="0" zone="1"/>
+        </locations>
+        <threatType>malfB</threatType>
+        <xAction>
+            <effect type="damageShip">
+                <target>self</target>
+                <damage>EnergyValue</damage>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="comsumeFuel">
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damageShip">
+                <target>self</target>
+                <damage>3</damage>
+            </effect>
+        </zAction>
+        <damageAction type="malfSingle">B</damageAction>
+        <deathAction>
+            <effect type="knockout">
+                <target>lateralReactors</target>
+            </effect>
+        </deathAction>
+        <spawnAction>
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
+        </spawnAction>
+    </threat>
 </Threats>
