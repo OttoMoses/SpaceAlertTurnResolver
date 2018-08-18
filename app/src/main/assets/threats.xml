@@ -1386,7 +1386,9 @@
                 </effect>
             </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1420,7 +1422,9 @@
                 </effect>
             </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1459,7 +1463,9 @@
                 </effect>
             </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1498,7 +1504,9 @@
                 </effect>
             </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1540,7 +1548,9 @@
                 </effect>
             </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1582,7 +1592,9 @@
                 </effect>
             </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1612,7 +1624,9 @@
                 </effect>
             </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
             <effect type="setHealth"/>
         </spawnAction>
     </threat>
@@ -1653,7 +1667,9 @@
                 </effect>
             </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1693,7 +1709,9 @@
                 </effect>
             </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1728,7 +1746,9 @@
                 </effect>
             </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1759,7 +1779,9 @@
                 </effect>
             </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1799,7 +1821,9 @@
                 </effect>
             </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1842,7 +1866,9 @@
             </effect>
         </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1878,7 +1904,9 @@
             </effect>
         </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>delay</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1914,7 +1942,9 @@
             </effect>
         </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>delay</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1948,7 +1978,9 @@
             </effect>
         </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
     <threat>
@@ -1982,7 +2014,9 @@
             </effect>
         </deathAction>
         <spawnAction>
-            <effect type="setPosition" />
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
         </spawnAction>
     </threat>
 </Threats>

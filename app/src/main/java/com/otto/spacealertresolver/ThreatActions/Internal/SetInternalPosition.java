@@ -4,9 +4,10 @@ import android.util.Pair;
 
 import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
-import com.otto.spacealertresolver.enums.InternalThreatTypes;
 
-public class SetInternalPosition extends ActionEffectInternal {
+public class SetInternalPosition extends ActionEffectInternal
+{
+    String special;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)
     {
@@ -26,14 +27,15 @@ public class SetInternalPosition extends ActionEffectInternal {
                 {
                     message.append(" appears ");
                 }
-                message.append("in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section!");
+                message.append("in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section!").append(ApplyCondition(location));
                 break;
             case "malfC":
                 for (Pair<Integer,Integer> p: threat.locations)
                 {
                     location = ship[p.first][p.second];
                     location.malfC = true;
-                    message.append("A Malfunction of the type ").append(threat.name).append(" occurs in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" C system!\n");
+                    ApplyCondition(location);
+                    message.append("A Malfunction of the type ").append(threat.name).append(" occurs in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" C system!").append(ApplyCondition(location));
                 }
                 break;
             case "malfB":
@@ -41,10 +43,30 @@ public class SetInternalPosition extends ActionEffectInternal {
                 {
                     location = ship[p.first][p.second];
                     location.malfB = true;
-                    message.append("A Malfunction of the type ").append(threat.name).append(" occurs in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" B system!");
+                    ApplyCondition(location);
+                    message.append("A Malfunction of the type ").append(threat.name).append(" occurs in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" B system!").append(ApplyCondition(location));
                 }
                 break;
         }
         return message.toString();
+    }
+    private String ApplyCondition(Section location)
+    {
+        switch (special)
+        {
+            case "delay":
+            {
+                location.specialDelay = true;
+                return "\nPlayers entering the " + location.sectionName + " " + location.zoneName + " section will be delayed!";
+            }
+            default:
+            {
+                return "";
+            }
+        }
+    }
+    public SetInternalPosition(String special)
+    {
+        this.special = special;
     }
 }

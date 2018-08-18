@@ -1509,7 +1509,7 @@ public class Game {
         return threatAction;
     }
 
-    private ThreatActionInternal GetInternalSpawnCommand(NodeList action, XPath xPath) {
+    private ThreatActionInternal GetInternalSpawnCommand(NodeList action, XPath xPath) throws XPathExpressionException {
         ArrayList<ActionEffectInternal> effects = new ArrayList<>();
         for (int i = 0; i < action.getLength(); i++) {
             ActionEffectInternal effect;
@@ -1517,7 +1517,9 @@ public class Game {
             String commandType = item.getAttribute("type");
             switch (commandType) {
                 case "setPosition": {
-                    effect = new SetInternalPosition();
+                    XPathExpression expression = xPath.compile("./special");
+                    String special = (String) expression.evaluate(item, XPathConstants.STRING);
+                    effect = new SetInternalPosition(special);
                     effects.add(effect);
                     break;
                 }
