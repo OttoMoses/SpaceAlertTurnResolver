@@ -57,6 +57,8 @@ import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternalRemoveG
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionEffectInternal;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalConditionDamageMove;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDamageShip;
+import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDestroyRocket;
+import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDisableBots;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalEndGame;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalEnergyDrain;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalGlobalDamageModifier;
@@ -75,12 +77,14 @@ import com.otto.spacealertresolver.ThreatActions.External.ActionExternalShieldDr
 import com.otto.spacealertresolver.ThreatActions.External.ThreatActionExternal;
 import com.otto.spacealertresolver.ThreatActions.External.ActionEffectExternal;
 import com.otto.spacealertresolver.ThreatActions.External.ActionExternalToggle;
+import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalSpread;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalTurboLift;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternal;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalCombat;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfMultiBonus;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfSingle;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternal;
+import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternalRemoveDelay;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnSpawnSetHealth;
 import com.otto.spacealertresolver.ThreatActions.Internal.SetInternalPosition;
 import com.otto.spacealertresolver.ThreatActions.Internal.ThreatActionInternal;
@@ -149,7 +153,7 @@ public class Game {
     private ArrayList<DamageToken> whiteDamage;
     private ArrayList<DamageToken> blueDamage;
     private ArrayList<Threat> escapedThreats;
-    private ArrayList<Threat> internalThreats;
+    public ArrayList<Threat> internalThreats;
     private ArrayList<Threat> externalThreats;
     private int[] observationScore;
     private boolean missileDamage;
@@ -351,7 +355,8 @@ public class Game {
     }
 
 
-    public String AdvanceTurn() {
+    public String AdvanceTurn()
+    {
         String roundMessage = "\n";
 
         //reset the game state for a new turn
@@ -402,12 +407,12 @@ public class Game {
         if (currentRound == 3 || currentRound == 6 || currentRound == 10) {
             message.append("\n----Computer Maintenance Check----\n");
             if (!computerMaintained) {
-                message.append("\nThe computer shuts down delaying all players on the ship this round \n");
+                message.append("\nThe computer shuts down delaying all players on the ship this round!\n");
                 for (Player p : players) {
                     if (!p.flyingInterceptors) {
                         message.append(p.Delay(currentRound));
                     } else {
-                        message.append(p.playerName).append("\nis safely off the ship and unaffected by the blackout \n");
+                        message.append("\n").append(p.playerName).append(" is safely off the ship and unaffected by the blackout \n");
                     }
                 }
             } else {
@@ -419,19 +424,25 @@ public class Game {
     }
 
     public String MoveThreats(String source) {
-        StringBuilder message = new StringBuilder("\n");
-        for (Threat t : activeThreats) {
-            if (!gameEnd) {
+        StringBuilder message = new StringBuilder();
+        for (Threat t : activeThreats)
+        {
+            message.append("\n");
+            if (!gameEnd)
+            {
                 int movement;
-                if (source.equals("game")) {
+                if (source.equals("game"))
+                {
                     movement = t.speed;
-                } else {
+                }
+                else
+                {
                     movement = Integer.parseInt(source);
                 }
                 ThreatTrack track = threatTracks[t.track];
                 int newPosition = t.position + movement;
                 if (t.getClass().equals(ThreatExternal.class)) {
-                    message.append("\nThe ").append(t.name).append(" moves ").append(movement).append(" spaces closer to the ship\n");
+                    message.append("The ").append(t.name).append(" moves ").append(movement).append(" spaces closer to the ship.\n");
                 } else {
                     message.append("The ").append(t.name);
                     if (((ThreatInternal) t).plural) {
@@ -439,7 +450,7 @@ public class Game {
                     } else {
                         message.append(" moves ");
                     }
-                    message.append(movement).append(" spaces on the internal track\n");
+                    message.append(movement).append(" spaces on the internal track.\n");
                 }
                 //check for attack spaces
                 for (int space : track.XSpace) {
@@ -447,8 +458,10 @@ public class Game {
                         message.append(t.ExecuteXAction(ship, players));
                     }
                 }
-                for (int space : track.YSpaces) {
-                    if ((space < newPosition && space > t.position) || space == newPosition) {
+                for (int space : track.YSpaces)
+                {
+                    if ((space < newPosition && space > t.position) || space == newPosition)
+                    {
                         message.append(t.ExecuteYAction(ship, players));
                     }
                 }
@@ -461,7 +474,7 @@ public class Game {
                         {
                             if (t.getClass().equals(ThreatExternal.class))
                             {
-                                message.append("The ").append(t.name).append(" Escapes!");
+                                message.append("The ").append(t.name).append(" escapes!\n\n");
                             }
                             else
                             {
@@ -469,22 +482,22 @@ public class Game {
                                 {
                                     if (((ThreatInternal) t).plural)
                                     {
-                                        message.append("The ").append(t.name).append(" escape!");
+                                        message.append("The ").append(t.name).append(" escape!\n\n");
                                     }
                                     else
                                     {
-                                        message.append("The ").append(t.name).append(" escapes!");
+                                        message.append("The ").append(t.name).append(" escapes!\n\n");
                                     }
                                 }
                                 else
                                 {
                                     if (((ThreatInternal) t).plural)
                                     {
-                                        message.append("The ").append(t.name).append(" are now unfixable!");
+                                        message.append("The ").append(t.name).append(" are now unfixable!\n\n");
                                     }
                                     else
                                     {
-                                        message.append("The ").append(t.name).append(" is now unfixable!");
+                                        message.append("The ").append(t.name).append(" is now unfixable!\n\n");
                                     }
                                 }
                             }
@@ -492,7 +505,7 @@ public class Game {
                         escapedThreats.add(t);
                     } else {
                         if (t.getClass().equals(ThreatExternal.class)) {
-                            message.append("The ").append(t.name).append(" is now  ").append(threatTracks[t.track].EndSpace[0] - t.position).append(" space away from the ship!");
+                            message.append("The ").append(t.name).append(" is now  ").append(threatTracks[t.track].EndSpace[0] - t.position).append(" space away from the ship!\n");
                         } else {
                             message.append("The ").append(t.name);
                             if (((ThreatInternal) t).plural) {
@@ -500,7 +513,7 @@ public class Game {
                             } else {
                                 message.append(" is now ");
                             }
-                            message.append(threatTracks[t.track].EndSpace[0] - t.position).append(" space away from escaping!");
+                            message.append(threatTracks[t.track].EndSpace[0] - t.position).append(" space away from escaping!\n");
                         }
                         t.position = newPosition;
                     }
@@ -512,17 +525,16 @@ public class Game {
         }
         if (message.toString().equals("\n")) {
             message.append("There are no threats to move this turn.\n");
-        } else {
-            message.append("\n");
         }
-
         return message.toString();
     }
 
     private void ResetState() {
         //Reset gun fire state and internal damage bundles
-        for (Section[] aShip : ship) {
-            for (Section s : aShip) {
+        for (Section[] aShip : ship)
+        {
+            for (Section s : aShip)
+            {
                 s.hasFired = false;
                 s.heroicFire = false;
                 s.combatDamage = null;
@@ -530,6 +542,13 @@ public class Game {
                 s.malfBDamage= null;
             }
         }
+
+        //reset player delay count
+        for(Player p : players)
+        {
+            p.delayed = false;
+        }
+
         //reset strafing run boolean
         strafingRun = false;
         strafeHeroic = false;
@@ -580,25 +599,31 @@ public class Game {
                 {
                     switch (p.actions[round - 1].name)
                     {
-                        case "Battlebots action":
-                            actions[7].Execute(p);
+                        case "BattleBots action":
+                            message.append("\n").append(actions[7].Execute(p)).append("\n");
                             break;
                         case "Heroic Battlebots action":
-                            actions[11].Execute(p);
+                            message.append("\n").append(actions[11].Execute(p)).append("\n");
                             break;
                         default:
-                            message.append("\n").append(p.playerName).append(" returns to the ship");
+                            message.append("\n").append(p.playerName).append(" returns to the ship\n");
                             p.flyingInterceptors = false;
                             interceptorsDocked = true;
                             break;
                     }
                 }
-                message.append("\n").append(p.playerName).append(" ").append(p.actions[round - 1].Execute(p)).append("\n");
+                else
+                {
+                    message.append("\n").append(p.playerName).append(" ").append(p.actions[round - 1].Execute(p)).append("\n");
+                }
             }
             ArrayList<Threat> internalTargets = new ArrayList<>(activeThreats);
             internalTargets.removeAll(externalThreats);
-            message.append(InternalThreatDamage(internalTargets)).append("\n");
-            message.append(KillThreats(activeThreats));
+            if (internalTargets.size() != 0)
+            {
+                message.append(InternalThreatDamage(internalTargets));
+                message.append(KillThreats(activeThreats));
+            }
         }
         return message.toString();
     }
@@ -925,7 +950,7 @@ public class Game {
         if (!externalTargets.isEmpty()) {
             message.append(ExternalThreatDamage(externalTargets));
         } else {
-            message.append("There are no external threats this turn.");
+            message.append("There are no external threats this turn.\n");
         }
         //special check for nemesis threat
         for (Threat t : activeThreats) {
@@ -1221,6 +1246,10 @@ public class Game {
         expression = xPath.compile("./damageAction");
         data = (Element) expression.evaluate(node, XPathConstants.NODE);
         threat.damageEffect = GetInternalDamageEffect(data, xPath);
+
+        expression = xPath.compile("./deathAction/effect");
+        data = (Element) expression.evaluate(node, XPathConstants.NODE);
+        threat.deathAction = GetInternalDeathEffect(data);
         return threat;
     }
 
@@ -1389,7 +1418,7 @@ public class Game {
                 case "turbolift": {
                     effects.add(new ActionInternalTurboLift());
                 }
-                case "damage": {
+                case "damageShip": {
                     XPathExpression expression = xPath.compile("./target");
                     String target = (String) expression.evaluate(item, XPathConstants.STRING);
 
@@ -1455,6 +1484,23 @@ public class Game {
                 }
                 case "globalDamageMod": {
                     effects.add(new ActionInternalGlobalDamageModifier());
+                    break;
+                }
+                case "spread" :
+                {
+                    XPathExpression expression = xPath.compile("./direction");
+                    String direction = (String) expression.evaluate(item, XPathConstants.STRING);
+                    effects.add(new ActionInternalSpread(direction));
+                    break;
+                }
+                case "destroyMissile":
+                {
+                    effects.add(new ActionInternalDestroyRocket());
+                    break;
+                }
+                case "disableBots":
+                {
+                    effects.add(new ActionInternalDisableBots());
                     break;
                 }
             }
@@ -1602,17 +1648,19 @@ public class Game {
         }
         return effect;
     }
-    /*private OnDeathInternal GetInternalDeathEffect(Element deathType)
+    private OnDeathInternal GetInternalDeathEffect(Element deathType)
     {
         OnDeathInternal effect;
         String type = deathType.getAttribute("type");
         switch (type) {
-            case "none":
+            case "removeDelay":
                 {
-                effect = new OnDeathInternal();
-                break;
+                    effect = new OnDeathInternalRemoveDelay();
+                    break;
                 }
+                default:
+                    effect = null;
         }
         return effect;
-    }*/
+    }
 }
