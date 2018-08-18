@@ -1590,7 +1590,6 @@
         <plural>true</plural>
         <cardID>I1-07</cardID>
         <name>Unstable Warheads</name>
-
         <deathScore>4</deathScore>
         <escapeScore>2</escapeScore>
         <health>0</health>
@@ -1642,6 +1641,7 @@
         <zAction>
             <effect type="damageShip">
                 <damage>4</damage>
+                <target>self</target>
             </effect>
             <effect type="knockOut">
                 <target>self</target>
@@ -1681,6 +1681,7 @@
         <zAction>
             <effect type="damageShip">
                 <damage>4</damage>
+                <target>self</target>
             </effect>
             <effect type="knockOut">
                 <target>self</target>
@@ -1714,6 +1715,7 @@
         <yAction>
             <effect type="changeDeck" />
             <effect type="damageShip">
+                <target>self</target>
                 <damage>perPlayer</damage>
             </effect>
         </yAction>
@@ -1837,6 +1839,80 @@
         </damageAction>
         <deathAction>
             <effect type="none">
+            </effect>
+        </deathAction>
+        <spawnAction>
+            <effect type="setPosition" />
+        </spawnAction>
+    </threat>
+    <threat>
+        <type>internal</type>
+        <plural>false</plural>
+        <cardID>I2-01</cardID>
+        <name>Slime</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <health>2</health>
+        <speed>2</speed>
+        <locations>
+            <location section="0" zone="2"/>
+        </locations>
+        <threatType>combat</threatType>
+        <xAction>
+            <effect type="destroyMissile" />
+        </xAction>
+        <yAction>
+            <effect type="spread">
+                <direction>left</direction>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="changeDeck" />
+            <effect type="damageShip">
+                <target>self</target>
+                <damage>2</damage>
+            </effect>
+        </zAction>
+        <damageAction type="combat">false</damageAction>
+        <deathAction>
+            <effect type="removeDelay">
+            </effect>
+        </deathAction>
+        <spawnAction>
+            <effect type="setPosition" />
+        </spawnAction>
+    </threat>
+    <threat>
+        <type>internal</type>
+        <plural>false</plural>
+        <cardID>I2-01</cardID>
+        <name>Slime</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <health>2</health>
+        <speed>2</speed>
+        <locations>
+            <location section="0" zone="0"/>
+        </locations>
+        <threatType>combat</threatType>
+        <xAction>
+            <effect type="disableBots" />
+        </xAction>
+        <yAction>
+            <effect type="spread">
+                <direction>right</direction>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="changeDeck" />
+            <effect type="damageShip">
+                <target>self</target>
+                <damage>2</damage>
+            </effect>
+        </zAction>
+        <damageAction type="combat">false</damageAction>
+        <deathAction>
+            <effect type="removeDelay">
             </effect>
         </deathAction>
         <spawnAction>
