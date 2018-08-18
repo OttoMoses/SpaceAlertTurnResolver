@@ -24,7 +24,7 @@ public class HeroicBattlebotsAction  extends PlayerAction
             if(MainActivity.game.ship[0][0].malfC)
             {
                 message += "heroically attempts to repair the fissure with their interceptors!";
-                MainActivity.game.ship[0][0].malfCDamage.add(new InternalDamageBundle(player.playerID,true));
+                MainActivity.game.ship[0][0].malfCDamage = new InternalDamageBundle(player.playerID,true);
             }
             else
             {
@@ -36,7 +36,7 @@ public class HeroicBattlebotsAction  extends PlayerAction
         else if(location.combatThreat)
         {
             message += "heroically leads their bots in combat in the " + location.sectionName + " " + location.zoneName + " zone!";
-            location.combatDamage.add(new InternalDamageBundle(player.playerID,true));
+            location.combatDamage = new InternalDamageBundle(player.playerID,true);
         }
         else
         {

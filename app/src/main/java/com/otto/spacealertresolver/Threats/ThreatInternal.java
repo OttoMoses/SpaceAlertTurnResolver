@@ -10,6 +10,8 @@ import com.otto.spacealertresolver.ThreatActions.Internal.ThreatActionInternal;
 
 import java.util.ArrayList;
 
+import static com.otto.spacealertresolver.Activities.MainActivity.game;
+
 public class ThreatInternal extends Threat
 {
     public ArrayList<Pair<Integer,Integer>> locations;
@@ -79,9 +81,54 @@ public class ThreatInternal extends Threat
     public String ExecuteDeathAction(Section[][] ship, Player[] players)
     {
         String message = "";
+        for(Pair p : locations)
+        {
+            Section location = ship[(Integer)locations.get(0).first][(((Integer)locations.get(0).first))];
+            switch (threatType)
+            {
+                case "combat":
+                {
+                    location.combatThreat = false;
+                    break;
+                }
+                case "malfC":
+                {
+                    location.malfC = false;
+                    break;
+                }
+                case "malfB":
+                {
+                    location.malfB = false;
+                    break;
+                }
+            }
+        }
         if(deathAction != null)
         {
             return deathAction.Execute(this);
+        }
+        return message;
+    }
+
+    @Override
+    public String TakeDamage(int value, boolean shield)
+    {
+        String message = "";
+        damage += value;
+        message += "The " + name;
+        if(plural)
+        {
+            message += " take ";
+        }
+        else
+        {
+            message += " takes ";
+        }
+        message += value + " damage!";
+        if(damage >= health)
+        {
+            message += ExecuteDeathAction(game.ship,game.players);
+            game.deadThreats.add(this);
         }
         return message;
     }

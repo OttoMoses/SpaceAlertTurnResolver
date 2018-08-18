@@ -35,7 +35,7 @@ public class BattleBotsAction extends PlayerAction
         }
         else if(location.combatThreat)
         {
-            message += "leads their bots in combat in the " + location.sectionName + " " + location.zoneName + " zone!";
+            message += "leads their bots in combat in the " + location.sectionName + " " + location.zoneName + " section!";
             location.combatDamage =  new InternalDamageBundle(player.playerID,false);
         }
         else

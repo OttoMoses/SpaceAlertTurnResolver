@@ -21,7 +21,7 @@ public class CAction extends PlayerAction
         String message = "";
         if(location.malfC)
         {
-            location.malfCDamage.add(new InternalDamageBundle(player.playerID,false));
+            location.malfCDamage = new InternalDamageBundle(player.playerID,false);
             message += " attempts to repair the malfunction in the " + location.sectionName + " " + location.zoneName + " section!";
         }
         else

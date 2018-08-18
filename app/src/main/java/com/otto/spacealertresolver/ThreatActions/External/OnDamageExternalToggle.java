@@ -23,9 +23,7 @@ public class OnDamageExternalToggle extends OnDamageExternal
             {
                 DBDamage += (int)p.second;
             }
-            damage = DBDamage - t.shield;
-            t.damage += damage;
-            return "The " + t.name + " takes " + damage + " damage!";
+            return t.TakeDamage(DBDamage,true);
         }
         else
         {

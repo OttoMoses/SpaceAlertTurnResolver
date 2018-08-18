@@ -4,6 +4,8 @@ import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
 
+import static com.otto.spacealertresolver.Activities.MainActivity.game;
+
 /**
  * Created by Otto on 2/1/2018.
  */
@@ -19,11 +21,12 @@ public class TurboLiftAction extends PlayerAction {
         System.out.println("Do " + name);
         String message = "";
         Section startLocation = MainActivity.game.ship[player.zonePosition][player.sectionPosition];
+        Section endLocation = null;
             if(player.sectionPosition == 1)
             {
                 startLocation.playerCount--;
                 player.sectionPosition = 0;
-                Section endLocation = MainActivity.game.ship[player.zonePosition][player.sectionPosition];
+                endLocation = MainActivity.game.ship[player.zonePosition][player.sectionPosition];
                 endLocation.playerCount++;
                 message += "moves to the " + endLocation.sectionName + " " + endLocation.zoneName + " section";
             }
@@ -31,13 +34,17 @@ public class TurboLiftAction extends PlayerAction {
             {
                 startLocation.playerCount--;
                 player.sectionPosition = 1;
-                Section endLocation = MainActivity.game.ship[player.zonePosition][player.sectionPosition];
+                endLocation = MainActivity.game.ship[player.zonePosition][player.sectionPosition];
                 endLocation.playerCount++;
                 message += "moves to the " + endLocation.sectionName + " " + endLocation.zoneName + " section";
             }
         if(startLocation.liftUsed || startLocation.LiftDamaged)
         {
            message += player.Delay(MainActivity.game.currentRound);
+        }
+        if(endLocation.specialDelay)
+        {
+            message += player.Delay(game.currentRound);
         }
         startLocation.liftUsed = true;
         startLocation.liftUsed = true;

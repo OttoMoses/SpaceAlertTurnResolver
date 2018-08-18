@@ -18,17 +18,17 @@ public class OnDeathExternalDamageOthers extends OnDeathExternal
     {
         StringBuilder message = new StringBuilder();
         ArrayList<Threat> targets = MainActivity.game.activeThreats;
+        message.append("On dying the ").append(threat.name).append(" did damage to all other external threats!\n");
         for(Threat t : targets)
         {
             if(t.getClass() == ThreatExternal.class)
             {
-                t.damage += 1;
+                message.append(t.TakeDamage(1,false));
                 if(((ThreatExternal)t).damageAction.getClass() == OnDamageExternalCount.class)
                 {
                     ((OnDamageExternalCount)((ThreatExternal) t).damageAction).damaged = true;
                 }
             }
-            message.append("On dying the ").append(t.name).append(" did damage to all other external threats!");
         }
         return message.toString();
     }

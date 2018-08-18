@@ -19,18 +19,18 @@ public class OnDamageInternalCombat extends OnDamageInternal
         {
             InternalDamageBundle db = location.combatDamage;
             Player player = players[db.playerID];
-            threat.damage++;
-            message.append(player.playerName).append(" deals 1 damage against the ").append(threat.name).append(" in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section!\n\n");
+            message.append(player.playerName + " fights the " + threat.name + "!");
+            message.append(threat.TakeDamage(1, false));
             if(firesBack)
             {
                 if(db.heroic)
                 {
-                    message.append(player.playerName).append("'s heroic leadership prevented the ").append(threat.name).append(" from damaging their bots!\n");
+                    message.append("\n").append(player.playerName).append("'s heroic leadership prevented the ").append(threat.name).append(" from damaging their bots!\n");
                 }
                 else
                 {
                     player.damagedBots = true;
-                    message.append(player.playerName).append("'s bots were damaged in combat against the ").append(threat.name).append("!\n");
+                    message.append("\n").append(player.playerName).append("'s bots were damaged in combat against the ").append(threat.name).append("!\n");
                 }
             }
             location.combatDamage = null;

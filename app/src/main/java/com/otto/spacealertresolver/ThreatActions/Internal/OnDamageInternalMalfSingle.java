@@ -56,13 +56,13 @@ public class OnDamageInternalMalfSingle extends OnDamageInternal
         String message = "";
         if(bundle.heroic)
         {
-            threat.damage+=2;
-            message += game.players[bundle.playerID].playerName + " heroically repairs the " + threat.name + " for 2 damage!";
+            message += game.players[bundle.playerID].playerName + " heroically repairs the " + threat.name + "!\n";
+            message += threat.TakeDamage(2,false);
         }
         else
         {
-            threat.damage++;
-            message += game.players[bundle.playerID].playerName + " repairs the " + threat.name + " for 1 damage!";
+            message += game.players[bundle.playerID].playerName + " repairs the " + threat.name + "!\n";
+            message += threat.TakeDamage(1,false);
         }
         return message;
     }

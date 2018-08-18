@@ -12,9 +12,9 @@ public class SetInternalPosition extends ActionEffectInternal {
     {
         StringBuilder message = new StringBuilder();
         Section location;
-        switch (InternalThreatTypes.valueOf(threat.threatType))
+        switch (threat.threatType)
         {
-            case combat:
+            case "combat":
                 location = ship[threat.locations.get(0).first][threat.locations.get(0).second];
                 location.combatThreat = true;
                 message.append("The ").append(threat.name);
@@ -28,7 +28,7 @@ public class SetInternalPosition extends ActionEffectInternal {
                 }
                 message.append("in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section!");
                 break;
-            case malfC:
+            case "malfC":
                 for (Pair<Integer,Integer> p: threat.locations)
                 {
                     location = ship[p.first][p.second];
@@ -36,7 +36,7 @@ public class SetInternalPosition extends ActionEffectInternal {
                     message.append("A Malfunction of the type ").append(threat.name).append(" occurs in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" C system!\n");
                 }
                 break;
-            case malfB:
+            case "malfB":
                 for (Pair<Integer,Integer> p: threat.locations)
                 {
                     location = ship[p.first][p.second];

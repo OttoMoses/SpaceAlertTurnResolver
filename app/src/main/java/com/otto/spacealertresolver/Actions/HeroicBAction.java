@@ -22,7 +22,7 @@ public class HeroicBAction extends PlayerAction
         String message = "";
         if(location.malfB)
         {
-            location.malfBDamage.add(new InternalDamageBundle(player.playerID,true));
+            location.malfBDamage = new InternalDamageBundle(player.playerID,true);
             message += " attempts to repair the malfunction in the " + location.sectionName + " " + location.zoneName + " section!";
         }
         else

@@ -11,26 +11,28 @@ import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 public class OnDamageExternalSelfToggle extends OnDamageExternal
 {
-    private Boolean toggle = false;
+    private boolean toggle;
     @Override
     public String Execute(ThreatExternal t, ExternalDamageBundle db)
-{
-    if(toggle)
     {
-        int DBDamage = 0;
-        int damage;
-        for(Pair p : db.damageSources)
+        if(toggle)
         {
-            DBDamage += (int)p.second;
+            int DBDamage = 0;
+            for(Pair p : db.damageSources)
+            {
+                DBDamage += (int)p.second;
+            }
+            return t.TakeDamage(DBDamage,true);
         }
-        damage = DBDamage - t.shield;
-        t.damage += damage;
-        return "The " + t.name + " takes " + damage + " damage!";
+        else
+        {
+            toggle = true;
+            return "The " + t.name + " is no longer immune to damage!\n";
+        }
     }
-    else
+
+    public OnDamageExternalSelfToggle()
     {
-        toggle = false;
-        return "The " + t.name + " is no longer immune to damage!";
+        this.toggle = false;
     }
-}
 }

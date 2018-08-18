@@ -74,15 +74,18 @@ public class OnDamageInternalMalfMultiBonus extends OnDamageInternal {
     private String ProcessDamageBundle(InternalDamageBundle bundle, ThreatInternal threat,int bonus)
     {
         String message = "";
+        int damage;
         if(bundle.heroic)
         {
-            threat.damage += 2 + bonus;
-            message += game.players[bundle.playerID].playerName + " heroically repairs the " + threat.name + " for " + (2 + bonus) + " damage!";
+            damage = 2 + bonus;
+            message += "\n" +  game.players[bundle.playerID].playerName + " heroically repairs the " + threat.name + "!";
+            message += threat.TakeDamage(damage,false);
         }
         else
         {
-            threat.damage += 1 + bonus;
-            message += game.players[bundle.playerID].playerName + " repairs the " + threat.name + " for " + (1 + bonus) + " damage!";
+            damage = 1 + bonus;
+            message += "\n" + game.players[bundle.playerID].playerName + " repairs the " + threat.name + "!";
+            message += threat.TakeDamage(damage,false);
         }
         return message;
     }

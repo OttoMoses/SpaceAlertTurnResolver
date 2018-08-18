@@ -6,6 +6,8 @@ import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
 
+import static com.otto.spacealertresolver.Activities.MainActivity.game;
+
 /**
  * Created by Otto on 1/22/2018.
  */
@@ -19,10 +21,16 @@ public class HeroicMoveAction extends PlayerAction
     }
     public  String Execute(Player player)
     {
+        String message = "";
         player.zonePosition = destination.first;
         player.sectionPosition = destination.second;
         Section location = MainActivity.game.ship[player.zonePosition][player.sectionPosition];
-        return "moves directly to the " + location.sectionName + " " + location.zoneName + " section!";
+        message += "moves directly to the " + location.sectionName + " " + location.zoneName + " section!";
+        if(location.specialDelay)
+        {
+            message += player.Delay(game.currentRound);
+        }
+        return message;
     }
 
     public HeroicMoveAction(Pair<Integer, Integer> destination)

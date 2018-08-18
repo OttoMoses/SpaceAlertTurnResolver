@@ -8,6 +8,8 @@ import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternal;
 import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternal;
 import com.otto.spacealertresolver.ThreatActions.External.ThreatActionExternal;
 
+import static com.otto.spacealertresolver.Activities.MainActivity.game;
+
 /**
  * Created by Otto on 1/22/2018.
  */
@@ -88,8 +90,39 @@ public class ThreatExternal extends Threat
         }
         else
         {
-            return null;
+            return "";
         }
+    }
+
+    @Override
+    public String TakeDamage(int value, boolean shield)
+    {
+        int damage;
+        String message = "";
+        if(shield)
+        {
+            damage = value - this.shield;
+        }
+        else
+        {
+            damage = value;
+        }
+        if(damage <= 0)
+        {
+            message += "The " + name + "'s shield blocks all damage!";
+        }
+        else
+        {
+            this.damage += damage;
+            message += "The " + name + " takes " + damage + " damage!";
+        }
+        if(damage >= health)
+        {
+            message += ExecuteDeathAction(game.ship,game.players);
+            game.deadThreats.add(this);
+        }
+        dead = true;
+        return message + "\n";
     }
 
     public String ExecuteDamageAction()

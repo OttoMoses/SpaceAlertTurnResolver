@@ -38,20 +38,11 @@ public class OnDamageExternalNoShield extends OnDamageExternal
             if(toggle)
             {
                 message += "\nThe " + t.name + " has no shield this turn!";
-                damage = DBDamage;
+                message += t.TakeDamage(DBDamage,false);
             }
             else
             {
-                damage = DBDamage - t.shield;
-            }
-            if(damage > 0)
-            {
-                t.damage += damage;
-                message += "\nThe " + t.name + " takes " + damage + " damage!\n";
-            }
-            else
-            {
-                message += "\nThe " + t.name + " blocks all damage!";
+                message += t.TakeDamage(DBDamage,true);
             }
         }
         return message;
