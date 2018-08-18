@@ -18,6 +18,7 @@ public class Player
     public int sectionPosition;
     public Boolean damagedBots;
     public int playerID;
+    public boolean delayed;
 
     public Player(String name, int numRounds)
     {
@@ -33,18 +34,22 @@ public class Player
     public String Delay(int round)
     {
         String message = "";
-        for(int roundCount = actions.length - 1; roundCount >= round; roundCount--)
+        if(!delayed)
         {
-            if(roundCount == actions.length-1)
+            for(int roundCount = actions.length - 1; roundCount >= round; roundCount--)
             {
-                actions[actions.length-1] = MainActivity.game.actions[0];
+                if(roundCount == actions.length-1)
+                {
+                    actions[actions.length-1] = MainActivity.game.actions[0];
+                }
+                else
+                {
+                    actions[roundCount] = actions[roundCount - 1];
+                }
             }
-            else
-            {
-                actions[roundCount] = actions[roundCount - 1];
-            }
+            delayed = true;
+            message +="\n" +  playerName + " delays their actions starting at T + " + round + "\n";
         }
-        message +="\n" +  playerName + " delays their actions starting at T + " + round + "\n";
-        return  message;
+        return message;
     }
 }

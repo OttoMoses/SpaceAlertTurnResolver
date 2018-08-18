@@ -67,6 +67,7 @@ public class Section
         gunDamagePenalty = 0;
         gunRangePenalty = 0;
         liftUsed = false;
+        specialDelay = false;
     }
     public int getMaxPower()
     {
