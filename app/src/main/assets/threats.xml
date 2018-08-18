@@ -2019,4 +2019,46 @@
             </effect>
         </spawnAction>
     </threat>
+    <threat>
+        <type>internal</type>
+        <plural>true</plural>
+        <cardID>I2-05</cardID>
+        <name>Virus</name>
+        <deathScore>6</deathScore>
+        <escapeScore>3</escapeScore>
+        <health>3</health>
+        <speed>3</speed>
+        <locations>
+            <location section="1" zone="1"/>
+        </locations>
+        <threatType>malfC</threatType>
+        <xAction>
+            <effect type="drainPower" >
+                <condition>none</condition>
+                <value>1</value>
+                <target>allReactors</target>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="delay">
+                <target>all</target>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damageShip">
+                <target>all</target>
+                <damage>1</damage>
+            </effect>
+        </zAction>
+        <damageAction type="malfSingle">C</damageAction>
+        <deathAction>
+            <effect type="none">
+            </effect>
+        </deathAction>
+        <spawnAction>
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
+        </spawnAction>
+    </threat>
 </Threats>

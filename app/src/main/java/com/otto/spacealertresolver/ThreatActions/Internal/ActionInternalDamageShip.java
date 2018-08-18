@@ -22,12 +22,21 @@ public class ActionInternalDamageShip extends ActionEffectInternal
     public String Execute(Section[][] ship, ThreatInternal threat)
     {
         StringBuilder message = new StringBuilder();
+        locations = new ArrayList<>();
         //determine which location or locations this action affects
         switch (target)
         {
             case "self":
             {
-                locations = threat.locations;
+                locations.addAll(threat.locations);
+                break;
+            }
+            case "all" :
+            {
+                locations.add(new Pair<Integer, Integer>(0,1));
+                locations.add(new Pair<Integer, Integer>(1,1));
+                locations.add(new Pair<Integer, Integer>(2,1));
+                break;
             }
         }
         for (Pair<Integer,Integer> p :locations)
