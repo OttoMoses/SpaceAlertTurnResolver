@@ -37,6 +37,7 @@ public class Section
     public int sectionPos;
     public boolean heroicFire;
     public boolean liftUsed;
+    public boolean specialKnockout;
     public InternalDamageBundle combatDamage;
     public InternalDamageBundle malfBDamage;
     public InternalDamageBundle malfCDamage;
@@ -68,6 +69,7 @@ public class Section
         gunRangePenalty = 0;
         liftUsed = false;
         specialDelay = false;
+        specialKnockout = false;
     }
     public int getMaxPower()
     {

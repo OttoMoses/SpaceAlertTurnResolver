@@ -46,6 +46,11 @@ public class TurboLiftAction extends PlayerAction {
         {
             message += player.Delay(game.currentRound);
         }
+        if(endLocation.specialKnockout)
+        {
+            player.unconscious = true;
+            message += player.playerName + " is knocked out!";
+        }
         startLocation.liftUsed = true;
         startLocation.liftUsed = true;
         return message;

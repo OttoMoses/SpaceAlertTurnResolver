@@ -74,6 +74,12 @@ public class ActionInternalEnergyDrain extends ActionEffectInternal
                 message.append("\n").append(DrainPower(location, threat));
                 break;
             }
+            case "mainReactor" :
+            {
+                Section location = ship[1][0];
+                message.append("\n").append(DrainPower(location, threat));
+                break;
+            }
         }
         return message.toString();
     }

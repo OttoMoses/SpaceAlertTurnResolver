@@ -1938,7 +1938,8 @@
         </zAction>
         <damageAction type="combat">false</damageAction>
         <deathAction>
-            <effect type="removeDelay">
+            <effect type="removeEffect">
+                <effectType>delay</effectType>
             </effect>
         </deathAction>
         <spawnAction>
@@ -2176,6 +2177,99 @@
         <deathAction>
             <effect type="knockout">
                 <target>lastHit</target>
+            </effect>
+        </deathAction>
+        <spawnAction>
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
+        </spawnAction>
+    </threat>
+    <threat>
+        <type>internal</type>
+        <plural>false</plural>
+        <cardID>SI2-03</cardID>
+        <name>Power System Overload</name>
+        <deathScore>12</deathScore>
+        <escapeScore>6</escapeScore>
+        <health>7</health>
+        <speed>3</speed>
+        <locations>
+            <location section="0" zone="0"/>
+            <location section="0" zone="1"/>
+            <location section="0" zone="2"/>
+        </locations>
+        <threatType>malfB</threatType>
+        <xAction>
+            <effect type="drainPower" >
+                <condition>none</condition>
+                <value>2</value>
+                <target>mainReactor</target>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="drainPower" >
+                <condition>none</condition>
+                <value>1</value>
+                <target>allReactors</target>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="damageShip">
+                <target>all</target>
+                <damage>3</damage>
+            </effect>
+        </zAction>
+        <damageAction type="malfMultiBonus">
+            <target>B</target>
+            <bonus>2</bonus>
+        </damageAction>
+        <deathAction>
+            <effect type="none">
+            </effect>
+        </deathAction>
+        <spawnAction>
+            <effect type="setPosition">
+                <special>none</special>
+            </effect>
+        </spawnAction>
+    </threat>
+    <threat>
+        <type>internal</type>
+        <plural>false</plural>
+        <cardID>SI2-04</cardID>
+        <name>Contamination</name>
+        <deathScore>12</deathScore>
+        <escapeScore>6</escapeScore>
+        <health>3</health>
+        <speed>2</speed>
+        <locations>
+            <location section="1" zone="0"/>
+            <location section="0" zone="0"/>
+            <location section="1" zone="2"/>
+            <location section="0" zone="2"/>
+        </locations>
+        <threatType>combat</threatType>
+        <xAction>
+            <effect type="delay">
+                <target>self</target>
+            </effect>
+        </xAction>
+        <yAction>
+            <effect type="damageShip">
+                <target>self</target>
+                <damage>1</damage>
+            </effect>
+        </yAction>
+        <zAction>
+            <effect type="setEffect">
+                <effectType>knockout</effectType>
+            </effect>
+        </zAction>
+        <damageAction type="combatMulti">false</damageAction>
+        <deathAction>
+            <effect type="removeEffect">
+                <effectType>knockout</effectType>
             </effect>
         </deathAction>
         <spawnAction>

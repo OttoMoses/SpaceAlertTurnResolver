@@ -30,6 +30,11 @@ public class HeroicMoveAction extends PlayerAction
         {
             message += player.Delay(game.currentRound);
         }
+        if(location.specialKnockout)
+        {
+            player.unconscious = true;
+            message += player.playerName + " is knocked out!";
+        }
         return message;
     }
 

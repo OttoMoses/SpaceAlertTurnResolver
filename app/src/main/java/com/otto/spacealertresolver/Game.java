@@ -86,7 +86,7 @@ import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalCombat
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfMultiBonus;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfSingle;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternal;
-import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternalRemoveDelay;
+import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternalRemoveEffect;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternalKnockOut;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnSpawnSetHealth;
 import com.otto.spacealertresolver.ThreatActions.Internal.SetInternalPosition;
@@ -1636,6 +1636,12 @@ public class Game {
                 expression = xPath.compile("./bonus");
                 int bonus = Integer.parseInt((String) expression.evaluate(damType, XPathConstants.STRING));
                 effect = new OnDamageInternalMalfMultiBonus(target, bonus);
+                break;
+            }
+            case "combatMulti":
+            {
+                effect = new OnDamageInternalCombat(Boolean.parseBoolean(damType.getTextContent()));
+                break;
             }
         }
         return effect;
@@ -1673,7 +1679,9 @@ public class Game {
         switch (type) {
             case "removeDelay":
                 {
-                    effect = new OnDeathInternalRemoveDelay();
+                    XPathExpression expression = xPath.compile("./effectType");
+                    String effectType = (String) expression.evaluate(deathType, XPathConstants.STRING);
+                    effect = new OnDeathInternalRemoveEffect(effectType);
                     break;
                 }
             case "knockout":
