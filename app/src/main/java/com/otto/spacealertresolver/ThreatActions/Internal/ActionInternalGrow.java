@@ -8,7 +8,7 @@ public class ActionInternalGrow extends ActionEffectInternal {
     public String Execute(Section[][] ship, ThreatInternal threat)
     {
         OnDamageInternalCombat effect = (OnDamageInternalCombat)threat.damageEffect;
-        effect.firesBack = true;
+        threat.firesBack = true;
         return "The " + threat.name + " grows up!";
     }
 }

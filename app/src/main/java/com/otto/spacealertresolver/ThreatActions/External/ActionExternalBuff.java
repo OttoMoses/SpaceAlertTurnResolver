@@ -34,11 +34,11 @@ public class ActionExternalBuff extends ActionEffectExternal
         switch (Stats.valueOf(stat))
         {
             case shieldBuff:
-                threat.shield += value;
+                threat.shieldBoost += value;
                 actionText += "The " + threat.name + " raises its shield by " + value + "!";
                 break;
             case speed:
-                threat.speed += value;
+                threat.speedBoost += value;
                 actionText += "The " + threat.name + " raises its speed by " + value + "!";
                 break;
             case damage:

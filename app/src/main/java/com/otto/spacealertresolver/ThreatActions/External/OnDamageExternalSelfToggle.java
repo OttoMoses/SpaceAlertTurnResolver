@@ -11,11 +11,10 @@ import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 public class OnDamageExternalSelfToggle extends OnDamageExternal
 {
-    private boolean toggle;
     @Override
     public String Execute(ThreatExternal t, ExternalDamageBundle db)
     {
-        if(toggle)
+        if(t.toggle)
         {
             int DBDamage = 0;
             for(Pair p : db.damageSources)
@@ -26,13 +25,8 @@ public class OnDamageExternalSelfToggle extends OnDamageExternal
         }
         else
         {
-            toggle = true;
+            t.toggle = true;
             return "The " + t.name + " is no longer immune to damage!";
         }
-    }
-
-    public OnDamageExternalSelfToggle()
-    {
-        this.toggle = false;
     }
 }

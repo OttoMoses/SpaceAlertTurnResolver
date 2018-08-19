@@ -3,7 +3,6 @@
     <string name="app_name">SpaceAlertResolver</string>
 
     <string-array name="difficulty_array">
-        <item>Tutorial</item>
         <item>Basic</item>
         <item>Advanced</item>
     </string-array>

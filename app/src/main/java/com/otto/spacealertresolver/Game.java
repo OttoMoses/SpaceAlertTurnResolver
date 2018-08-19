@@ -139,7 +139,8 @@ public class Game {
     public boolean missileInSpace;
     public boolean strafingRun;
     public ThreatTrack[] threatTracks;
-    public ThreatString[] selectedThreats;
+    public ThreatString[] selectedThreatStrings;
+    private Threat[] selectedThreats;
     public ArrayList<Threat> activeThreats;
     public String[] colors;
     public ArrayList<Threat> deadThreats;
@@ -153,20 +154,20 @@ public class Game {
     public int globalDamageBuff;
     public int globalShieldBuff;
     private String shipName;
-    private Threat[] builtThreats;
-    private Context context;
     private ArrayList<DamageToken> redDamage;
     private ArrayList<DamageToken> whiteDamage;
     private ArrayList<DamageToken> blueDamage;
     private ArrayList<Threat> escapedThreats;
     public ArrayList<Threat> internalThreats;
     private ArrayList<Threat> externalThreats;
+    private ArrayList<Threat> allThreats;
     private int[] observationScore;
     private boolean missileDamage;
     private boolean gameEnd;
     public int currentPlayer;
 
-    public Game(Context c) throws ParserConfigurationException, SAXException, IOException {
+    public Game()
+    {
         colors = new String[]
                 {
                         "Red",
@@ -174,7 +175,6 @@ public class Game {
                         "Blue",
                         "Internal",
                 };
-        context = c;
         //create array of all action object flyweights
         actions = new PlayerAction[]
                 {
@@ -192,13 +192,10 @@ public class Game {
                         new TurboLiftAction()
                 };
         observationScore = new int[]{0, 1, 2, 3, 5, 7};
-        threatNames = new ArrayList<>();
-        internalThreatNames = new ArrayList<>();
-        getThreatNames();
     }
 
     //Public method to set game-wide variables when starting a new session
-    public void SetupGame(int numPlayers, String name) {
+    public void SetupGame(int numPlayers, String name,ArrayList<String> threatNames,ArrayList<String> internalNames,ArrayList<Threat> allThreats,ArrayList<Threat> internalThreats,ArrayList<Threat> externalThreats) {
         shipName = name;
         //set variables that depend on game type
 
@@ -206,14 +203,20 @@ public class Game {
         numRounds = 12;
         threatTracks = new ThreatTrack[4];
 
+        //import xml data
+        this.threatNames = threatNames;
+        this.internalThreatNames = internalNames;
+        this.allThreats = allThreats;
+        this.internalThreats = internalThreats;
+        this.externalThreats = externalThreats;
         // create the right number of threat tracks and an array to store them;
 
         threatTracks[0] = new ThreatTrack("Red");
         threatTracks[1] = new ThreatTrack("white");
         threatTracks[2] = new ThreatTrack("Blue");
         threatTracks[3] = new ThreatTrack("Internal");
-        selectedThreats = new ThreatString[8];
-        Arrays.fill(selectedThreats, new ThreatString(threatNames.size() + 1, 4));
+        selectedThreatStrings = new ThreatString[8];
+        Arrays.fill(selectedThreatStrings, new ThreatString(threatNames.size() + 1, 4));
 
         //create creates an array to store players, populates it with unnamed players, and populates their action arrays with blank actions
         players = new Player[numPlayers];
@@ -225,9 +228,9 @@ public class Game {
             players[i] = p;
             p.playerID = i;
         }
-
         InitializeShip();
     }
+
 
     public void StartGame() throws IOException, SAXException, ParserConfigurationException {
         // set game state starting values
@@ -272,8 +275,23 @@ public class Game {
             }
         }
 
-        // build threats
-        builtThreats = ThreatAssembler(gameType);
+        // get threats
+        selectedThreats = new Threat[8];
+        for(int i = 0; i < selectedThreatStrings.length; i++)
+        {
+            ThreatString ts = selectedThreatStrings[i];
+            if(ts.trackNum != 4)
+            {
+                Threat threat = allThreats.get(ts.threatID);
+                threat.track = ts.trackNum;
+                threat.ResetThreat();
+                selectedThreats[i] = threat;
+            }
+            else
+            {
+                selectedThreats[i] = null;
+            }
+        }
 
         //check threat tracks
         for (ThreatTrack t : threatTracks) {
@@ -442,7 +460,7 @@ public class Game {
                 int movement;
                 if (source.equals("game"))
                 {
-                    movement = t.speed;
+                    movement = t.GetSpeed();
                 }
                 else
                 {
@@ -574,8 +592,8 @@ public class Game {
         //spawn Threats
         String message = "";
         if (round <= 8) {
-            if (builtThreats[currentRound - 1] != null) {
-                Threat t = builtThreats[round - 1];
+            if (selectedThreats[currentRound - 1] != null) {
+                Threat t = selectedThreats[round - 1];
                 if (t.getClass() == ThreatExternal.class) {
                     ((ThreatExternal) t).shield += globalShieldBuff;
                 }
@@ -657,7 +675,7 @@ public class Game {
             }
             if(((ThreatExternal) t).damageAction.getClass() == OnDamageExternalToggle.class)
             {
-                if(((OnDamageExternalToggle)(((ThreatExternal) t).damageAction)).toggle);
+                if(((ThreatExternal) t).damageAction.getClass() == OnDamageExternalSelfToggle.class && ((ThreatExternal) t).toggle);
                 {
                     invalid.add(t);
                 }
@@ -1150,571 +1168,5 @@ public class Game {
         }
         endMessage += "\nThanks for playing!";
         return endMessage;
-    }
-
-    private void getThreatNames() throws IOException, SAXException, ParserConfigurationException {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder parser = factory.newDocumentBuilder();
-        InputStream in = context.getAssets().open("threats.xml");
-        Document document = parser.parse(in);
-        XPathFactory xPathFactory = XPathFactory.newInstance();
-        XPath xPath = xPathFactory.newXPath();
-        try {
-            XPathExpression expression = xPath.compile("/Threats/threat");
-            NodeList nl = (NodeList) expression.evaluate(document, XPathConstants.NODESET);
-            for (int i = 0; i < nl.getLength(); i++) {
-                Node n = nl.item(i);
-                expression = xPath.compile("./cardID");
-                String cardNumber = (String) expression.evaluate(n, XPathConstants.STRING);
-                expression = xPath.compile("./name");
-                String name = (String) expression.evaluate(n, XPathConstants.STRING);
-                expression = xPath.compile("./type");
-                String type = (String) expression.evaluate(n, XPathConstants.STRING);
-
-                if (type.equals("internal")) {
-                    internalThreatNames.add(cardNumber + " - " + name);
-                }
-                threatNames.add(cardNumber + " - " + name);
-            }
-        } catch (XPathExpressionException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //threat assembler
-    private Threat[] ThreatAssembler(int gametype) throws ParserConfigurationException, IOException, SAXException {
-        Threat[] builtThreats = new Threat[8];
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder parser = factory.newDocumentBuilder();
-        InputStream in = context.getAssets().open("threats.xml");
-        Document document = parser.parse(in);
-        XPathFactory xPathFactory = XPathFactory.newInstance();
-        XPath xPath = xPathFactory.newXPath();
-        internalThreats = new ArrayList<>();
-        externalThreats = new ArrayList<>();
-        for (int turn = 0; turn < selectedThreats.length; turn++) {
-            ThreatString t = selectedThreats[turn];
-            if (t.threatID != threatNames.size() + 1) {
-                try {
-                    System.out.println(t.threatID);
-                    XPathExpression expression = xPath.compile("/Threats/threat[" + (t.threatID + 1) + "]");
-                    Node node = (Node) expression.evaluate(document, XPathConstants.NODE);
-                    expression = xPath.compile("./type");
-                    String threatType = (String) expression.evaluate(node, XPathConstants.STRING);
-                    if (!threatType.equals("internal")) {
-                        ThreatExternal threat = BuildThreatExternal(xPath, node, t.trackNum);
-                        builtThreats[turn] = threat;
-                        externalThreats.add(threat);
-                    } else {
-                        ThreatInternal threat = BuildThreatInternal(xPath, node, t.trackNum);
-                        builtThreats[turn] = threat;
-                        internalThreats.add(threat);
-
-                    }
-                } catch (XPathExpressionException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-        return builtThreats;
-    }
-
-    private ThreatInternal BuildThreatInternal(XPath xPath, Node node, int trackNum) throws XPathExpressionException {
-        ThreatInternal threat = new ThreatInternal();
-        XPathExpression expression;
-        threat.track = 3;
-        expression = xPath.compile("./name");
-        threat.name = (String) expression.evaluate(node, XPathConstants.STRING);
-        expression = xPath.compile("./plural");
-        threat.plural = Boolean.parseBoolean((String) expression.evaluate(node, XPathConstants.STRING));
-        expression = xPath.compile("./speed");
-        threat.speed = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
-        expression = xPath.compile("./health");
-        threat.health = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
-        expression = xPath.compile("./deathScore");
-        threat.deathScore = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
-        expression = xPath.compile("./escapeScore");
-        threat.escapeScore = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
-        expression = xPath.compile(("./threatType"));
-        threat.threatType = (String) expression.evaluate(node, XPathConstants.STRING);
-        expression = xPath.compile(("./spawnMessage"));
-        threat.spawnMessage = (String) expression.evaluate(node, XPathConstants.STRING);
-
-        NodeList dataSet;
-        Element data;
-        expression = xPath.compile("./xAction/effect");
-        dataSet = (NodeList) expression.evaluate(node, XPathConstants.NODESET);
-        threat.xAction = GetInternalActionCommand(dataSet, xPath);
-        expression = xPath.compile("./yAction/effect");
-        dataSet = (NodeList) expression.evaluate(node, XPathConstants.NODESET);
-        threat.yAction = GetInternalActionCommand(dataSet, xPath);
-        expression = xPath.compile("./zAction/effect");
-        dataSet = (NodeList) expression.evaluate(node, XPathConstants.NODESET);
-        threat.zAction = GetInternalActionCommand(dataSet, xPath);
-
-        expression = xPath.compile("./spawnAction/effect");
-        dataSet = (NodeList) expression.evaluate(node, XPathConstants.NODESET);
-        threat.spawnAction = GetInternalSpawnCommand(dataSet, xPath);
-
-        expression = xPath.compile("./locations/location");
-        dataSet = (NodeList) expression.evaluate(node, XPathConstants.NODESET);
-        threat.locations = GetLocations(dataSet);
-
-        expression = xPath.compile("./damageAction");
-        data = (Element) expression.evaluate(node, XPathConstants.NODE);
-        threat.damageEffect = GetInternalDamageEffect(data, xPath);
-
-        expression = xPath.compile("./deathAction/effect");
-        data = (Element) expression.evaluate(node, XPathConstants.NODE);
-        threat.deathAction = GetInternalDeathEffect(data,xPath);
-        return threat;
-    }
-
-    private ThreatExternal BuildThreatExternal(XPath xPath, Node node, int trackNum) throws XPathExpressionException {
-        ThreatExternal threat = new ThreatExternal();
-        threat.track = trackNum;
-        XPathExpression expression;
-        expression = xPath.compile("./name");
-        threat.name = (String) expression.evaluate(node, XPathConstants.STRING);
-        expression = xPath.compile("./movement");
-        threat.speed = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
-        expression = xPath.compile("./health");
-        threat.health = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
-        expression = xPath.compile("./shield");
-        threat.shield = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
-        expression = xPath.compile("./deathScore");
-        threat.deathScore = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
-        expression = xPath.compile("./escapeScore");
-        threat.escapeScore = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
-        expression = xPath.compile("./rocketImmune");
-        threat.missileImmune = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
-        expression = xPath.compile(("./spawnMessage"));
-        threat.spawnMessage = (String) expression.evaluate(node, XPathConstants.STRING);
-
-        //select action command objects
-        NodeList action;
-        expression = xPath.compile("./xAction/effect");
-        action = (NodeList) expression.evaluate(node, XPathConstants.NODESET);
-        threat.xAction = GetExternalActionCommand(action, xPath);
-
-        expression = xPath.compile("./yAction/effect");
-        action = (NodeList) expression.evaluate(node, XPathConstants.NODESET);
-        threat.yAction = GetExternalActionCommand(action, xPath);
-
-        expression = xPath.compile("./zAction/effect");
-        action = (NodeList) expression.evaluate(node, XPathConstants.NODESET);
-        threat.zAction = GetExternalActionCommand(action, xPath);
-
-        //get damage command object
-        Element element;
-        expression = xPath.compile("./damageAction/effect");
-        element = (Element) expression.evaluate(node, XPathConstants.NODE);
-        threat.damageAction = GetExternalDamageCommand(element, xPath);
-
-        expression = xPath.compile("./deathAction/effect");
-        element = (Element) expression.evaluate(node, XPathConstants.NODE);
-        threat.deathAction = GetExternalDeathEffect(element);
-        return threat;
-    }
-
-    private ThreatActionExternal GetExternalActionCommand(NodeList action, XPath xPath) throws XPathExpressionException {
-        ThreatActionExternal threatAction;
-        ArrayList<ActionEffectExternal> effects = new ArrayList<>();
-        for (int i = 0; i < action.getLength(); i++) {
-            Element item = (Element) action.item(i);
-            String commandType = item.getAttribute("type");
-            switch (commandType) {
-                case "damage":
-                    XPathExpression expression = xPath.compile("./zone");
-                    int zone = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
-
-                    expression = xPath.compile("./damage");
-                    String damage = (String) expression.evaluate(item, XPathConstants.STRING);
-
-                    expression = xPath.compile("./condition");
-                    String condition = (String) expression.evaluate(item, XPathConstants.STRING);
-
-                    expression = xPath.compile("./bypassBonus");
-                    boolean bypassBonus = Boolean.parseBoolean((String) expression.evaluate(item, XPathConstants.STRING));
-
-                    String data;
-                    int damageMulti;
-                    expression = xPath.compile("./damageMulti");
-                    data = (String) expression.evaluate(item, XPathConstants.STRING);
-                    if (!data.equals("")) {
-                        damageMulti = Integer.parseInt(data);
-                    } else {
-                        damageMulti = 1;
-                    }
-                    effects.add(new ActionExternalDamageShip(zone, damage, bypassBonus, condition, damageMulti));
-                    break;
-                case "buff": {
-                    expression = xPath.compile("./stat");
-                    String stat = (String) expression.evaluate(item, XPathConstants.STRING);
-                    expression = xPath.compile("./amount");
-                    String value = (String) expression.evaluate(item, XPathConstants.STRING);
-                    effects.add(new ActionExternalBuff(stat, value));
-                    break;
-                }
-                case "shieldDrain": {
-                    expression = xPath.compile("./amount");
-                    String amount = (String) expression.evaluate(item, XPathConstants.STRING);
-                    effects.add(new ActionExternalShieldDrain(amount));
-                    break;
-                }
-                case "toggle": {
-                    effects.add(new ActionExternalToggle());
-                    break;
-                }
-                case "globalBuff": {
-                    expression = xPath.compile("./stat");
-                    String stat = (String) expression.evaluate(item, XPathConstants.STRING);
-                    expression = xPath.compile("./value");
-                    int value = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
-                    effects.add(new ActionExternalGlobalBuff(stat, value));
-                    break;
-                }
-                case "moveOthers": {
-                    expression = xPath.compile("./value");
-                    int value = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
-                    effects.add(new ActionExternalMoveOthers(value));
-                    break;
-                }
-                case "knockOut": {
-                    expression = xPath.compile("./target");
-                    String target = (String) expression.evaluate(item, XPathConstants.STRING);
-                    effects.add(new ActionExternalKnockOut(target));
-                    break;
-
-                }
-                case "delay": {
-                    expression = xPath.compile("./target");
-                    String target = (String) expression.evaluate(item, XPathConstants.STRING);
-                    effects.add(new ActionExternalDelayPlayers(target));
-                    break;
-
-                }
-                case "selfDamage": {
-                    expression = xPath.compile("./value");
-                    int value = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
-                    effects.add(new ActionExternalSelfDamage(value));
-                    break;
-                }
-                case "endGame": {
-                    effects.add(new ActionExternalEndGame());
-                    break;
-                }
-                case "die": {
-                    effects.add(new ActionExternalDie());
-                    break;
-                }
-            }
-        }
-        threatAction = new ThreatActionExternal(effects);
-        return threatAction;
-    }
-
-    private ThreatActionInternal GetInternalActionCommand(NodeList action, XPath xPath) throws XPathExpressionException {
-        ThreatActionInternal threatAction;
-        ArrayList<ActionEffectInternal> effects = new ArrayList<>();
-        for (int i = 0; i < action.getLength(); i++) {
-            Element item = (Element) action.item(i);
-            String commandType = item.getAttribute("type");
-            switch (commandType) {
-                case "moveBlue": {
-                    effects.add(new ActionInternalMoveBlue());
-                    break;
-                }
-                case "moveRed": {
-                    effects.add(new ActionInternalMoveRed());
-                    break;
-                }
-                case "changeDeck": {
-                    effects.add(new ActionInternalTurboLift());
-                }
-                case "damageShip": {
-                    XPathExpression expression = xPath.compile("./target");
-                    String target = (String) expression.evaluate(item, XPathConstants.STRING);
-
-                    expression = xPath.compile("./damage");
-                    String damage = (String) expression.evaluate(item, XPathConstants.STRING);
-
-                    effects.add(new ActionInternalDamageShip(target, damage));
-                    break;
-                }
-                case "drainPower": {
-                    XPathExpression expression = xPath.compile("./target");
-                    String target = (String) expression.evaluate(item, XPathConstants.STRING);
-
-                    expression = xPath.compile("./value");
-                    String value = (String) expression.evaluate(item, XPathConstants.STRING);
-
-                    expression = xPath.compile("./condition");
-                    String condition = (String) expression.evaluate(item, XPathConstants.STRING);
-
-                    effects.add(new ActionInternalEnergyDrain(target, condition, value));
-                    break;
-                }
-                case "leakPower": {
-                    XPathExpression expression = xPath.compile("./target");
-                    String target = (String) expression.evaluate(item, XPathConstants.STRING);
-                    expression = xPath.compile("./condition");
-                    String condition = (String) expression.evaluate(item, XPathConstants.STRING);
-
-                    effects.add(new ActionInternalLeakPower(condition, target));
-                    break;
-                }
-                case "conditionalDamageMove": {
-                    XPathExpression expression = xPath.compile("./damage");
-                    int damage = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
-
-                    expression = xPath.compile("./direction");
-                    String direction = (String) expression.evaluate(item, XPathConstants.STRING);
-
-                    effects.add(new ActionInternalConditionDamageMove(damage, direction));
-                    break;
-                }
-                case "knockOut": {
-                    XPathExpression expression = xPath.compile("./target");
-                    String target = (String) expression.evaluate(item, XPathConstants.STRING);
-                    ActionInternalKnockOut effect = new ActionInternalKnockOut(target);
-                    if (target.equals("allBut")) {
-                        expression = xPath.compile("./locationX");
-                        int locationX = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
-                        expression = xPath.compile("./locationY");
-                        int locationY = Integer.parseInt((String) expression.evaluate(item, XPathConstants.STRING));
-                        effect.exclude = new Pair<>(locationX, locationY);
-                    }
-                    effects.add(effect);
-                    break;
-                }
-                case "endGame": {
-                    effects.add(new ActionInternalEndGame());
-                    break;
-                }
-                case "grow": {
-                    effects.add(new ActionInternalGrow());
-                    break;
-                }
-                case "globalDamageMod": {
-                    effects.add(new ActionInternalGlobalDamageModifier());
-                    break;
-                }
-                case "spread" :
-                {
-                    XPathExpression expression = xPath.compile("./direction");
-                    String direction = (String) expression.evaluate(item, XPathConstants.STRING);
-                    effects.add(new ActionInternalSpread(direction));
-                    break;
-                }
-                case "destroyMissile":
-                {
-                    effects.add(new ActionInternalDestroyRocket());
-                    break;
-                }
-                case "disableBots":
-                {
-                    effects.add(new ActionInternalDisableBots());
-                    break;
-                }
-                case "comsumeFuel" :
-                {
-                    effects.add(new ActionInternalDrainFuel());
-                    break;
-                }
-                case "moveToPlayerCount":
-                {
-                    effects.add(new ActionInternalMoveToPlayerCount());
-                    break;
-                }
-                case "delay" :
-                {
-                    XPathExpression expression = xPath.compile("./target");
-                    String target = (String) expression.evaluate(item, XPathConstants.STRING);
-                    effects.add(new ActionInternalDelayPlayers(target));
-                }
-
-            }
-        }
-        threatAction = new ThreatActionInternal(effects);
-        return threatAction;
-    }
-
-    private ThreatActionInternal GetInternalSpawnCommand(NodeList action, XPath xPath) throws XPathExpressionException {
-        ArrayList<ActionEffectInternal> effects = new ArrayList<>();
-        for (int i = 0; i < action.getLength(); i++) {
-            ActionEffectInternal effect;
-            Element item = (Element) action.item(i);
-            String commandType = item.getAttribute("type");
-            switch (commandType) {
-                case "setPosition": {
-                    XPathExpression expression = xPath.compile("./special");
-                    String special = (String) expression.evaluate(item, XPathConstants.STRING);
-                    effect = new SetInternalPosition(special);
-                    effects.add(effect);
-                    break;
-                }
-                case "setHealth": {
-                    effect = new OnSpawnSetHealth();
-                    effects.add(effect);
-                    break;
-                }
-            }
-        }
-        return new ThreatActionInternal(effects);
-    }
-
-    private ArrayList<Pair<Integer, Integer>> GetLocations(NodeList data) {
-        ArrayList<Pair<Integer, Integer>> locations = new ArrayList<>();
-        for (int i = 0; i < data.getLength(); i++) {
-            Pair<Integer, Integer> location;
-            Element item = (Element) data.item(i);
-            int section = Integer.parseInt(item.getAttribute("section"));
-            int zone = Integer.parseInt(item.getAttribute("zone"));
-            location = new Pair<>(zone, section);
-            locations.add(location);
-        }
-        return locations;
-    }
-
-    private OnDamageExternal GetExternalDamageCommand(Element damType, XPath xPath) throws XPathExpressionException {
-        OnDamageExternal effect;
-        String type = damType.getAttribute("type");
-        switch (type) {
-            case "toggleExt":
-                effect = new OnDamageExternalToggle();
-                break;
-            case "toggleInt": {
-                effect = new OnDamageExternalSelfToggle();
-                break;
-            }
-            case "noShield": {
-                XPathExpression expression = xPath.compile("./trigger");
-                String trigger = (String) expression.evaluate(damType, XPathConstants.STRING);
-                effect = new OnDamageExternalNoShield(trigger);
-                break;
-            }
-            case "bypass": {
-                XPathExpression expression = xPath.compile("./source");
-                String source = (String) expression.evaluate(damType, XPathConstants.STRING);
-                effect = new OnDamageExternalBypassSource(source);
-                break;
-            }
-            case "maxValue": {
-                XPathExpression expression = xPath.compile("./value");
-                int value = Integer.parseInt((String) expression.evaluate(damType, XPathConstants.STRING));
-                effect = new OnDamageExternalMaxValue(value);
-                break;
-            }
-            case "destroyInterceptors": {
-                effect = new OnDamageExternalDestroyInterceptors();
-                break;
-            }
-            case "buff": {
-                XPathExpression expression = xPath.compile("./value");
-                int value = Integer.parseInt((String) expression.evaluate(damType, XPathConstants.STRING));
-                expression = xPath.compile("./stat");
-                String stat = (String) expression.evaluate(damType, XPathConstants.STRING);
-                expression = xPath.compile("./source");
-                String source = (String) expression.evaluate(damType, XPathConstants.STRING);
-                effect = new OnDamageExternalBuff(value, stat, source);
-                break;
-            }
-            case "count": {
-                XPathExpression expression = xPath.compile("./value");
-                int value = Integer.parseInt((String) expression.evaluate(damType, XPathConstants.STRING));
-                effect = new OnDamageExternalCount(value);
-                break;
-            }
-            default:
-                effect = new OnDamageExternalDefault();
-                break;
-        }
-        return effect;
-    }
-
-    private OnDamageInternal GetInternalDamageEffect(Element damType, XPath xPath) throws XPathExpressionException {
-        OnDamageInternal effect = null;
-        String type = damType.getAttribute("type");
-        switch (type) {
-            case "combat": {
-                effect = new OnDamageInternalCombat(Boolean.parseBoolean(damType.getTextContent()));
-                break;
-            }
-            case "malfSingle": {
-
-                effect = new OnDamageInternalMalfSingle(damType.getTextContent());
-                break;
-            }
-            case "malfMultiBonus": {
-                XPathExpression expression = xPath.compile("./target");
-                String target = (String) expression.evaluate(damType, XPathConstants.STRING);
-                expression = xPath.compile("./bonus");
-                int bonus = Integer.parseInt((String) expression.evaluate(damType, XPathConstants.STRING));
-                effect = new OnDamageInternalMalfMultiBonus(target, bonus);
-                break;
-            }
-            case "combatMulti":
-            {
-                effect = new OnDamageInternalCombatMulti(Boolean.parseBoolean(damType.getTextContent()));
-                break;
-            }
-            case "countRequired" :
-            {
-                effect = new OnDamageCountRequired();
-                break;
-            }
-        }
-        return effect;
-    }
-
-    private OnDeathExternal GetExternalDeathEffect(Element deathType) {
-        OnDeathExternal effect;
-        String type = deathType.getAttribute("type");
-        switch (type) {
-            case "damageOthers": {
-                effect = new OnDeathExternalDamageOthers();
-                break;
-            }
-            case "damageSpaceCount": {
-                int multi = Integer.parseInt(deathType.getTextContent());
-                effect = new OnDeathExternalDamageSpaceCount(multi);
-                break;
-            }
-            case "removeGlobalBonus": {
-                effect = new OnDeathExternalRemoveGlobalBonus();
-                break;
-            }
-            default:
-            {
-                effect = null;
-                break;
-            }
-        }
-        return effect;
-    }
-    private OnDeathInternal GetInternalDeathEffect(Element deathType,XPath xPath) throws XPathExpressionException
-    {
-        OnDeathInternal effect;
-        String type = deathType.getAttribute("type");
-        switch (type) {
-            case "removeDelay":
-                {
-                    XPathExpression expression = xPath.compile("./effectType");
-                    String effectType = (String) expression.evaluate(deathType, XPathConstants.STRING);
-                    effect = new OnDeathInternalRemoveEffect(effectType);
-                    break;
-                }
-            case "knockout":
-            {
-                XPathExpression expression = xPath.compile("./target");
-                String target = (String) expression.evaluate(deathType, XPathConstants.STRING);
-                effect = new OnDeathInternalKnockOut(target);
-                break;
-            }
-                default:
-                    effect = null;
-        }
-        return effect;
     }
 }

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Threats>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
-            <cardID>e1-01</cardID>
+            <cardID>E1-01</cardID>
             <name>Pulse Ball</name>
             <deathScore>4</deathScore>
             <escapeScore>2</escapeScore>
@@ -47,8 +48,9 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
-            <cardID>e1-02</cardID>
+            <cardID>E1-02</cardID>
             <name>Destroyer</name>
             <deathScore>4</deathScore>
             <escapeScore>2</escapeScore>
@@ -93,8 +95,9 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
-            <cardID>e1-03</cardID>
+            <cardID>E1-03</cardID>
             <name>Stealth Fighter</name>
             <deathScore>4</deathScore>
             <escapeScore>2</escapeScore>
@@ -134,8 +137,9 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
-            <cardID>e1-04</cardID>
+            <cardID>E1-04</cardID>
             <name>Energy Cloud</name>
             <deathScore>4</deathScore>
             <escapeScore>2</escapeScore>
@@ -177,8 +181,9 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
-            <cardID>e1-05</cardID>
+            <cardID>E1-05</cardID>
             <name>Gunship</name>
             <deathScore>4</deathScore>
             <escapeScore>2</escapeScore>
@@ -223,8 +228,9 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
-            <cardID>e1-06</cardID>
+            <cardID>E1-06</cardID>
             <name>Cryoshield Fighter</name>
             <deathScore>4</deathScore>
             <escapeScore>2</escapeScore>
@@ -269,8 +275,9 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
-            <cardID>e1-07</cardID>
+            <cardID>E1-07</cardID>
             <name>Fighter</name>
             <deathScore>4</deathScore>
             <escapeScore>2</escapeScore>
@@ -315,8 +322,9 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
-            <cardID>e1-08</cardID>
+            <cardID>E1-08</cardID>
             <name>Armored Grappler</name>
             <deathScore>4</deathScore>
             <escapeScore>2</escapeScore>
@@ -358,8 +366,9 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
-            <cardID>e1-09</cardID>
+            <cardID>E1-09</cardID>
             <name>Amoeba</name>
             <deathScore>4</deathScore>
             <escapeScore>2</escapeScore>
@@ -398,8 +407,9 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
-            <cardID>e1-10</cardID>
+            <cardID>E1-10</cardID>
             <name>Meteoroid</name>
             <deathScore>4</deathScore>
             <escapeScore>2</escapeScore>
@@ -426,6 +436,7 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
             <cardID>SE1-01</cardID>
             <name>Frigate</name>
@@ -472,6 +483,7 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
             <cardID>SE1-02</cardID>
             <name>Man-Of-War</name>
@@ -526,6 +538,7 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
             <cardID>SE1-03</cardID>
             <name>Leviathan Tanker</name>
@@ -576,6 +589,7 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
             <cardID>SE1-04</cardID>
             <name>Pulse Satellite</name>
@@ -622,6 +636,7 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
             <cardID>SE1-05</cardID>
             <name>Cryoshield Frigate</name>
@@ -668,6 +683,7 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
             <cardID>SE1-06</cardID>
             <name>Interstellar Octopus</name>
@@ -715,6 +731,7 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
             <cardID>SE1-07</cardID>
             <name>Maelstrom</name>
@@ -758,6 +775,7 @@
             </deathAction>
         </threat>
         <threat>
+            <difficulty>basic</difficulty>
             <type>external</type>
             <cardID>SE1-08</cardID>
             <name>Asteroid</name>
@@ -785,6 +803,7 @@
             </deathAction>
         </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>E2-01</cardID>
         <name>Kamikaze</name>
@@ -833,6 +852,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>E2-02</cardID>
         <name>Scout</name>
@@ -872,6 +892,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>E2-03</cardID>
         <name>Phantom Fighter</name>
@@ -913,6 +934,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>E2-04</cardID>
         <name>Swarm</name>
@@ -974,6 +996,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>E2-05</cardID>
         <name>Jellyfish</name>
@@ -1027,6 +1050,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>E2-06</cardID>
         <name>Marauder</name>
@@ -1068,6 +1092,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>E2-07</cardID>
         <name>Minor Asteroid</name>
@@ -1095,6 +1120,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>SE2-01</cardID>
         <name>Behemoth</name>
@@ -1141,6 +1167,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>SE2-02</cardID>
         <name>Juggernaut</name>
@@ -1202,6 +1229,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>SE2-03</cardID>
         <name>Psionic Satellite</name>
@@ -1236,6 +1264,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>SE2-04</cardID>
         <name>Nebula Crab</name>
@@ -1280,6 +1309,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>SE2-05</cardID>
         <name>Nemesis</name>
@@ -1328,6 +1358,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>external</type>
         <cardID>SE2-06</cardID>
         <name>Major Asteroid</name>
@@ -1355,6 +1386,7 @@
         </deathAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>true</plural>
         <cardID>I1-01</cardID>
@@ -1380,7 +1412,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat"> true </damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1392,6 +1424,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>true</plural>
         <cardID>I1-02</cardID>
@@ -1400,6 +1433,7 @@
         <escapeScore>2</escapeScore>
         <health>1</health>
         <speed>3</speed>
+        <firesBack>true</firesBack>
         <locations>
             <location section="1" zone="2"/>
         </locations>
@@ -1416,7 +1450,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat"> true </damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1428,6 +1462,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>I1-03</cardID>
@@ -1437,6 +1472,7 @@
         <escapeScore>2</escapeScore>
         <health>1</health>
         <speed>3</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="0" zone="1"/>
         </locations>
@@ -1457,7 +1493,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat"> false </damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1469,6 +1505,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>I1-04</cardID>
@@ -1478,6 +1515,7 @@
         <escapeScore>2</escapeScore>
         <health>1</health>
         <speed>3</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="0" zone="1"/>
         </locations>
@@ -1498,7 +1536,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat"> false </damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1510,6 +1548,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>true</plural>
         <cardID>I1-05</cardID>
@@ -1518,6 +1557,7 @@
         <escapeScore>2</escapeScore>
         <health>3</health>
         <speed>2</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="1" zone="2"/>
         </locations>
@@ -1554,6 +1594,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>true</plural>
         <cardID>I1-06</cardID>
@@ -1562,6 +1603,7 @@
         <escapeScore>2</escapeScore>
         <health>3</health>
         <speed>2</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="1" zone="0"/>
         </locations>
@@ -1598,6 +1640,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>true</plural>
         <cardID>I1-07</cardID>
@@ -1606,6 +1649,7 @@
         <escapeScore>2</escapeScore>
         <health>0</health>
         <speed>3</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="0" zone="2"/>
         </locations>
@@ -1631,6 +1675,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>true</plural>
         <cardID>SI1-01</cardID>
@@ -1639,6 +1684,7 @@
         <escapeScore>4</escapeScore>
         <health>2</health>
         <speed>2</speed>
+        <firesBack>true</firesBack>
         <locations>
             <location section="0" zone="0"/>
         </locations>
@@ -1661,7 +1707,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat">true</damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1673,6 +1719,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>true</plural>
         <cardID>SI1-02</cardID>
@@ -1681,6 +1728,7 @@
         <escapeScore>4</escapeScore>
         <health>2</health>
         <speed>2</speed>
+        <firesBack>true</firesBack>
         <locations>
             <location section="1" zone="2"/>
         </locations>
@@ -1703,7 +1751,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat">true</damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1715,6 +1763,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>SI1-03</cardID>
@@ -1723,6 +1772,7 @@
         <escapeScore>4</escapeScore>
         <health>2</health>
         <speed>2</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="1" zone="1"/>
         </locations>
@@ -1740,7 +1790,7 @@
         <zAction>
             <effect type="endGame" />
         </zAction>
-        <damageAction type="combat">false</damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1752,6 +1802,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>SI1-04</cardID>
@@ -1760,6 +1811,7 @@
         <escapeScore>4</escapeScore>
         <health>2</health>
         <speed>2</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="0" zone="0"/>
         </locations>
@@ -1785,6 +1837,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>true</plural>
         <cardID>SI1-05</cardID>
@@ -1793,6 +1846,7 @@
         <escapeScore>4</escapeScore>
         <health>4</health>
         <speed>3</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="0" zone="1"/>
         </locations>
@@ -1827,6 +1881,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>basic</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>SI1-06</cardID>
@@ -1835,6 +1890,7 @@
         <escapeScore>4</escapeScore>
         <health>4</health>
         <speed>2</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="0" zone="0"/>
             <location section="1" zone="2"/>
@@ -1872,6 +1928,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>I2-01</cardID>
@@ -1880,6 +1937,7 @@
         <escapeScore>3</escapeScore>
         <health>2</health>
         <speed>2</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="0" zone="2"/>
         </locations>
@@ -1898,7 +1956,7 @@
                 <damage>2</damage>
             </effect>
         </zAction>
-        <damageAction type="combat">false</damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
             <effect type="removeDelay">
             </effect>
@@ -1910,6 +1968,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>I2-02</cardID>
@@ -1918,6 +1977,7 @@
         <escapeScore>3</escapeScore>
         <health>2</health>
         <speed>2</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="0" zone="0"/>
         </locations>
@@ -1936,7 +1996,7 @@
                 <damage>2</damage>
             </effect>
         </zAction>
-        <damageAction type="combat">false</damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
             <effect type="removeEffect">
                 <effectType>delay</effectType>
@@ -1949,6 +2009,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>internal</type>
         <plural>true</plural>
         <cardID>I2-03</cardID>
@@ -1957,6 +2018,7 @@
         <escapeScore>3</escapeScore>
         <health>2</health>
         <speed>2</speed>
+        <firesBack>true</firesBack>
         <locations>
             <location section="1" zone="0"/>
         </locations>
@@ -1973,7 +2035,7 @@
                 <damage>4</damage>
             </effect>
         </zAction>
-        <damageAction type="combat">true</damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
             <effect type="none">
             </effect>
@@ -1985,6 +2047,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>internal</type>
         <plural>true</plural>
         <cardID>I2-04</cardID>
@@ -1993,6 +2056,7 @@
         <escapeScore>3</escapeScore>
         <health>2</health>
         <speed>2</speed>
+        <firesBack>true</firesBack>
         <locations>
             <location section="0" zone="2"/>
         </locations>
@@ -2009,7 +2073,7 @@
                 <damage>4</damage>
             </effect>
         </zAction>
-        <damageAction type="combat">true</damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
             <effect type="none">
             </effect>
@@ -2021,6 +2085,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>I2-05</cardID>
@@ -2029,6 +2094,7 @@
         <escapeScore>3</escapeScore>
         <health>3</health>
         <speed>3</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="1" zone="1"/>
         </locations>
@@ -2063,6 +2129,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>I2-06</cardID>
@@ -2071,6 +2138,7 @@
         <escapeScore>3</escapeScore>
         <health>3</health>
         <speed>3</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="0" zone="1"/>
         </locations>
@@ -2104,6 +2172,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>SI2-01</cardID>
@@ -2112,6 +2181,7 @@
         <escapeScore>6</escapeScore>
         <health>2</health>
         <speed>2</speed>
+        <firesBack>true</firesBack>
         <locations>
             <location section="1" zone="2"/>
         </locations>
@@ -2134,7 +2204,7 @@
                 <damage>3</damage>
             </effect>
         </zAction>
-        <damageAction type="combat">true</damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
             <effect type="knockout">
                 <target>lastHit</target>
@@ -2147,6 +2217,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>SI2-02</cardID>
@@ -2155,6 +2226,7 @@
         <escapeScore>6</escapeScore>
         <health>2</health>
         <speed>2</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="1" zone="1"/>
         </locations>
@@ -2174,7 +2246,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat">false</damageAction>
+        <damageAction type="combat"></damageAction>
         <deathAction>
             <effect type="knockout">
                 <target>lastHit</target>
@@ -2187,6 +2259,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>SI2-03</cardID>
@@ -2195,6 +2268,7 @@
         <escapeScore>6</escapeScore>
         <health>7</health>
         <speed>3</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="0" zone="0"/>
             <location section="0" zone="1"/>
@@ -2236,6 +2310,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>SI2-04</cardID>
@@ -2244,6 +2319,7 @@
         <escapeScore>6</escapeScore>
         <health>3</health>
         <speed>2</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="1" zone="0"/>
             <location section="0" zone="0"/>
@@ -2267,7 +2343,7 @@
                 <effectType>knockout</effectType>
             </effect>
         </zAction>
-        <damageAction type="combatMulti">false</damageAction>
+        <damageAction type="combatMulti"></damageAction>
         <deathAction>
             <effect type="removeEffect">
                 <effectType>knockout</effectType>
@@ -2280,6 +2356,7 @@
         </spawnAction>
     </threat>
     <threat>
+        <difficulty>advanced</difficulty>
         <type>internal</type>
         <plural>false</plural>
         <cardID>SI2-05</cardID>
@@ -2288,6 +2365,7 @@
         <escapeScore>6</escapeScore>
         <health>1</health>
         <speed>4</speed>
+        <firesBack>false</firesBack>
         <locations>
             <location section="0" zone="1"/>
         </locations>

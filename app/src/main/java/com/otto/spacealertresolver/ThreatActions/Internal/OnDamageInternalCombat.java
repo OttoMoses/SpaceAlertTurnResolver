@@ -9,7 +9,6 @@ import com.otto.spacealertresolver.Threats.ThreatInternal;
 
 public class OnDamageInternalCombat extends OnDamageInternal
 {
-    public boolean firesBack;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat, Player[] players)
     {
@@ -21,7 +20,7 @@ public class OnDamageInternalCombat extends OnDamageInternal
             Player player = players[db.playerID];
             message.append(player.playerName + " fights the " + threat.name + "!\n");
             message.append(threat.TakeDamage(1, false));
-            if(firesBack)
+            if(threat.firesBack)
             {
                 if(db.heroic)
                 {
@@ -36,10 +35,5 @@ public class OnDamageInternalCombat extends OnDamageInternal
             location.combatDamage = null;
         }
         return message.toString();
-    }
-
-    public OnDamageInternalCombat(boolean firesBack)
-    {
-        this.firesBack = firesBack;
     }
 }

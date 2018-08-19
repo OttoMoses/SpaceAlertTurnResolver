@@ -11,7 +11,6 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class OnDamageInternalCombatMulti extends OnDamageInternal
 {
-    public boolean firesBack;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat, Player[] players)
     {
@@ -29,7 +28,7 @@ public class OnDamageInternalCombatMulti extends OnDamageInternal
                 location.combatThreat = false;
                 location.specialKnockout = false;
                 message.append(threat.TakeDamage(1, false));
-                if(firesBack)
+                if(threat.firesBack)
                 {
                     if(db.heroic)
                     {
@@ -46,10 +45,5 @@ public class OnDamageInternalCombatMulti extends OnDamageInternal
         }
         threat.locations.remove(toBeRemoved);
         return message.toString();
-    }
-
-    public OnDamageInternalCombatMulti(boolean firesBack)
-    {
-        this.firesBack = firesBack;
     }
 }

@@ -11,14 +11,12 @@ import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 public class OnDamageExternalToggle extends OnDamageExternal
 {
-    public boolean toggle = false;
     @Override
     public String Execute(ThreatExternal t, ExternalDamageBundle db)
     {
-        if(toggle)
+        if(t.toggle)
         {
             int DBDamage = 0;
-            int damage;
             for(Pair p : db.damageSources)
             {
                 DBDamage += (int)p.second;

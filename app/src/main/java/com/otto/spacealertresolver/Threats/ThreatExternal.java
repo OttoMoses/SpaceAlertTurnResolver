@@ -20,12 +20,14 @@ public class ThreatExternal extends Threat
     public Boolean rangeThree = false;
     public OnDamageExternal damageAction;
     public int shield;
+    public int shieldBoost;
     public int missileImmune;
     public ThreatActionExternal xAction;
     public ThreatActionExternal yAction;
     public ThreatActionExternal zAction;
     public ThreatActionExternal spawnAction = null;
     public OnDeathExternal deathAction = null;
+    public boolean toggle;
 
     @Override
     public String ExecuteXAction(Section[][] ship, Player[] players)
@@ -101,7 +103,7 @@ public class ThreatExternal extends Threat
         String message = "";
         if(shield)
         {
-            damage = value - this.shield;
+            damage = value - GetShield();
         }
         else
         {
@@ -123,6 +125,19 @@ public class ThreatExternal extends Threat
         }
         dead = true;
         return message;
+    }
+    public int GetShield()
+    {
+        return shield + shieldBoost;
+    }
+    @Override
+    public void ResetThreat()
+    {
+        damage = 0;
+        shieldBoost = 0;
+        speedBoost = 0;
+        toggle = false;
+        position = 0;
     }
 
     public String ExecuteDamageAction()

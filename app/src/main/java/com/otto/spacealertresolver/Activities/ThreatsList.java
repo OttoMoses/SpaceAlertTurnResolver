@@ -40,7 +40,7 @@ public class ThreatsList extends AppCompatActivity
     protected  void onResume()
     {
         super.onResume();
-        ThreatString[] threatStrings = MainActivity.game.selectedThreats;
+        ThreatString[] threatStrings = MainActivity.game.selectedThreatStrings;
         ThreatAdapter threatAdapter = new ThreatAdapter(this, threatStrings);
         threatsListView.setAdapter(threatAdapter);
     }

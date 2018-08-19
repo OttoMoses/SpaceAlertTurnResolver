@@ -11,7 +11,7 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class OnDamageCountRequired extends OnDamageInternal
 {
-    private int count = 0;
+    private int count = 20;
     private int roundnumber = 0;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat, Player[] players)

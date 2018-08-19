@@ -14,6 +14,7 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class ThreatInternal extends Threat
 {
+    public ArrayList<Pair<Integer,Integer>> locationsDefault;
     public ArrayList<Pair<Integer,Integer>> locations;
     public OnDamageInternal damageEffect;
     public String threatType;
@@ -22,6 +23,8 @@ public class ThreatInternal extends Threat
     public ThreatActionInternal zAction;
     public OnDeathInternal deathAction;
     public ThreatActionInternal spawnAction;
+    public boolean firesBackDefault;
+    public boolean firesBack;
     public boolean plural;
 
     @Override
@@ -145,5 +148,16 @@ public class ThreatInternal extends Threat
             message += "\n";
         }
         return message;
+    }
+
+    @Override
+    public void ResetThreat()
+    {
+        locations.clear();
+        locations.addAll(locationsDefault);
+        speedBoost = 0;
+        damage = 0;
+        firesBack = firesBackDefault;
+        position = 0;
     }
 }

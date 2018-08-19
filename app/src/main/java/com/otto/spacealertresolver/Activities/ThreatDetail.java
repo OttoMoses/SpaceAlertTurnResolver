@@ -53,7 +53,7 @@ public class ThreatDetail extends AppCompatActivity
         Button clearButton = findViewById(R.id.clearThreat);
 
         threatTurn = this.getIntent().getIntExtra("threatID", 0);
-        ThreatString ref =  MainActivity.game.selectedThreats[threatTurn];
+        ThreatString ref =  MainActivity.game.selectedThreatStrings[threatTurn];
         threatString = new ThreatString(ref.threatID,ref.trackNum);
         if(threatString.threatID != names.size() + 1)
         {
@@ -108,7 +108,7 @@ public class ThreatDetail extends AppCompatActivity
                     }
                     else
                     {
-                        MainActivity.game.selectedThreats[threatTurn] = threatString;
+                        MainActivity.game.selectedThreatStrings[threatTurn] = threatString;
                         finish();
                     }
                 }
@@ -124,7 +124,7 @@ public class ThreatDetail extends AppCompatActivity
                     }
                     else
                     {
-                        MainActivity.game.selectedThreats[threatTurn] = threatString;
+                        MainActivity.game.selectedThreatStrings[threatTurn] = threatString;
                         finish();
                     }
                 }
@@ -137,8 +137,8 @@ public class ThreatDetail extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                MainActivity.game.selectedThreats[threatTurn].trackNum = 4;
-                MainActivity.game.selectedThreats[threatTurn].threatID = names.size() + 1;
+                MainActivity.game.selectedThreatStrings[threatTurn].trackNum = 4;
+                MainActivity.game.selectedThreatStrings[threatTurn].threatID = names.size() + 1;
                 finish();
             }
         });

@@ -15,7 +15,7 @@ public class ActionExternalToggle extends ActionEffectExternal
         if(threat.damageAction.getClass().toString().equals("class com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalToggle"))
         {
             OnDamageExternalToggle damageEffect = (OnDamageExternalToggle)threat.damageAction;
-            damageEffect.toggle = true;
+            threat.toggle = true;
             return "The " + threat.name + " is no longer immune to damage!";
         }
         else
