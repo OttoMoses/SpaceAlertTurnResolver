@@ -76,7 +76,7 @@ public class ActionExternalDamageShip extends ActionEffectExternal
     }
     private String DealDamage(Section[][] ship, ThreatExternal threat,boolean ignoreShields)
     {
-        String damageMessage = "\n";
+        String damageMessage = "";
         switch (target)
         {
             case 1:

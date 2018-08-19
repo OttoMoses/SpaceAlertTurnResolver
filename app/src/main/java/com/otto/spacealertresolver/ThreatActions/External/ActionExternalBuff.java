@@ -17,7 +17,7 @@ public class ActionExternalBuff extends ActionEffectExternal
     @Override
     public String Execute(Section[][] ship, ThreatExternal threat)
     {
-        String actionText = "\n";
+        String actionText = "";
         switch (amount)
         {
             case "halfHealth":

@@ -599,7 +599,7 @@ public class Game {
             currentPlayer = p.playerID;
             if (p.unconscious)
             {
-                message.append(p.playerName).append(" is knocked out and can't take any actions!");
+                message.append("\n").append(p.playerName).append(" is knocked out and can't take any actions!");
             }
             else
             {
