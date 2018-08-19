@@ -26,8 +26,8 @@ public class SetInternalPosition extends ActionEffectInternal
                     } else {
                         message.append(" appears ");
                     }
-                    message.append("in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section!").append(ApplyCondition(location));
-                    message.append("\n").append(ApplyCondition(location));
+                    message.append("in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section!");
+                    message.append(ApplyCondition(location));
                 }
                 break;
 
