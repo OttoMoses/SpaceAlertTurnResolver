@@ -19,7 +19,7 @@ public class OnDamageInternalCombat extends OnDamageInternal
         {
             InternalDamageBundle db = location.combatDamage;
             Player player = players[db.playerID];
-            message.append(player.playerName + " fights the " + threat.name + "!");
+            message.append(player.playerName + " fights the " + threat.name + "!\n");
             message.append(threat.TakeDamage(1, false));
             if(firesBack)
             {

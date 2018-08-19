@@ -24,7 +24,7 @@ public class OnDamageInternalCombatMulti extends OnDamageInternal
             {
                 InternalDamageBundle db = location.combatDamage;
                 Player player = players[db.playerID];
-                message.append(player.playerName + " destroys the " + threat.name + " in the " + location.sectionName + " " + location.zoneName + " section!");
+                message.append(player.playerName + " destroys the " + threat.name + " in the " + location.sectionName + " " + location.zoneName + " section!\n");
                 toBeRemoved = pair;
                 location.combatThreat = false;
                 location.specialKnockout = false;

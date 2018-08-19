@@ -89,7 +89,7 @@ public class ThreatInternal extends Threat
         String message = "";
         for(Pair p : locations)
         {
-            Section location = ship[(Integer)locations.get(0).first][(((Integer)locations.get(0).first))];
+            Section location = ship[(Integer)locations.get(0).first][(((Integer)locations.get(0).second))];
             switch (threatType)
             {
                 case "combat":
@@ -135,6 +135,10 @@ public class ThreatInternal extends Threat
         {
             message += ExecuteDeathAction(game.ship,game.players);
             game.deadThreats.add(this);
+        }
+        else
+        {
+            message += "\n";
         }
         return message;
     }

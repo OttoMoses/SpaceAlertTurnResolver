@@ -20,7 +20,7 @@ public class SetInternalPosition extends ActionEffectInternal
                 {
                     location = ship[p.first][p.second];
                     location.combatThreat = true;
-                    message.append("The ").append(threat.name);
+                    message.append("\nThe ").append(threat.name);
                     if (threat.plural) {
                         message.append(" appear ");
                     } else {
@@ -45,7 +45,7 @@ public class SetInternalPosition extends ActionEffectInternal
                 {
                     location = ship[p.first][p.second];
                     location.malfB = true;
-                    message.append("A Malfunction of the type ").append(threat.name).append(" occurs in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" B system!").append(ApplyCondition(location));
+                    message.append("\nA Malfunction of the type ").append(threat.name).append(" occurs in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" B system!").append(ApplyCondition(location));
                     message.append("\n").append(ApplyCondition(location));
                 }
                 break;

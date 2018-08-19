@@ -1,5 +1,6 @@
 package com.otto.spacealertresolver;
 
+import com.otto.spacealertresolver.Actions.BlankAction;
 import com.otto.spacealertresolver.Actions.PlayerAction;
 import com.otto.spacealertresolver.Activities.MainActivity;
 
@@ -47,6 +48,10 @@ public class Player
                     if(roundCount == actions.length-1)
                     {
                         actions[actions.length-1] = MainActivity.game.actions[0];
+                    }
+                    else if(roundCount == round)
+                    {
+                        actions[roundCount] = MainActivity.game.actions[0];
                     }
                     else
                     {

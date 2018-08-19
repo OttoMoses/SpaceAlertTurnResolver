@@ -85,6 +85,7 @@ import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalTurboLif
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageCountRequired;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternal;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalCombat;
+import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalCombatMulti;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfMultiBonus;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfSingle;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternal;
@@ -571,7 +572,7 @@ public class Game {
 
     private String SpawnThreats(int round) {
         //spawn Threats
-        String message = "\n";
+        String message = "";
         if (round <= 8) {
             if (builtThreats[currentRound - 1] != null) {
                 Threat t = builtThreats[round - 1];
@@ -579,6 +580,10 @@ public class Game {
                     ((ThreatExternal) t).shield += globalShieldBuff;
                 }
                 activeThreats.add(t);
+                if(t.getClass().equals(ThreatExternal.class))
+                {
+                    message += "\n";
+                }
                 message += t.ExecuteSpawnAction(ship);
             }
         }
@@ -1648,7 +1653,7 @@ public class Game {
             }
             case "combatMulti":
             {
-                effect = new OnDamageInternalCombat(Boolean.parseBoolean(damType.getTextContent()));
+                effect = new OnDamageInternalCombatMulti(Boolean.parseBoolean(damType.getTextContent()));
                 break;
             }
             case "countRequired" :

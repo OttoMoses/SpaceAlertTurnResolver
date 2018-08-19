@@ -31,7 +31,11 @@ public class ActionInternalDelayPlayers extends ActionEffectInternal
                 for(Pair pair : threat.locations)
                 {
                     Section location = ship[(Integer)pair.first][(Integer)pair.second];
-                    message.append("The ").append(threat.name).append(" attacks all players in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section!").append(" delaying their actions!");
+                    if(pair != threat.locations.get(0))
+                    {
+                        message.append("\n");
+                    }
+                    message.append("The ").append(threat.name).append(" attacks all players in the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section ").append("delaying their actions!");
                 }
                 for(Player p : game.players)
                 {
