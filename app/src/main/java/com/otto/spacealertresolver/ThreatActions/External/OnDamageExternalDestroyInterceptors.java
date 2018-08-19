@@ -39,11 +39,11 @@ public class OnDamageExternalDestroyInterceptors extends OnDamageExternal
             if(damage > 0)
             {
                 t.damage += damage;
-                message.append("\nThe ").append(t.name).append(" takes ").append(damage).append(" damage!\n");
+                message.append("\nThe ").append(t.name).append(" takes ").append(damage).append(" damage!");
             }
             else
             {
-                message.append("\nThe ").append(t.name).append(" blocks all damage!\n");
+                message.append("\nThe ").append(t.name).append(" blocks all damage!");
             }
         }
         return message.toString();

@@ -12,6 +12,6 @@ public class ActionExternalDie extends ActionEffectExternal
     {
         game.activeThreats.remove(threat);
         game.deadThreats.add(threat);
-        return "The " + threat.name + " is destroyed!\n";
+        return "The " + threat.name + " is destroyed!";
     }
 }

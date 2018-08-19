@@ -10,6 +10,6 @@ public class ActionInternalGlobalDamageModifier extends ActionEffectInternal
     public String Execute(Section[][] ship, ThreatInternal threat)
     {
         MainActivity.game.fissureMod++;
-        return "The Fissure widens!\n";
+        return "The Fissure widens!";
     }
 }

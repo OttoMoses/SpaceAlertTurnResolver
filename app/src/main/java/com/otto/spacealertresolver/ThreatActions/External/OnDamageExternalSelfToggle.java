@@ -27,7 +27,7 @@ public class OnDamageExternalSelfToggle extends OnDamageExternal
         else
         {
             toggle = true;
-            return "The " + t.name + " is no longer immune to damage!\n";
+            return "The " + t.name + " is no longer immune to damage!";
         }
     }
 

@@ -25,7 +25,7 @@ public class ActionInternalMoveBlue extends ActionEffectInternal
         threat.locations.set(0,newLocation);
         location = ship[threat.locations.get(0).first][threat.locations.get(0).second];
         location.combatThreat = true;
-        message += "The " + threat.name + " moves to the " + location.sectionName + " " + location.zoneName + " section!" + "\n";
+        message += "The " + threat.name + " moves to the " + location.sectionName + " " + location.zoneName + " section!";
         return message;
     }
 }

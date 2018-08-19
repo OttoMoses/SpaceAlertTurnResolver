@@ -17,7 +17,7 @@ public class ActionExternalDelayPlayers extends ActionEffectExternal
         {
             case "all" :
             {
-                message.append("The ").append(threat.name).append(" attacks all players on the ship delaying their actions!\n");
+                message.append("The ").append(threat.name).append(" attacks all players on the ship delaying their actions!");
                 for (Player p : game.players)
                 {
                 message.append(p.Delay(game.currentRound));
@@ -26,7 +26,7 @@ public class ActionExternalDelayPlayers extends ActionEffectExternal
             case "self":
             {
 
-                message.append("The ").append(threat.name).append(" attacks all players in the ").append(game.colors[threat.track]).append(" zone delaying their actions!\n");
+                message.append("The ").append(threat.name).append(" attacks all players in the ").append(game.colors[threat.track]).append(" zone delaying their actions!");
                 for (Player p : game.players)
                 {
                     if(p.zonePosition == threat.track)

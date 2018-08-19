@@ -79,7 +79,7 @@ public class OnDamageExternalBypassSource extends OnDamageExternal
             if(damage > 0)
             {
                 t.damage += damage;
-                message += "\nThe " + t.name + " takes " + damage + " damage!\n";
+                message += "\nThe " + t.name + " takes " + damage + " damage!";
             }
             else
             {

@@ -14,7 +14,7 @@ public class ActionExternalMoveOthers extends ActionEffectExternal
         String message = "";
         String v = "" + value;
         game.MoveThreats(v);
-        message += "The " + threat.name + "moves all other external threats " + value;
+        message += "The " + threat.name + "moves all other external threats " + value + "!";
         if(value > 1)
         {
             message += " spaces ";

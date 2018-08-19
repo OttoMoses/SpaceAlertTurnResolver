@@ -26,7 +26,7 @@ public class ActionInternalTurboLift extends ActionEffectInternal {
         threat.locations.set(0,new Pair<Integer, Integer>(currentZone,currentSection));
         location = ship[threat.locations.get(0).first][threat.locations.get(0).second];
         location.combatThreat = true;
-        message += "The " + threat.name + " moves to the " + location.sectionName + " " + location.zoneName + " section!" + "\n";
+        message += "The " + threat.name + " moves to the " + location.sectionName + " " + location.zoneName + " section!";
         return message;
     }
 }

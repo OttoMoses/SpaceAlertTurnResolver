@@ -17,22 +17,22 @@ public class ActionExternalKnockOut extends ActionEffectExternal
         {
             case "all" :
             {
-                message.append("The ").append(threat.name).append(" attacks all players on the ship knocking them out!\n");
+                message.append("The ").append(threat.name).append(" attacks all players on the ship knocking them out!");
                 for (Player p : game.players)
                 {
                     if(p.unconscious)
                     {
-                        message.append(p.playerName).append(" can't be knocked out because they are already knocked out!\n");
+                        message.append(p.playerName).append(" can't be knocked out because they are already knocked out!");
                     }
                     else
                     {
                         if(p.flyingInterceptors)
                         {
-                            message.append(p.playerName).append(" is safely off the ship flying interceptors!\n");
+                            message.append(p.playerName).append(" is safely off the ship flying interceptors!");
                         }
                         else
                         {
-                            message.append(p.playerName).append(" is knocked out!\n");
+                            message.append(p.playerName).append(" is knocked out!");
                             p.unconscious = true;
                         }
                     }
@@ -42,24 +42,24 @@ public class ActionExternalKnockOut extends ActionEffectExternal
             case "self":
             {
 
-                message.append("The ").append(threat.name).append(" attacks all players in the ").append(game.colors[threat.track]).append(" zone knocking them out!\n");
+                message.append("The ").append(threat.name).append(" attacks all players in the ").append(game.colors[threat.track]).append(" zone knocking them out!");
                 for (Player p : game.players)
                 {
                     if(p.zonePosition == threat.track)
                     {
                         if(p.unconscious)
                         {
-                            message.append(p.playerName).append(" can't be delayed because they are already knocked out!\n");
+                            message.append(p.playerName).append(" can't be knocked out because they are already knocked out!");
                         }
                         else
                         {
                             if(p.flyingInterceptors)
                             {
-                                message.append(p.playerName).append(" is safely off the ship flying interceptors!\n");
+                                message.append(p.playerName).append(" is safely off the ship flying interceptors!");
                             }
                             else
                             {
-                                message.append(p.playerName).append(" is knocked out!\n");
+                                message.append(p.playerName).append(" is knocked out!");
                                 p.unconscious = true;
                             }
                         }

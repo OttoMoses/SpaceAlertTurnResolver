@@ -16,7 +16,7 @@ public class ActionExternalToggle extends ActionEffectExternal
         {
             OnDamageExternalToggle damageEffect = (OnDamageExternalToggle)threat.damageAction;
             damageEffect.toggle = true;
-            return "The " + threat.name + " is no longer immune to damage!\n";
+            return "The " + threat.name + " is no longer immune to damage!";
         }
         else
         {

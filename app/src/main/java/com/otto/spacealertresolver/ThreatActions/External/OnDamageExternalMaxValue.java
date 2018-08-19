@@ -22,7 +22,7 @@ public class OnDamageExternalMaxValue extends OnDamageExternal
         {
             if(DBDamage > maxValue)
             {
-                message += "The " + t.name + " reduces damage by " + (DBDamage - maxValue) + "!\n";
+                message += "The " + t.name + " reduces damage by " + (DBDamage - maxValue) + "!";
                 DBDamage = maxValue;
             }
             message += t.TakeDamage(DBDamage,true);

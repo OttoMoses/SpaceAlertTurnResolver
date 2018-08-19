@@ -16,19 +16,19 @@ public class ActionInternalLeakPower extends ActionEffectInternal
         {
             case "centralReactor" :
             {
-                message += LeakPower(threat,ship[1][1]) + "\n";
+                message += LeakPower(threat,ship[1][1]);
                 break;
             }
             case "allReactors" :
             {
                 message+= LeakPower(threat,ship[0][1]) + "\n";
                 message+= LeakPower(threat,ship[1][1]) + "\n";
-                message+= LeakPower(threat,ship[2][1]) + "\n";
+                message+= LeakPower(threat,ship[2][1]);
                 break;
             }
             case "centralShield" :
             {
-                message += LeakPower(threat,ship[1][0]) + "\n";
+                message += LeakPower(threat,ship[1][0]);
                 break;
             }
         }
@@ -53,7 +53,7 @@ public class ActionInternalLeakPower extends ActionEffectInternal
                 {
                     int damage = power - transferValue;
                     location.powerCubes += transferValue;
-                    message += "The " + threat.name + " transfer " + transferValue + " power to the" + location.BSystem.name + " in the " + location.sectionName + " " + location.zoneName + " section!\n";
+                    message += "The " + threat.name + " transfer " + transferValue + " power to the" + location.BSystem.name + " in the " + location.sectionName + " " + location.zoneName + " section!";
                     message += "The " + threat.name + MainActivity.game.ShipDamage(location.zonePos,damage,false,true,true);
                 }
                 break;

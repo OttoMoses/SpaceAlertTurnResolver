@@ -420,6 +420,7 @@ public class Game {
                 {
                     message.append(p.Delay(currentRound));
                 }
+                message.append("\n");
             }
             else
             {
@@ -474,9 +475,7 @@ public class Game {
                 }
                 for (int space : track.EndSpace) {
                     if (space < newPosition || space == newPosition) {
-
                         message.append(t.ExecuteZAction(ship, players));
-                        message.append("\n");
                         if(!gameEnd)
                         {
                             if (t.getClass().equals(ThreatExternal.class))
@@ -510,9 +509,10 @@ public class Game {
                             }
                         }
                         escapedThreats.add(t);
-                    } else {
+                    }
+                    else {
                         if (t.getClass().equals(ThreatExternal.class)) {
-                            message.append("The ").append(t.name).append(" is now  ").append(threatTracks[t.track].EndSpace[0] - t.position).append(" space away from the ship!\n");
+                            message.append("The ").append(t.name).append(" is now ").append(threatTracks[t.track].EndSpace[0] - t.position).append(" space away from the ship!\n");
                         } else {
                             message.append("The ").append(t.name);
                             if (((ThreatInternal) t).plural) {
@@ -937,7 +937,7 @@ public class Game {
             }
         }
         if (message.toString().equals("")) {
-            return "No external threats have taken damage this turn.\n";
+            return "No external threats have taken damage this turn.";
         } else {
             return message.toString();
         }
@@ -955,11 +955,11 @@ public class Game {
     }
 
     private String DamageThreats(ArrayList<Threat> externalTargets) {
-        StringBuilder message = new StringBuilder("\n");
+        StringBuilder message = new StringBuilder();
         if (!externalTargets.isEmpty()) {
-            message.append(ExternalThreatDamage(externalTargets));
+            message.append("\n").append(ExternalThreatDamage(externalTargets)).append("\n");
         } else {
-            message.append("There are no external threats this turn.\n");
+            message.append("\nThere are no external threats this turn.\n");
         }
         //special check for nemesis threat
         for (Threat t : activeThreats) {
@@ -967,10 +967,10 @@ public class Game {
                 if (((ThreatExternal) t).damageAction.getClass() == OnDamageExternalCount.class) {
                     if (((OnDamageExternalCount) ((ThreatExternal) t).damageAction).damaged) {
                         int value = ((OnDamageExternalCount) ((ThreatExternal) t).damageAction).value;
-                        message.append("Because it took damage this turn the ").append(t.name).append(" attacks all zones for ").append(value).append(" damage!\n");
+                        message.append("\nBecause it took damage this turn the ").append(t.name).append(" attacks all zones for ").append(value).append(" damage!\n");
                         ((OnDamageExternalCount) ((ThreatExternal) t).damageAction).damaged = false;
-                        message.append("The ").append(t.name).append(MainActivity.game.ShipDamage(0, value, false, false, false));
-                        message.append("The ").append(t.name).append(MainActivity.game.ShipDamage(1, value, false, false, false));
+                        message.append("The ").append(t.name).append(MainActivity.game.ShipDamage(0, value, false, false, false)).append("\n\n");
+                        message.append("The ").append(t.name).append(MainActivity.game.ShipDamage(1, value, false, false, false)).append("\n\n");
                         message.append("The ").append(t.name).append(MainActivity.game.ShipDamage(2, value, false, false, false));
                     }
                 }
@@ -1008,7 +1008,7 @@ public class Game {
         } else {
             damageMessage += " attacks";
         }
-        damageMessage += " the " + colors[zone] + " zone " + " for " + realDamage + " damage!\n";
+        damageMessage += " the " + colors[zone] + " zone for " + realDamage + " damage!";
         Section shield = ship[zone][1];
         switch (zone) {
             case 0:
@@ -1023,19 +1023,19 @@ public class Game {
         }
         if (shield.powerCubes != 0 && !internal) {
             if (shield.powerCubes >= realDamage) {
-                damageMessage += "The shield in the " + shield.zoneName + " zone blocks all the damage!\n";
+                damageMessage += "The shield in the " + shield.zoneName + " zone blocks all the damage!";
                 shield.powerCubes -= realDamage;
                 realDamage = 0;
                 if (shield.powerCubes != 0) {
-                    damageMessage += "There is " + shield.powerCubes + " power left in the " + shield.zoneName + " zone shield.\n";
+                    damageMessage += "\nThere is " + shield.powerCubes + " power left in the " + shield.zoneName + " zone shield.";
                 } else {
-                    damageMessage += "there is no power remaining in the " + shield.zoneName + " zone shield\n";
+                    damageMessage += "\nThere is no power remaining in the " + shield.zoneName + " zone shield!";
                 }
             } else {
                 realDamage -= shield.powerCubes;
-                damageMessage += "The " + shield.zoneName + " zone shield blocked " + shield.powerCubes + " damage!\n";
+                damageMessage += "The " + shield.zoneName + " zone shield blocked " + shield.powerCubes + " damage!";
                 shield.powerCubes = 0;
-                damageMessage += "There is no power remaining in the " + shield.zoneName + " zone shield!\n";
+                damageMessage += "\nThere is no power remaining in the " + shield.zoneName + " zone shield!";
             }
 
         }
@@ -1046,16 +1046,16 @@ public class Game {
             realDamage = realDamage * 2;
             damageMessage += "\n Damage is doubled by the fissure!";
         }
-        damageMessage += "\n";
         for (int i = 0; i < realDamage; i++) {
             if (tokens != null)
             {
+                damageMessage += "\n";
                 if (tokens.size() != 0) {
                     DamageToken d = tokens.get(0);
-                    damageMessage += d.doDamage(zone, ship) + "\n";
+                    damageMessage += d.doDamage(zone, ship);
                     tokens.remove(d);
                 } else {
-                    damageMessage += "The Ship is destroyed!";
+                    damageMessage += "\nThe Ship is destroyed!";
                     break;
                 }
             }
@@ -1421,7 +1421,7 @@ public class Game {
                     effects.add(new ActionInternalMoveRed());
                     break;
                 }
-                case "turbolift": {
+                case "changeDeck": {
                     effects.add(new ActionInternalTurboLift());
                 }
                 case "damageShip": {

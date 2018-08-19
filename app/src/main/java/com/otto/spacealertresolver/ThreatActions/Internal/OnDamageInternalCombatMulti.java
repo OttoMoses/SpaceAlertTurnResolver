@@ -33,12 +33,12 @@ public class OnDamageInternalCombatMulti extends OnDamageInternal
                 {
                     if(db.heroic)
                     {
-                        message.append("\n").append(player.playerName).append("'s heroic leadership prevented the ").append(threat.name).append(" from damaging their bots!\n");
+                        message.append("\n").append(player.playerName).append("'s heroic leadership prevented the ").append(threat.name).append(" from damaging their bots!");
                     }
                     else
                     {
                         player.damagedBots = true;
-                        message.append("\n").append(player.playerName).append("'s bots were damaged in combat against the ").append(threat.name).append("!\n");
+                        message.append("\n").append(player.playerName).append("'s bots were damaged in combat against the ").append(threat.name).append("!");
                     }
                 }
                 location.combatDamage = null;

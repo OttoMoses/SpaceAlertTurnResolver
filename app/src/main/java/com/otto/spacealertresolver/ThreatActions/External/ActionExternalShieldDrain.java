@@ -21,7 +21,7 @@ public class ActionExternalShieldDrain extends ActionEffectExternal
             ship[0][1].powerCubes -= value;
             ship[1][1].powerCubes -= value;
             ship[2][1].powerCubes -= value;
-            actionText += "The " + threat.name + " Drains " + value + " power from the all shields!\n";
+            actionText += "The " + threat.name + " Drains " + value + " power from the all shields!";
 
         }
         else
@@ -29,7 +29,7 @@ public class ActionExternalShieldDrain extends ActionEffectExternal
             ship[0][1].powerCubes = 0;
             ship[1][1].powerCubes = 0;
             ship[2][1].powerCubes = 0;
-            actionText += "The " + threat.name + " Drains all power from the all shields!\n";
+            actionText += "The " + threat.name + " Drains all power from the all shields!";
         }
         return actionText;
     }

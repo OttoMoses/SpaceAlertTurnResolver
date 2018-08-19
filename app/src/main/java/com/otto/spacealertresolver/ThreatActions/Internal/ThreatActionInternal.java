@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class ThreatActionInternal
 {
-    private ArrayList<ActionEffectInternal> effects;
+    public ArrayList<ActionEffectInternal> effects;
 
     public String Execute(Section[][] ship, ThreatInternal threatInternal)
     {

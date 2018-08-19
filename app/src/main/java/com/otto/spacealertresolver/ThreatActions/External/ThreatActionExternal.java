@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class ThreatActionExternal
 {
-    private ArrayList<ActionEffectExternal> effects;
+    public ArrayList<ActionEffectExternal> effects;
 
     public  String Execute(Section[][] ship, ThreatExternal threat)
     { StringBuilder actionMessage = new StringBuilder();

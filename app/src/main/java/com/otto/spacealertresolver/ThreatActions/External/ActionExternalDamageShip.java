@@ -68,7 +68,7 @@ public class ActionExternalDamageShip extends ActionEffectExternal
                     }
                     else
                     {
-                        actionText = "Because the " + threat.name + " has at least " + value + " damage it skips its attack!\n";
+                        actionText = "Because the " + threat.name + " has at least " + value + " damage it skips its attack!";
                     }
                 }
         }
@@ -81,8 +81,8 @@ public class ActionExternalDamageShip extends ActionEffectExternal
         {
             case 1:
                 //damage all zones for given damage value
-                damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(0,damageValue,bypassBonus,ignoreShields,false) + "\n";
-                damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(1,damageValue,bypassBonus,ignoreShields,false) + "\n";
+                damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(0,damageValue,bypassBonus,ignoreShields,false) + "\n\n";
+                damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(1,damageValue,bypassBonus,ignoreShields,false) + "\n\n";
                 damageMessage += "The " + threat.name +MainActivity.game.ShipDamage(2,damageValue,bypassBonus,ignoreShields,false);
                 break;
             case 2:

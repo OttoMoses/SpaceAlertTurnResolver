@@ -27,34 +27,40 @@ public class ThreatInternal extends Threat
     @Override
     public String ExecuteXAction(Section[][] ship, Player[] players)
     {
-        String message = "";
-        if(xAction != null)
+        if(xAction.effects.size() != 0)
         {
-            return xAction.Execute(ship,this);
+            return "\n" + xAction.Execute(ship,this) + "\n\n";
         }
-        return message;
+        else
+        {
+            return "";
+        }
     }
 
     @Override
     public String ExecuteYAction(Section[][] ship, Player[] players)
     {
-        String message = "";
-        if(yAction != null)
+        if(yAction.effects.size() != 0)
         {
-            return yAction.Execute(ship,this);
+            return "\n" + yAction.Execute(ship,this) + "\n\n";
         }
-        return message;
+        else
+        {
+            return "";
+        }
     }
 
     @Override
     public String ExecuteZAction(Section[][] ship, Player[] players)
     {
-        String message = "";
-        if(zAction != null)
+        if(zAction.effects.size() != 0)
         {
-            return zAction.Execute(ship,this);
+            return "\n" + zAction.Execute(ship,this) + "\n\n";
         }
-        return message;
+        else
+        {
+            return "";
+        }
     }
 
     @Override

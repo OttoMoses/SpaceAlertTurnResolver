@@ -9,6 +9,6 @@ public class ActionInternalGrow extends ActionEffectInternal {
     {
         OnDamageInternalCombat effect = (OnDamageInternalCombat)threat.damageEffect;
         effect.firesBack = true;
-        return "The " + threat.name + " grows up!\n";
+        return "The " + threat.name + " grows up!";
     }
 }

@@ -35,34 +35,34 @@ public class ActionExternalBuff extends ActionEffectExternal
         {
             case shieldBuff:
                 threat.shield += value;
-                actionText += "The " + threat.name + " raises its shield by " + value + "!\n";
+                actionText += "The " + threat.name + " raises its shield by " + value + "!";
                 break;
             case speed:
                 threat.speed += value;
-                actionText += "The " + threat.name + " raises its speed by " + value + "!\n";
+                actionText += "The " + threat.name + " raises its speed by " + value + "!";
                 break;
             case damage:
                 int damage = threat.damage;
                 if(threat.damage == 0)
                 {
-                    actionText += "The " + threat.name + " tries to heal but hasn't taken any damage!\n";
+                    actionText += "The " + threat.name + " tries to heal but hasn't taken any damage!";
                 }
                 else if(value >= damage)
                 {
                     damage = 0;
                     threat.damage = damage;
-                    actionText += "The " + threat.name + " Heals all of its damage!\n";
+                    actionText += "The " + threat.name + " Heals all of its damage!";
                 }
                 else
                 {
                     damage -= value;
                     threat.damage = damage;
-                    actionText += "The " + threat.name + " Heals " + value + " damage!\n";
+                    actionText += "The " + threat.name + " Heals " + value + " damage!";
                 }
                 break;
             case shieldSet:
                 threat.shield = value;
-                actionText += "The " + threat.name + " sets its shield to " + value + "!\n";
+                actionText += "The " + threat.name + " sets its shield to " + value + "!";
         }
         return actionText;
     }
