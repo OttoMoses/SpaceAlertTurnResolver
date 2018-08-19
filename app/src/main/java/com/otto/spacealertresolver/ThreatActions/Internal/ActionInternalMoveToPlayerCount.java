@@ -57,8 +57,9 @@ public class ActionInternalMoveToPlayerCount extends ActionEffectInternal
             @Override
             public int compare(Pair<Integer, Pair<Integer, Integer>> x, Pair<Integer, Pair<Integer, Integer>> y)
             {
-                return x.first - y.first;
+                return y.first.compareTo(x.first);
             }
+
         });
         if(options.get(0).first != options.get(1).first)
         {

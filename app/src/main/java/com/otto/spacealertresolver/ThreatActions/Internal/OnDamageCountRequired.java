@@ -23,15 +23,16 @@ public class OnDamageCountRequired extends OnDamageInternal
         {
             InternalDamageBundle db = location.malfCDamage;
             message += players[db.playerID].playerName + " attempts to defuse the " + threat.name + "!";
+            location.malfCDamage = null;
             if(roundnumber != game.currentRound)
             {
                 count = 0;
                 roundnumber = game.currentRound;
             }
             count++;
-            message += "\nThe " +threat.name + " has been defused!\n";
             if(count == 3)
             {
+                message += "\nThe " +threat.name + " has been defused!\n";
                 message += threat.TakeDamage(1,false);
             }
         }
