@@ -77,11 +77,15 @@ public class ThreatInternal extends Threat
     public String ExecuteDamageAction(Section[][] ship, Player[] players)
     {
         String message = "";
-        if(damageEffect != null)
+        message += damageEffect.Execute(ship,this,players);
+        if(message == "")
         {
-            return damageEffect.Execute(ship,this,players);
+            return message;
         }
-        return message;
+        else
+        {
+            return "\n" + message + "\n";
+        }
     }
 
     public String ExecuteDeathAction(Section[][] ship, Player[] players)
@@ -111,7 +115,7 @@ public class ThreatInternal extends Threat
         }
         if(deathAction != null)
         {
-            return deathAction.Execute(this);
+            return "\n" +  deathAction.Execute(this) + "\n";
         }
         return message;
     }

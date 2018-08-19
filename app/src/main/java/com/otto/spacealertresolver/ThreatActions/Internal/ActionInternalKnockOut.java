@@ -27,7 +27,7 @@ public class ActionInternalKnockOut extends ActionEffectInternal {
                         } else {
                             message.append(" attacks ");
                         }
-                        message.append(p.playerName).append(" knocking them out!\n");
+                        message.append(p.playerName).append(" knocking them out!");
                         p.unconscious = true;
                     }
                 }
@@ -44,7 +44,7 @@ public class ActionInternalKnockOut extends ActionEffectInternal {
                             } else {
                                 message.append(" attacks ");
                             }
-                            message.append(p.playerName).append(" knocking them out!\n");
+                            message.append(p.playerName).append(" knocking them out!");
                             p.unconscious = true;
                         }
                     }
@@ -63,7 +63,7 @@ public class ActionInternalKnockOut extends ActionEffectInternal {
                         } else {
                             message.append(" attacks ");
                         }
-                        message.append(p.playerName).append(" knocking them out!\n");
+                        message.append(p.playerName).append(" knocking them out!");
                         p.unconscious = true;
                     }
                 }
@@ -80,7 +80,7 @@ public class ActionInternalKnockOut extends ActionEffectInternal {
                         } else {
                             message.append(" attacks ");
                         }
-                        message.append(p.playerName).append(" knocking them out!\n");
+                        message.append(p.playerName).append(" knocking them out!");
                         p.unconscious = true;
                     }
                 }
@@ -98,7 +98,7 @@ public class ActionInternalKnockOut extends ActionEffectInternal {
                         } else {
                             message.append(" attacks ");
                         }
-                        message.append(p.playerName).append(" knocking them out!\n");
+                        message.append(p.playerName).append(" knocking them out!");
                         p.unconscious = true;
                     }
                 }

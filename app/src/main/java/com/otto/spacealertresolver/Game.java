@@ -950,7 +950,7 @@ public class Game {
 
     private String InternalThreatDamage(ArrayList<Threat> targets)
     {
-        StringBuilder message = new StringBuilder();
+        StringBuilder message = new StringBuilder("");
         for (Threat threat : targets)
         {
             ThreatInternal t = (ThreatInternal) threat;
@@ -988,7 +988,10 @@ public class Game {
         StringBuilder message = new StringBuilder();
         for (Threat t : targets) {
             if (t.damage >= t.health) {
-                message.append("\n");
+                if(t.getClass() == ThreatExternal.class)
+                {
+                    message.append("\n");
+                }
                 t.ExecuteDeathAction(ship, players);
                 deadThreats.add(t);
                 if (t.getClass().equals(ThreatInternal.class) && ((ThreatInternal) t).plural) {

@@ -25,7 +25,7 @@ public class BattlebotStation extends ActionStation {
                 if (location.hasBots) {
                     player.leadingBots = true;
                     location.hasBots = false;
-                    message += "starts leading a squad of battlbots";
+                    message += "starts leading a squad of battlebots";
                 }
                 else
                 {

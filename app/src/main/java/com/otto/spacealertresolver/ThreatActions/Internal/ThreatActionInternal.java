@@ -14,6 +14,10 @@ public class ThreatActionInternal
         StringBuilder actionMessage = new StringBuilder();
         for(ActionEffectInternal effect : effects)
         {
+            if(effect != effects.get(0))
+            {
+                actionMessage.append("\n");
+            }
             actionMessage.append(effect.Execute(ship, threatInternal));
         }
         return actionMessage.toString();

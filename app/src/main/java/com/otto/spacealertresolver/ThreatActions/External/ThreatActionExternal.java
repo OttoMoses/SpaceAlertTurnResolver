@@ -16,9 +16,13 @@ public class ThreatActionExternal
 
     public  String Execute(Section[][] ship, ThreatExternal threat)
     { StringBuilder actionMessage = new StringBuilder();
-        for (ActionEffectExternal tsa :effects)
+        for (ActionEffectExternal effect :effects)
         {
-            actionMessage.append(tsa.Execute(ship, threat));
+            if(effect != effects.get(0))
+            {
+                actionMessage.append("\n");
+            }
+            actionMessage.append(effect.Execute(ship, threat));
         }
         return actionMessage.toString();
     }

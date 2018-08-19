@@ -24,7 +24,7 @@ public class OnDeathInternalKnockOut extends OnDeathInternal
                     if((p.zonePosition == 0 && p.sectionPosition == 0) ||(p.zonePosition == 2 && p.sectionPosition == 0))
                     {
                         p.unconscious = true;
-                        message += "\n" + p.playerName + " Is knocked out!";
+                        message += p.playerName + " Is knocked out!";
                     }
                 }
             }
@@ -32,7 +32,7 @@ public class OnDeathInternalKnockOut extends OnDeathInternal
             {
                 message += "The " + threat.name + " attacks the player who killed it!\n";
                 game.players[game.currentPlayer].unconscious = true;
-                message += "\n" + game.players[game.currentPlayer].playerName + " Is knocked out!";
+                message += game.players[game.currentPlayer].playerName + " Is knocked out!";
             }
         }
         return message;

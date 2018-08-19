@@ -2136,7 +2136,8 @@
         </zAction>
         <damageAction type="combat">true</damageAction>
         <deathAction>
-            <effect type="none">
+            <effect type="knockout">
+                <target>lastHit</target>
             </effect>
         </deathAction>
         <spawnAction>
