@@ -20,21 +20,7 @@ public class ActionExternalDelayPlayers extends ActionEffectExternal
                 message.append("The ").append(threat.name).append(" attacks all players on the ship delaying their actions!\n");
                 for (Player p : game.players)
                 {
-                    if(p.unconscious)
-                    {
-                        message.append(p.playerName).append(" can't be delayed because they are already knocked out!");
-                    }
-                    else
-                    {
-                        if(p.flyingInterceptors)
-                        {
-                            message.append(p.playerName).append(" is safely off the ship flying interceptors!");
-                        }
-                        else
-                        {
-                            message.append(p.Delay(game.currentRound));
-                        }
-                    }
+                message.append(p.Delay(game.currentRound));
                 }
             }
             case "self":
@@ -45,21 +31,7 @@ public class ActionExternalDelayPlayers extends ActionEffectExternal
                 {
                     if(p.zonePosition == threat.track)
                     {
-                        if(p.unconscious)
-                        {
-                            message.append(p.playerName).append(" can't be delayed because they are already knocked out!");
-                        }
-                        else
-                        {
-                            if(p.flyingInterceptors)
-                            {
-                                message.append(p.playerName).append(" is safely off the ship flying interceptors!");
-                            }
-                            else
-                            {
-                                message.append(p.Delay(game.currentRound));
-                            }
-                        }
+                        message.append(p.Delay(game.currentRound));
                     }
                 }
             }

@@ -57,6 +57,7 @@ import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternalRemoveG
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionEffectInternal;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalConditionDamageMove;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDamageShip;
+import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDelayPlayers;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDestroyRocket;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDisableBots;
 import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDrainFuel;
@@ -412,16 +413,16 @@ public class Game {
         StringBuilder message = new StringBuilder();
         if (currentRound == 3 || currentRound == 6 || currentRound == 10) {
             message.append("\n----Computer Maintenance Check----\n");
-            if (!computerMaintained) {
+            if (!computerMaintained)
+            {
                 message.append("\nThe computer shuts down delaying all players on the ship this round!\n");
-                for (Player p : players) {
-                    if (!p.flyingInterceptors) {
-                        message.append(p.Delay(currentRound));
-                    } else {
-                        message.append("\n").append(p.playerName).append(" is safely off the ship and unaffected by the blackout \n");
-                    }
+                for (Player p : players)
+                {
+                    message.append(p.Delay(currentRound));
                 }
-            } else {
+            }
+            else
+            {
                 message.append("\nThe computer was correctly maintained and stays on this round \n");
             }
             computerMaintained = false;
@@ -1517,6 +1518,12 @@ public class Game {
                 {
                     effects.add(new ActionInternalMoveToPlayerCount());
                     break;
+                }
+                case "delay" :
+                {
+                    XPathExpression expression = xPath.compile("./target");
+                    String target = (String) expression.evaluate(item, XPathConstants.STRING);
+                    effects.add(new ActionInternalDelayPlayers(target));
                 }
 
             }

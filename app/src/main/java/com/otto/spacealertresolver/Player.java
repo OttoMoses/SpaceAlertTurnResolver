@@ -36,19 +36,30 @@ public class Player
         String message = "";
         if(!delayed)
         {
-            for(int roundCount = actions.length - 1; roundCount >= round; roundCount--)
+            if(flyingInterceptors)
             {
-                if(roundCount == actions.length-1)
-                {
-                    actions[actions.length-1] = MainActivity.game.actions[0];
-                }
-                else
-                {
-                    actions[roundCount] = actions[roundCount - 1];
-                }
+                message += playerName + " is safely off the ship flying interceptors!";
             }
-            delayed = true;
-            message +="\n" +  playerName + " delays their actions starting at T + " + round;
+            else
+            {
+                for(int roundCount = actions.length - 1; roundCount >= round; roundCount--)
+                {
+                    if(roundCount == actions.length-1)
+                    {
+                        actions[actions.length-1] = MainActivity.game.actions[0];
+                    }
+                    else
+                    {
+                        actions[roundCount] = actions[roundCount - 1];
+                    }
+                }
+                delayed = true;
+                message +="\n" +  playerName + " delays their actions starting at T + " + round;
+            }
+        }
+        else
+        {
+            message += playerName + " can't be delayed because they are already knocked out!";
         }
         return message;
     }
