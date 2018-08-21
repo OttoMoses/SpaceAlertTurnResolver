@@ -90,7 +90,7 @@ public class ActionDetail extends AppCompatActivity
                                 }
                             }
                             PlayerAction action = new HeroicMoveAction(heroicLocation);
-                            MainActivity.game.players[playerId].actions[actionId] = action;
+                            MainActivity.game.players[playerId].actionsDefault[actionId] = action;
                             dialog.dismiss();
                             finish();
                         }
@@ -98,7 +98,7 @@ public class ActionDetail extends AppCompatActivity
                 }
                 else
                 {
-                    MainActivity.game.players[playerId].actions[actionId] = actionOptions[position];
+                    MainActivity.game.players[playerId].actionsDefault[actionId] = actionOptions[position];
                     finish();
                 }
             }

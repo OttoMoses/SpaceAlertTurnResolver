@@ -16,6 +16,8 @@ import com.otto.spacealertresolver.ThreatString;
 
 import java.util.ArrayList;
 
+import static com.otto.spacealertresolver.Activities.MainActivity.game;
+
 public class ThreatDetail extends AppCompatActivity
 {
     private Spinner nameSpinner;
@@ -23,15 +25,16 @@ public class ThreatDetail extends AppCompatActivity
     private ThreatString threatString;
     private int threatTurn;
     private Context context = this;
+    ArrayList<String> names;
+    ArrayList<String> internalNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_threat_detail);
-
-        final ArrayList<String> names = MainActivity.game.threatNames;
-        final ArrayList<String> internalNames = MainActivity.game.internalThreatNames;
+        names = new ArrayList<>(game.threatNames);
+        internalNames = game.internalThreatNames;
 
         TextView title = findViewById(R.id.TurnLabel);
         String titleText = "Set the threat to appear at T+" + (threatTurn + 1);
@@ -53,7 +56,7 @@ public class ThreatDetail extends AppCompatActivity
         Button clearButton = findViewById(R.id.clearThreat);
 
         threatTurn = this.getIntent().getIntExtra("threatID", 0);
-        ThreatString ref =  MainActivity.game.selectedThreatStrings[threatTurn];
+        ThreatString ref =  game.selectedThreatStrings[threatTurn];
         threatString = new ThreatString(ref.threatID,ref.trackNum);
         if(threatString.threatID != names.size() + 1)
         {
@@ -69,7 +72,7 @@ public class ThreatDetail extends AppCompatActivity
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int position, long l)
             {
-                threatString.threatID = nameSpinner.getSelectedItemPosition();
+                threatString.threatID = game.threatNames.indexOf(nameSpinner.getSelectedItem().toString());
             }
 
             @Override
@@ -108,7 +111,12 @@ public class ThreatDetail extends AppCompatActivity
                     }
                     else
                     {
-                        MainActivity.game.selectedThreatStrings[threatTurn] = threatString;
+                        if(game.selectedThreatStrings[threatTurn].threatID != game.threatNames.size() + 1)
+                        {
+                            game.selectedNames.remove(game.threatNames.get(game.selectedThreatStrings[threatTurn].threatID));
+                        }
+                        game.selectedThreatStrings[threatTurn] = threatString;
+                        game.selectedNames.add(nameSpinner.getSelectedItem().toString());
                         finish();
                     }
                 }
@@ -124,7 +132,12 @@ public class ThreatDetail extends AppCompatActivity
                     }
                     else
                     {
-                        MainActivity.game.selectedThreatStrings[threatTurn] = threatString;
+                        if(game.selectedThreatStrings[threatTurn].threatID != game.threatNames.size() + 1)
+                        {
+                            game.selectedNames.remove(game.threatNames.get(game.selectedThreatStrings[threatTurn].threatID));
+                        }
+                        game.selectedThreatStrings[threatTurn] = threatString;
+                        game.selectedNames.add(nameSpinner.getSelectedItem().toString());
                         finish();
                     }
                 }
@@ -137,10 +150,21 @@ public class ThreatDetail extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                MainActivity.game.selectedThreatStrings[threatTurn].trackNum = 4;
-                MainActivity.game.selectedThreatStrings[threatTurn].threatID = names.size() + 1;
+                game.selectedNames.remove(game.threatNames.get(game.selectedThreatStrings[threatTurn].threatID));
+                game.selectedThreatStrings[threatTurn].trackNum = 4;
+                game.selectedThreatStrings[threatTurn].threatID = game.threatNames.size() + 1;
                 finish();
             }
         });
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        if(game.selectedNames.size() != 0)
+        {
+            names.removeAll(game.selectedNames);
+        }
     }
 }

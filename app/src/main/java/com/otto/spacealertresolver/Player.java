@@ -11,6 +11,7 @@ import com.otto.spacealertresolver.Activities.MainActivity;
 public class Player
 {
     public PlayerAction[] actions;
+    public PlayerAction[] actionsDefault;
     public String playerName;
     public boolean leadingBots;
     public boolean flyingInterceptors;
@@ -30,7 +31,7 @@ public class Player
         damagedBots = false;
 
         //create array to store player actions
-        actions = new PlayerAction[numRounds];
+        actionsDefault = new PlayerAction[numRounds];
     }
     public String Delay(int round)
     {
@@ -45,18 +46,20 @@ public class Player
             {
                 for(int roundCount = actions.length - 1; roundCount >= round; roundCount--)
                 {
-                    if(roundCount == actions.length-1)
+                    String previous = actions[roundCount].name;
+                    if(roundCount == actions.length - 1)
                     {
-                        actions[actions.length-1] = MainActivity.game.actions[0];
+                        actions[actions.length - 1] = MainActivity.game.actions[0];
                     }
                     else if(roundCount == round)
                     {
-                        actions[roundCount] = MainActivity.game.actions[0];
+                        actions[roundCount - 1] = MainActivity.game.actions[0];
                     }
                     else
                     {
-                        actions[roundCount] = actions[roundCount - 1];
+                        actions[roundCount - 1] = actions[roundCount - 2];
                     }
+                    System.out.println(playerName + "'s action at T+" + roundCount + " was " + previous + " is now " + actions[roundCount].name);
                 }
                 delayed = true;
                 message +="\n" +  playerName + " delays their actions starting at T + " + round;

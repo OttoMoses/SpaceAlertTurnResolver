@@ -221,7 +221,7 @@ public class SettingsScreen extends AppCompatActivity
                     Node node = threatList.item(i);
                     expression = xPath.compile("./type");
                     String threatType = (String) expression.evaluate(node, XPathConstants.STRING);
-                    if (!threatType.equals("internal"))
+                    if (threatType.equals("external"))
                     {
                         ThreatExternal threat = BuildThreatExternal(xPath, node);
                         allThreats.add(threat);
@@ -233,7 +233,7 @@ public class SettingsScreen extends AppCompatActivity
                         ThreatInternal threat = BuildThreatInternal(xPath, node);
                         allThreats.add(threat);
                         internalThreats.add(threat);
-                        internalNames.add(threat.name);
+                        internalNames.add(threat.cardNum + " " + threat.name);
                         threatNames.add(threat.cardNum + " " + threat.name);
                     }
                     publishProgress(maxProgress);

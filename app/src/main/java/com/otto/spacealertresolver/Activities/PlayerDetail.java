@@ -53,7 +53,7 @@ public class PlayerDetail extends AppCompatActivity
                 else
                 {
                     player.playerName = nameEntry.getText().toString();
-                    player.actions = actions;
+                    player.actionsDefault = actions;
                     MainActivity.game.players[playerId] = player;
                     finish();
                 }
@@ -77,7 +77,7 @@ public class PlayerDetail extends AppCompatActivity
 {
     super.onResume();
 
-    actions = MainActivity.game.players[playerId].actions;
+    actions = MainActivity.game.players[playerId].actionsDefault;
     ActionAdapter actionList = new ActionAdapter(this, actions);
     actionListView.setAdapter(actionList);
 }

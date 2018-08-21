@@ -158,9 +158,10 @@ public class Game {
     private ArrayList<DamageToken> whiteDamage;
     private ArrayList<DamageToken> blueDamage;
     private ArrayList<Threat> escapedThreats;
-    public ArrayList<Threat> internalThreats;
     private ArrayList<Threat> externalThreats;
     private ArrayList<Threat> allThreats;
+    public ArrayList<String> selectedNames;
+    public ArrayList<Threat> internalThreats;
     private int[] observationScore;
     private boolean missileDamage;
     private boolean gameEnd;
@@ -209,6 +210,7 @@ public class Game {
         this.allThreats = allThreats;
         this.internalThreats = internalThreats;
         this.externalThreats = externalThreats;
+        selectedNames = new ArrayList<>();
         // create the right number of threat tracks and an array to store them;
 
         threatTracks[0] = new ThreatTrack("Red");
@@ -223,7 +225,7 @@ public class Game {
         for (int i = 0; i < numPlayers; i++) {
             Player p = new Player("Unnamed Player", numRounds);
             for (int roundCount = 0; roundCount < numRounds; roundCount++) {
-                p.actions[roundCount] = actions[0];
+                p.actionsDefault[roundCount] = actions[0];
             }
             players[i] = p;
             p.playerID = i;
@@ -254,6 +256,7 @@ public class Game {
         //set player starting values
         for (Player p : players)
         {
+            p.actions = p.actionsDefault.clone();
             p.zonePosition = 1;
             p.sectionPosition = 1;
             p.leadingBots = false;

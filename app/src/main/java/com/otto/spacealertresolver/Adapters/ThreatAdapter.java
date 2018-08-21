@@ -12,6 +12,8 @@ import com.otto.spacealertresolver.ThreatString;
 
 import java.util.ArrayList;
 
+import static com.otto.spacealertresolver.Activities.MainActivity.game;
+
 /**
  * Created by Otto on 1/28/2018.
  */
@@ -19,7 +21,6 @@ import java.util.ArrayList;
 public class ThreatAdapter extends BaseAdapter
 {
     private ThreatString[] threats;
-    private ArrayList<String> names = MainActivity.game.threatNames;
     private Activity context;
 
     @Override
@@ -46,9 +47,9 @@ public class ThreatAdapter extends BaseAdapter
         TextView txtName = view.findViewById(R.id.ThreatNameText);
         TextView txtTrack = view.findViewById(R.id.ThreatTrackText);
         txtTurn.setText("T+" + (position + 1));
-        if(item.threatID != names.size() + 1)
+        if(item.threatID != game.threatNames.size() + 1)
         {
-            txtName.setText("Threat: " + names.get(item.threatID));
+            txtName.setText("Threat: " + game.threatNames.get(item.threatID));
         }
         else
         {
