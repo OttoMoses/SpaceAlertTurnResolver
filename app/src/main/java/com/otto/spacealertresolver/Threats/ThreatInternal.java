@@ -153,11 +153,19 @@ public class ThreatInternal extends Threat
     @Override
     public void ResetThreat()
     {
-        locations.clear();
+        if(locations == null)
+        {
+            locations = new ArrayList<>();
+        }
+        if(locations.size() != 0)
+        {
+            locations.clear();
+        }
         locations.addAll(locationsDefault);
         speedBoost = 0;
         damage = 0;
         firesBack = firesBackDefault;
         position = 0;
     }
+
 }
