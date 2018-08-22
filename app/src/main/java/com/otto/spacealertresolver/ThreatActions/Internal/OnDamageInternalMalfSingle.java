@@ -2,8 +2,6 @@ package com.otto.spacealertresolver.ThreatActions.Internal;
 
 import android.util.Pair;
 
-import com.otto.spacealertresolver.Activities.MainActivity;
-import com.otto.spacealertresolver.Game;
 import com.otto.spacealertresolver.InternalDamageBundle;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
@@ -13,7 +11,7 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class OnDamageInternalMalfSingle extends OnDamageInternal
 {
-    public String system;
+    private final String system;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat, Player[] players)
     {

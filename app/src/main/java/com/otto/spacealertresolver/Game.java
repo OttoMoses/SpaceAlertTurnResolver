@@ -1,6 +1,5 @@
 package com.otto.spacealertresolver;
 
-import android.content.Context;
 import android.util.Pair;
 
 import com.otto.spacealertresolver.Actions.AAction;
@@ -37,96 +36,25 @@ import com.otto.spacealertresolver.Stations.MissileStation;
 import com.otto.spacealertresolver.Stations.PulseLaserStation;
 import com.otto.spacealertresolver.Stations.SuperHeavyLaserStation;
 import com.otto.spacealertresolver.Stations.WindowStation;
-import com.otto.spacealertresolver.ThreatActions.External.ActionExternalBuff;
-import com.otto.spacealertresolver.ThreatActions.External.ActionExternalDamageShip;
-import com.otto.spacealertresolver.ThreatActions.External.ActionExternalDelayPlayers;
-import com.otto.spacealertresolver.ThreatActions.External.ActionExternalDie;
-import com.otto.spacealertresolver.ThreatActions.External.ActionExternalEndGame;
-import com.otto.spacealertresolver.ThreatActions.External.ActionExternalGlobalBuff;
-import com.otto.spacealertresolver.ThreatActions.External.ActionExternalKnockOut;
-import com.otto.spacealertresolver.ThreatActions.External.ActionExternalMoveOthers;
-import com.otto.spacealertresolver.ThreatActions.External.ActionExternalSelfDamage;
-import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternal;
-import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalBuff;
-import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalBypassSource;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalCount;
-import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalDestroyInterceptors;
-import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalMaxValue;
-import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternal;
-import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternalRemoveGlobalBonus;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionEffectInternal;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalConditionDamageMove;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDamageShip;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDelayPlayers;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDestroyRocket;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDisableBots;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalDrainFuel;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalEndGame;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalEnergyDrain;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalGlobalDamageModifier;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalGrow;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalKnockOut;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalLeakPower;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalMoveBlue;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalMoveRed;
-import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalDefault;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalToggle;
 import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalSelfToggle;
-import com.otto.spacealertresolver.ThreatActions.External.OnDamageExternalNoShield;
-import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternalDamageOthers;
-import com.otto.spacealertresolver.ThreatActions.External.OnDeathExternalDamageSpaceCount;
-import com.otto.spacealertresolver.ThreatActions.External.ActionExternalShieldDrain;
-import com.otto.spacealertresolver.ThreatActions.External.ThreatActionExternal;
-import com.otto.spacealertresolver.ThreatActions.External.ActionEffectExternal;
-import com.otto.spacealertresolver.ThreatActions.External.ActionExternalToggle;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalMoveToPlayerCount;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalSpread;
-import com.otto.spacealertresolver.ThreatActions.Internal.ActionInternalTurboLift;
-import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageCountRequired;
-import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternal;
-import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalCombat;
-import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalCombatMulti;
-import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfMultiBonus;
-import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfSingle;
-import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternal;
-import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternalRemoveEffect;
-import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternalKnockOut;
-import com.otto.spacealertresolver.ThreatActions.Internal.OnSpawnSetHealth;
-import com.otto.spacealertresolver.ThreatActions.Internal.SetInternalPosition;
-import com.otto.spacealertresolver.ThreatActions.Internal.ThreatActionInternal;
 import com.otto.spacealertresolver.Threats.Threat;
 import com.otto.spacealertresolver.Threats.ThreatExternal;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
 
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-import org.xml.sax.SAXException;
-
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.xpath.XPath;
-import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
-import javax.xml.xpath.XPathExpressionException;
-import javax.xml.xpath.XPathFactory;
-
 /**
  * Created by Otto on 1/22/2018.
  */
 
 public class Game {
-    public PlayerAction[] actions;
+    public final PlayerAction[] actions;
     public ArrayList<String> threatNames;
     public Player[] players;
     public int numRounds;
@@ -142,7 +70,7 @@ public class Game {
     public ThreatString[] selectedThreatStrings;
     private Threat[] selectedThreats;
     public ArrayList<Threat> activeThreats;
-    public String[] colors;
+    public final String[] colors;
     public ArrayList<Threat> deadThreats;
     public int observationOne;
     public int observationTwo;
@@ -152,7 +80,6 @@ public class Game {
     public boolean strafeHeroic;
     public int fissureMod;
     public int globalDamageBuff;
-    public int globalShieldBuff;
     private String shipName;
     private ArrayList<DamageToken> redDamage;
     private ArrayList<DamageToken> whiteDamage;
@@ -162,10 +89,11 @@ public class Game {
     private ArrayList<Threat> allThreats;
     public ArrayList<String> selectedNames;
     public ArrayList<Threat> internalThreats;
-    private int[] observationScore;
+    private final int[] observationScore;
     private boolean missileDamage;
     private boolean gameEnd;
     public int currentPlayer;
+    public int globalShieldBuff;
 
     public Game()
     {
@@ -251,6 +179,7 @@ public class Game {
         fissureMod = 0;
         globalDamageBuff = 0;
         gameEnd = false;
+        globalShieldBuff = 0;
         BuildDamageDecks();
 
         //set player starting values
@@ -502,7 +431,10 @@ public class Game {
                         {
                             if (t.getClass().equals(ThreatExternal.class))
                             {
-                                message.append("The ").append(t.name).append(" escapes!\n\n");
+                                if(!((ThreatExternal)t).dead)
+                                {
+                                    message.append("The ").append(t.name).append(" escapes!\n\n");
+                                }
                             }
                             else
                             {
@@ -599,7 +531,7 @@ public class Game {
             if (selectedThreats[currentRound - 1] != null) {
                 Threat t = selectedThreats[round - 1];
                 if (t.getClass() == ThreatExternal.class) {
-                    ((ThreatExternal) t).shield += globalShieldBuff;
+                    ((ThreatExternal) t).shieldBoost += globalShieldBuff;
                 }
                 activeThreats.add(t);
                 if(t.getClass().equals(ThreatExternal.class))
@@ -1006,7 +938,7 @@ public class Game {
         return message.toString();
     }
 
-    public String KillThreats(ArrayList<Threat> targets) {
+    private String KillThreats(ArrayList<Threat> targets) {
         StringBuilder message = new StringBuilder();
         for (Threat t : targets) {
             if (t.damage >= t.health) {
@@ -1029,7 +961,7 @@ public class Game {
 
     public String ShipDamage(int zone, int damage, boolean bypassBonus, boolean internal, boolean plural) {
         StringBuilder damageMessage = new StringBuilder();
-        int realDamage = damage + globalDamageBuff;
+        int realDamage = (damage + globalDamageBuff);
         ArrayList<DamageToken> tokens = null;
         if (plural) {
             damageMessage.append(" attack");

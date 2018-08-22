@@ -9,7 +9,7 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class OnDeathInternalRemoveEffect extends OnDeathInternal
 {
-    String type;
+    private final String type;
     @Override
     public String Execute(ThreatInternal threat)
     {

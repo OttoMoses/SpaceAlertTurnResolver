@@ -7,9 +7,9 @@ import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 public class OnDamageExternalBuff extends OnDamageExternal
 {
-    private int value;
-    private String stat;
-    private String source;
+    private final int value;
+    private final String stat;
+    private final String source;
     @Override
     public String Execute(ThreatExternal t, ExternalDamageBundle db)
     {

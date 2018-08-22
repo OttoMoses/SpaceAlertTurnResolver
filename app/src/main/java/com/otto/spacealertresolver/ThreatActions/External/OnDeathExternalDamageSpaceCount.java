@@ -10,7 +10,7 @@ import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 public class OnDeathExternalDamageSpaceCount extends OnDeathExternal
 {
-    public int multiplier;
+    private final int multiplier;
     @Override
     public String Execute(ThreatExternal threat)
     {

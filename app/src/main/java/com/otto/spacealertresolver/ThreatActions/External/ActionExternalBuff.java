@@ -11,8 +11,8 @@ import com.otto.spacealertresolver.enums.Stats;
 
 public class ActionExternalBuff extends ActionEffectExternal
 {
-    private String stat;
-    private String amount;
+    private final String stat;
+    private final String amount;
 
     @Override
     public String Execute(Section[][] ship, ThreatExternal threat)

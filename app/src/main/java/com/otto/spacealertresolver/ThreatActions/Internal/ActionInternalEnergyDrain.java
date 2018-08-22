@@ -10,9 +10,9 @@ import java.util.ArrayList;
 
 public class ActionInternalEnergyDrain extends ActionEffectInternal
 {
-    private String target;
-    private String damValue;
-    private String condition;
+    private final String target;
+    private final String damValue;
+    private final String condition;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)
     {

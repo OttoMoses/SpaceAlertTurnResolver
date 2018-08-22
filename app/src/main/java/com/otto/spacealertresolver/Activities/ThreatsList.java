@@ -16,8 +16,7 @@ import com.otto.spacealertresolver.ThreatString;
 public class ThreatsList extends AppCompatActivity
 {
     private ListView threatsListView;
-    private Context context = this;
-    Button saveButton;
+    private final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

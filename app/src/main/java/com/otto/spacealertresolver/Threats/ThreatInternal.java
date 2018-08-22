@@ -96,7 +96,7 @@ public class ThreatInternal extends Threat
         String message = "";
         for(Pair p : locations)
         {
-            Section location = ship[(Integer)locations.get(0).first][(((Integer)locations.get(0).second))];
+            Section location = ship[locations.get(0).first][locations.get(0).second];
             switch (threatType)
             {
                 case "combat":

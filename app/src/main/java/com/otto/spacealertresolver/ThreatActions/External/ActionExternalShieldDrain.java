@@ -10,7 +10,7 @@ import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 public class ActionExternalShieldDrain extends ActionEffectExternal
 {
-    private String amount;
+    private final String amount;
     @Override
     public String Execute(Section[][] ship, ThreatExternal threat)
     {

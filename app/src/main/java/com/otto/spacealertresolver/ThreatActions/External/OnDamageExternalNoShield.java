@@ -12,7 +12,7 @@ import com.otto.spacealertresolver.Threats.ThreatExternal;
 public class OnDamageExternalNoShield extends OnDamageExternal
 {
 
-    private String trigger;
+    private final String trigger;
 
     @Override
     public String Execute(ThreatExternal t, ExternalDamageBundle db)

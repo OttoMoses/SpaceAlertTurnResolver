@@ -8,8 +8,8 @@ import com.otto.spacealertresolver.Threats.ThreatInternal;
 
 public class ActionInternalConditionDamageMove extends ActionEffectInternal
 {
-    private int damage;
-    private String direction;
+    private final int damage;
+    private final String direction;
     private String message = "";
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)

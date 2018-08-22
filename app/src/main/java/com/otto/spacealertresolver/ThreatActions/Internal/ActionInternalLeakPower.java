@@ -6,8 +6,8 @@ import com.otto.spacealertresolver.Threats.ThreatInternal;
 
 public class ActionInternalLeakPower extends ActionEffectInternal
 {
-    private String condition;
-    private String target;
+    private final String condition;
+    private final String target;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)
     {

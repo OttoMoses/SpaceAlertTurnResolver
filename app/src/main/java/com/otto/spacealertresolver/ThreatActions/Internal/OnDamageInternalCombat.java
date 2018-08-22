@@ -1,7 +1,5 @@
 package com.otto.spacealertresolver.ThreatActions.Internal;
 
-import android.widget.ListView;
-
 import com.otto.spacealertresolver.InternalDamageBundle;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;

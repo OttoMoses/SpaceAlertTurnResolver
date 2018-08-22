@@ -9,8 +9,8 @@ import static com.otto.spacealertresolver.Activities.MainActivity.*;
 
 public class ActionExternalGlobalBuff extends ActionEffectExternal
 {
-    private String stat;
-    private int value;
+    private final String stat;
+    private final int value;
     @Override
     public String Execute(Section[][] ship, ThreatExternal threat)
     {
@@ -35,7 +35,7 @@ public class ActionExternalGlobalBuff extends ActionEffectExternal
                 {
                     if(t.getClass() == ThreatExternal.class)
                     {
-                        ((ThreatExternal) t).shield += value;
+                        ((ThreatExternal) t).shieldBoost += value;
                     }
                 }
                 if(threat.deathAction.getClass() == (OnDeathExternalRemoveGlobalBonus.class))
@@ -45,7 +45,7 @@ public class ActionExternalGlobalBuff extends ActionEffectExternal
                     action.stat = stat;
                 }
                 game.globalDamageBuff += value;
-                message += "The " + threat.name + " increases shield value for all external threats by" + value + "!";
+                message += "The " + threat.name + " increases shield value for all external threats by " + value + "!";
                 break;
             }
         }

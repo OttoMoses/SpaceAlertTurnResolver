@@ -24,9 +24,9 @@ public class ThreatDetail extends AppCompatActivity
     private Spinner trackSpinner;
     private ThreatString threatString;
     private int threatTurn;
-    private Context context = this;
-    ArrayList<String> names;
-    ArrayList<String> internalNames;
+    private final Context context = this;
+    private ArrayList<String> names;
+    private ArrayList<String> internalNames;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -167,7 +167,17 @@ public class ThreatDetail extends AppCompatActivity
         super.onResume();
         if(game.selectedNames.size() != 0)
         {
-            names.removeAll(game.selectedNames);
+            ArrayList<String> toRemove;
+            if(game.selectedThreatStrings[threatTurn].threatID != game.threatNames.size() + 1)
+            {
+                toRemove = new ArrayList<>(game.selectedNames);
+                toRemove.remove(game.threatNames.get(game.selectedThreatStrings[threatTurn].threatID ));
+            }
+            else
+            {
+                toRemove = new ArrayList<>(game.selectedNames);
+            }
+            names.removeAll(toRemove);
         }
     }
 }

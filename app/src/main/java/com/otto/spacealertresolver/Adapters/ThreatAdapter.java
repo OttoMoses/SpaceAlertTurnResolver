@@ -6,11 +6,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.R;
 import com.otto.spacealertresolver.ThreatString;
-
-import java.util.ArrayList;
 
 import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
@@ -20,8 +17,8 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class ThreatAdapter extends BaseAdapter
 {
-    private ThreatString[] threats;
-    private Activity context;
+    private final ThreatString[] threats;
+    private final Activity context;
 
     @Override
     public int getCount() {

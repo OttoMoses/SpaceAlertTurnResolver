@@ -8,7 +8,7 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class ActionExternalKnockOut extends ActionEffectExternal
 {
-    private String target;
+    private final String target;
     @Override
     public String Execute(Section[][] ship, ThreatExternal threat)
     {

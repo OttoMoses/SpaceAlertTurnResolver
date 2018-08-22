@@ -4,8 +4,6 @@ import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.Stations.MainReactorStation;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
 
-import static com.otto.spacealertresolver.Activities.MainActivity.game;
-
 public class ActionInternalDrainFuel extends ActionEffectInternal
 {
     @Override

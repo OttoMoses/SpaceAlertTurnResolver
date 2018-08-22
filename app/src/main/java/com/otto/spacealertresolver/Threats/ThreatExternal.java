@@ -25,9 +25,10 @@ public class ThreatExternal extends Threat
     public ThreatActionExternal xAction;
     public ThreatActionExternal yAction;
     public ThreatActionExternal zAction;
-    public ThreatActionExternal spawnAction = null;
+    private final ThreatActionExternal spawnAction = null;
     public OnDeathExternal deathAction = null;
     public boolean toggle;
+    public boolean dead;
 
     @Override
     public String ExecuteXAction(Section[][] ship, Player[] players)
@@ -103,7 +104,7 @@ public class ThreatExternal extends Threat
         String message = "";
         if(shield)
         {
-            damage = value - GetShield();
+            damage = (value - GetShield());
         }
         else
         {
@@ -115,6 +116,10 @@ public class ThreatExternal extends Threat
         }
         else
         {
+            if(GetShield() != 0)
+            {
+                message += "The " + name + "'s shield blocks " + GetShield() + " damage!\n";
+            }
             this.damage += damage;
             message += "The " + name + " takes " + damage + " damage!";
         }
@@ -126,7 +131,7 @@ public class ThreatExternal extends Threat
         dead = true;
         return message;
     }
-    public int GetShield()
+    private int GetShield()
     {
         return shield + shieldBoost;
     }

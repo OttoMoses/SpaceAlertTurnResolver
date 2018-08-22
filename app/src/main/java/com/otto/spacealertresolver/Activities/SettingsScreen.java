@@ -7,7 +7,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Pair;
-import android.util.Size;
 import android.view.View;
 import android.widget.*;
 
@@ -99,10 +98,10 @@ public class SettingsScreen extends AppCompatActivity
     private EditText playerCount;
     private Spinner difficultySpinner;
     private Button setupGame;
-    ProgressBar progressBar;
-    TextView progressLabel;
-    TextView progressUpdateText;
-    XMLTask task;
+    private ProgressBar progressBar;
+    private TextView progressLabel;
+    private TextView progressUpdateText;
+    private XMLTask task;
     private Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) 
@@ -328,8 +327,6 @@ public class SettingsScreen extends AppCompatActivity
             threat.escapeScore = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
             expression = xPath.compile(("./threatType"));
             threat.threatType = (String) expression.evaluate(node, XPathConstants.STRING);
-            expression = xPath.compile(("./spawnMessage"));
-            threat.spawnMessage = (String) expression.evaluate(node, XPathConstants.STRING);
 
             NodeList dataSet;
             Element data;
@@ -380,8 +377,6 @@ public class SettingsScreen extends AppCompatActivity
             threat.escapeScore = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
             expression = xPath.compile("./rocketImmune");
             threat.missileImmune = Integer.parseInt((String) expression.evaluate(node, XPathConstants.STRING));
-            expression = xPath.compile(("./spawnMessage"));
-            threat.spawnMessage = (String) expression.evaluate(node, XPathConstants.STRING);
 
             //select action command objects
             NodeList action;

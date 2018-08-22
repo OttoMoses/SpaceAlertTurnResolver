@@ -7,7 +7,7 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class ActionExternalMoveOthers extends ActionEffectExternal
 {
-    int value;
+    private final int value;
     @Override
     public String Execute(Section[][] ship, ThreatExternal threat)
     {

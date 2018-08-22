@@ -14,7 +14,7 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class OnDamageExternalBypassSource extends OnDamageExternal
 {
-    String source;
+    private final String source;
     @Override
     public String Execute(ThreatExternal t, ExternalDamageBundle db)
     {

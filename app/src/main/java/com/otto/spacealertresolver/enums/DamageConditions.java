@@ -6,5 +6,4 @@ package com.otto.spacealertresolver.enums;
 
 public enum DamageConditions
 {
-    none,ifDamaged,ifDamagedAmount
 }

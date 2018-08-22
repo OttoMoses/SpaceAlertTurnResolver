@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
 
-import static com.otto.spacealertresolver.Activities.MainActivity.game;
-
 /**
  * Created by Otto on 1/22/2018.
  */
@@ -14,8 +12,7 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 public abstract class Threat implements Comparable<Threat>
 {
 public String name;
-public String spawnMessage;
-public int position;
+    public int position;
 public int speed;
 public int health;
 public int damage;
@@ -24,9 +21,8 @@ public int deathScore;
 public int escapeScore;
 public int track;
 public String cardNum;
-public boolean dead = false;
 
-public abstract String ExecuteXAction(Section[][] ship, Player[] players);
+    public abstract String ExecuteXAction(Section[][] ship, Player[] players);
 public abstract String ExecuteYAction(Section[][] ship, Player[] players);
 public abstract String ExecuteZAction(Section[][] ship, Player[] players);
 public abstract String ExecuteSpawnAction(Section[][] ship);

@@ -20,7 +20,7 @@ public class PlayerDetail extends AppCompatActivity
     private PlayerAction[] actions;
     private EditText nameEntry;
     private ListView actionListView;
-    private Context context = this;
+    private final Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

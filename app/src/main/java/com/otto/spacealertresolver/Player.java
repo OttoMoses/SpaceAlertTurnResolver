@@ -1,6 +1,5 @@
 package com.otto.spacealertresolver;
 
-import com.otto.spacealertresolver.Actions.BlankAction;
 import com.otto.spacealertresolver.Actions.PlayerAction;
 import com.otto.spacealertresolver.Activities.MainActivity;
 

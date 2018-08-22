@@ -15,8 +15,8 @@ import com.otto.spacealertresolver.R;
 
 public class ActionAdapter extends BaseAdapter
 {
-    private PlayerAction[] actions;
-    private Activity context;
+    private final PlayerAction[] actions;
+    private final Activity context;
     @Override
     public int getCount() {
         return actions.length;

@@ -7,7 +7,7 @@ import com.otto.spacealertresolver.Threats.ThreatInternal;
 
 public class SetInternalPosition extends ActionEffectInternal
 {
-    String special;
+    private final String special;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)
     {

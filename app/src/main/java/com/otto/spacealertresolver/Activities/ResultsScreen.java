@@ -22,7 +22,7 @@ public class ResultsScreen extends AppCompatActivity {
     private TextView result;
     private Button advanceTurn;
     private Button finish;
-    private Context context = this;
+    private final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -72,15 +72,7 @@ public class ResultsScreen extends AppCompatActivity {
     protected  void onResume()
     {
         super.onResume();
-        try {
-            MainActivity.game.StartGame();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SAXException e) {
-            e.printStackTrace();
-        } catch (ParserConfigurationException e) {
-            e.printStackTrace();
-        }
+        MainActivity.game.StartGame();
         result.setText("Press 'advance turn' when ready to start.");
     }
 }

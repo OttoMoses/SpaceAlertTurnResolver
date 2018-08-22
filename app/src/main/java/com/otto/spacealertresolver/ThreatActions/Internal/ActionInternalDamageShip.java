@@ -2,7 +2,6 @@ package com.otto.spacealertresolver.ThreatActions.Internal;
 
 import android.util.Pair;
 
-import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
@@ -13,10 +12,8 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class ActionInternalDamageShip extends ActionEffectInternal
 {
-    private String target;
-    private String damage;
-    private String condtion;
-    private int damageMulti;
+    private final String target;
+    private final String damage;
     private ArrayList<Pair<Integer,Integer>> locations;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)

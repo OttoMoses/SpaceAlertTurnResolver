@@ -7,7 +7,7 @@ import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 public class OnDamageExternalMaxValue extends OnDamageExternal
 {
-    private int maxValue;
+    private final int maxValue;
     @Override
     public String Execute(ThreatExternal t, ExternalDamageBundle db)
     {

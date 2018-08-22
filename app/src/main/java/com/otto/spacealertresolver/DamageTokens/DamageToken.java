@@ -9,7 +9,6 @@ import com.otto.spacealertresolver.Section;
 public abstract class DamageToken
 {
     int sectionPos;
-    public String damageText;
 
     public abstract String doDamage(int zone, Section[][] ship);
 }

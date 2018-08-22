@@ -8,7 +8,7 @@ import com.otto.spacealertresolver.Threats.ThreatExternal;
 public class OnDamageExternalCount extends OnDamageExternal
 {
     public boolean damaged;
-    public int value;
+    public final int value;
     @Override
     public String Execute(ThreatExternal t, ExternalDamageBundle db)
     {

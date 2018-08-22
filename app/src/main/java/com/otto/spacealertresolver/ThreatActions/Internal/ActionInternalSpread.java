@@ -11,7 +11,7 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class ActionInternalSpread extends ActionEffectInternal
 {
-    private String direction;
+    private final String direction;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)
     {

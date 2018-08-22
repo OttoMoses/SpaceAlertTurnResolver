@@ -10,7 +10,7 @@ import com.otto.spacealertresolver.Threats.ThreatInternal;
 import java.util.ArrayList;
 
 public class ActionInternalKnockOut extends ActionEffectInternal {
-    private String target;
+    private final String target;
     public Pair<Integer,Integer> exclude;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)

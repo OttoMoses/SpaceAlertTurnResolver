@@ -5,7 +5,7 @@ import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 public class ActionExternalSelfDamage extends ActionEffectExternal
 {
-    private int value;
+    private final int value;
     @Override
     public String Execute(Section[][] ship, ThreatExternal threat)
     {

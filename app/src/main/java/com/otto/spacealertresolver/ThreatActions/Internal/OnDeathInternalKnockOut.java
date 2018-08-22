@@ -3,13 +3,11 @@ package com.otto.spacealertresolver.ThreatActions.Internal;
 import com.otto.spacealertresolver.Player;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
 
-import java.util.ArrayList;
-
 import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class OnDeathInternalKnockOut extends OnDeathInternal
 {
-    private String target;
+    private final String target;
     @Override
     public String Execute(ThreatInternal threat)
     {

@@ -15,8 +15,8 @@ import com.otto.spacealertresolver.R;
 
 public class PlayerAdapter extends BaseAdapter {
 
-    private Player[] players;
-    private Activity context;
+    private final Player[] players;
+    private final Activity context;
 
     @Override
     public int getCount() {

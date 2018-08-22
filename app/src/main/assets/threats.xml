@@ -1088,7 +1088,7 @@
             <effect type="default" />
         </damageAction>
         <deathAction>
-            <effect type="removeGlobalBuff" />
+            <effect type="removeGlobalBonus" />
         </deathAction>
     </threat>
     <threat>
@@ -1412,7 +1412,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1450,7 +1450,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1493,7 +1493,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1536,7 +1536,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1707,7 +1707,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1751,7 +1751,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1790,7 +1790,7 @@
         <zAction>
             <effect type="endGame" />
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
                 <effect type="none">
                 </effect>
@@ -1956,7 +1956,7 @@
                 <damage>2</damage>
             </effect>
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
             <effect type="removeDelay">
             </effect>
@@ -1996,7 +1996,7 @@
                 <damage>2</damage>
             </effect>
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
             <effect type="removeEffect">
                 <effectType>delay</effectType>
@@ -2035,7 +2035,7 @@
                 <damage>4</damage>
             </effect>
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
             <effect type="none">
             </effect>
@@ -2073,7 +2073,7 @@
                 <damage>4</damage>
             </effect>
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
             <effect type="none">
             </effect>
@@ -2204,7 +2204,7 @@
                 <damage>3</damage>
             </effect>
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
             <effect type="knockout">
                 <target>lastHit</target>
@@ -2246,7 +2246,7 @@
                 <target>self</target>
             </effect>
         </zAction>
-        <damageAction type="combat"></damageAction>
+        <damageAction type="combat" />
         <deathAction>
             <effect type="knockout">
                 <target>lastHit</target>
@@ -2343,7 +2343,7 @@
                 <effectType>knockout</effectType>
             </effect>
         </zAction>
-        <damageAction type="combatMulti"></damageAction>
+        <damageAction type="combatMulti" />
         <deathAction>
             <effect type="removeEffect">
                 <effectType>knockout</effectType>

@@ -11,7 +11,7 @@ import com.otto.spacealertresolver.R;
 
 public class GameSetup extends AppCompatActivity
 {
-    private Context context = this;
+    private final Context context = this;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState)

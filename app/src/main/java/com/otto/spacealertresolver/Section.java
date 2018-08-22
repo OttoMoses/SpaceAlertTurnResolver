@@ -2,16 +2,14 @@ package com.otto.spacealertresolver;
 
 import com.otto.spacealertresolver.Stations.ActionStation;
 
-import java.util.ArrayList;
-
 /**
  * Created by Otto on 1/28/2018.
  */
 
 public class Section
 {
-    public String zoneName;
-    public String sectionName;
+    public final String zoneName;
+    public final String sectionName;
     public boolean LiftDamaged;
     public boolean combatThreat;
     public boolean malfB;
@@ -20,21 +18,21 @@ public class Section
     public ActionStation BSystem;
     public ActionStation CSystem;
     public boolean hasBots;
-    public int powerX;
-    public int powerY;
+    public final int powerX;
+    public final int powerY;
     public int powerCubes;
-    private int maxPower;
-    private int startPower;
+    private final int maxPower;
+    private final int startPower;
     public boolean hasFired;
-    private int gunDamage;
-    private int gunRange;
+    private final int gunDamage;
+    private final int gunRange;
     public int gunDamagePenalty;
     public int powerPenalty;
     public int gunRangePenalty;
     public boolean specialDelay;
     public int playerCount;
-    public int zonePos;
-    public int sectionPos;
+    public final int zonePos;
+    public final int sectionPos;
     public boolean heroicFire;
     public boolean liftUsed;
     public boolean specialKnockout;

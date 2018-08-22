@@ -9,7 +9,7 @@ import java.util.ArrayList;
  */
 
 public class ExternalDamageBundle {
-    public ArrayList<Pair> damageSources;
+    public final ArrayList<Pair> damageSources;
     public ExternalDamageBundle() {
         this.damageSources = new ArrayList<>();
     }

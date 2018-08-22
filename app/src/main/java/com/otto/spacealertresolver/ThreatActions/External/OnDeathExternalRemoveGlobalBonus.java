@@ -26,14 +26,15 @@ public class OnDeathExternalRemoveGlobalBonus extends OnDeathExternal
                 }
                 case "shield" :
                 {
-                    for(Threat threat : MainActivity.game.activeThreats)
-                    {
-                        if(threat.getClass() == ThreatExternal.class)
+                        game.globalShieldBuff -=value;
+                        for(Threat threat : MainActivity.game.activeThreats)
                         {
-                            ((ThreatExternal) threat).shield -= value;
+                            if(threat.getClass() == ThreatExternal.class)
+                            {
+                                ((ThreatExternal) threat).shieldBoost -= value;
+                            }
                         }
-                    }
-                    message += "The shield value of external threats is no longer being increased by the " + t.name + "!";
+                        message += "The shield value of external threats is no longer being increased by the " + t.name + "!";
                     break;
                 }
             }

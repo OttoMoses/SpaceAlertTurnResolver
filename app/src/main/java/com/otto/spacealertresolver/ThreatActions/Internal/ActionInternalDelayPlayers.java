@@ -10,7 +10,7 @@ import static com.otto.spacealertresolver.Activities.MainActivity.game;
 
 public class ActionInternalDelayPlayers extends ActionEffectInternal
 {
-    String target;
+    private final String target;
     @Override
     public String Execute(Section[][] ship, ThreatInternal threat)
     {

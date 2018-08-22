@@ -14,12 +14,11 @@ import com.otto.spacealertresolver.ThreatTrack;
 
 public class ThreatTrackEdit extends AppCompatActivity
 {
-    Spinner internalSpinner;
+    private Spinner internalSpinner;
     private int redTrackID;
     private int whiteTrackID;
     private int blueTrackID;
     private int internalTrackID;
-    Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -11,11 +11,11 @@ import com.otto.spacealertresolver.Threats.ThreatExternal;
 
 public class ActionExternalDamageShip extends ActionEffectExternal
 {
-    private int target;
-    private String damage;
-    private boolean bypassBonus;
-    private String condition;
-    private int damageMulti;
+    private final int target;
+    private final String damage;
+    private final boolean bypassBonus;
+    private final String condition;
+    private final int damageMulti;
     private int damageValue;
 
     @Override

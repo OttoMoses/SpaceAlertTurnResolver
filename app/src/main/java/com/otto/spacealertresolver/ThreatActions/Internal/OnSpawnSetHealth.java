@@ -1,6 +1,5 @@
 package com.otto.spacealertresolver.ThreatActions.Internal;
 
-import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.Threats.ThreatInternal;
 

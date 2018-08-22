@@ -10,17 +10,9 @@ import android.widget.*;
 import com.otto.spacealertresolver.Game;
 import com.otto.spacealertresolver.R;
 
-import org.xml.sax.SAXException;
-
-import java.io.IOException;
-
-import javax.xml.parsers.ParserConfigurationException;
-
 public class MainActivity extends AppCompatActivity {
     public static Game game;
-    Button helpButton;
-    Button contactButton;
-    private Context context = this;
+    private final Context context = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
