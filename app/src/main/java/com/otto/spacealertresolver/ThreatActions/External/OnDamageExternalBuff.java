@@ -27,6 +27,7 @@ public class OnDamageExternalBuff extends OnDamageExternal
                     {
                         t.shield += value;
                         message.append("The ").append(t.name).append(" gains ").append(value).append(" ").append(stat).append(" from being attacked with a ").append(source).append("!\n");
+                        break;
                     }
                 }
             }

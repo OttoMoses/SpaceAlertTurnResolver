@@ -24,6 +24,7 @@ public class ActionInternalEndGame extends ActionEffectInternal {
             case "Nuclear Device" :
             {
                 message += "The Nuclear Device detonates!";
+                break;
             }
         }
         message += MainActivity.game.EndGame(true);

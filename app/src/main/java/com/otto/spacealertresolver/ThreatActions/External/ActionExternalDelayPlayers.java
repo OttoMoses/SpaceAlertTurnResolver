@@ -22,6 +22,7 @@ public class ActionExternalDelayPlayers extends ActionEffectExternal
                 {
                 message.append(p.Delay(game.currentRound));
                 }
+                break;
             }
             case "self":
             {
@@ -34,6 +35,7 @@ public class ActionExternalDelayPlayers extends ActionEffectExternal
                         message.append(p.Delay(game.currentRound));
                     }
                 }
+                break;
             }
         }
         return message.toString();

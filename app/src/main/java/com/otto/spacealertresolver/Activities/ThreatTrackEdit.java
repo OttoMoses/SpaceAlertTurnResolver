@@ -159,6 +159,7 @@ public class ThreatTrackEdit extends AppCompatActivity
                 track.EndSpace = new int[]{16};
                 track.rangeTwo = 6;
                 track.rangeOne = 11;
+                break;
         }
     }
 

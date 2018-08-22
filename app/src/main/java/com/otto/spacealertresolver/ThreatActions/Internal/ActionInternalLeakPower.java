@@ -91,6 +91,8 @@ public class ActionInternalLeakPower extends ActionEffectInternal
                         message += "\n" + "The " + location.zoneName + " lateral reactor has no power remaining";
                     }
                 }
+
+                break;
             }
         }
         return message;

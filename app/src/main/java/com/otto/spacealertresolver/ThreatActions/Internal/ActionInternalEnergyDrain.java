@@ -33,8 +33,8 @@ public class ActionInternalEnergyDrain extends ActionEffectInternal
                 {
                     Section location = ship[p.first][p.second];
                     message.append("\n").append(DrainPower(location, threat));
-                    break;
                 }
+                break;
             }
             case "allReactors" :
             {
@@ -120,6 +120,7 @@ public class ActionInternalEnergyDrain extends ActionEffectInternal
             case "none":
             {
                 message += "The " + location.DrainPower(damage);
+                break;
             }
         }
         return message + "\n";

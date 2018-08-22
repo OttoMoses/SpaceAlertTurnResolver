@@ -39,7 +39,7 @@ public class OnDamageInternalMalfMultiBonus extends OnDamageInternal {
                         {
                             realBonus = potentialBonus;
                         }
-                        ProcessDamageBundle(location.malfCDamage,threat,realBonus);
+                        message.append(ProcessDamageBundle(location.malfCDamage,threat,realBonus));
                         location.malfCDamage = null;
                     }
                 }
@@ -57,7 +57,7 @@ public class OnDamageInternalMalfMultiBonus extends OnDamageInternal {
                         {
                             realBonus = potentialBonus;
                         }
-                        ProcessDamageBundle(location.malfBDamage,threat,realBonus);
+                        message.append(ProcessDamageBundle(location.malfBDamage,threat,realBonus));
                         location.malfBDamage = null;
                     }
                 }
@@ -65,7 +65,7 @@ public class OnDamageInternalMalfMultiBonus extends OnDamageInternal {
             }
             default :
             {
-                System.out.print(threat.name + " has an error in it's damage action");
+                message.append(threat.name).append(" has an error in it's damage action");
                 break;
             }
         }

@@ -13,7 +13,7 @@ public class OnDeathInternalRemoveEffect extends OnDeathInternal
     @Override
     public String Execute(ThreatInternal threat)
     {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         switch (type)
         {
             case "delay" :
@@ -24,9 +24,10 @@ public class OnDeathInternalRemoveEffect extends OnDeathInternal
                     if(location.specialDelay)
                     {
                         location.specialDelay = false;
-                        message +=  "Players are no longer delayed on entering the " + location.sectionName + " " + location.zoneName + " section!";
+                        message.append("Players are no longer delayed on entering the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section!");
                     }
                 }
+                break;
             }
             case "knockout" :
             {
@@ -36,12 +37,13 @@ public class OnDeathInternalRemoveEffect extends OnDeathInternal
                     if(location.specialKnockout)
                     {
                         location.specialKnockout = false;
-                        message +=  "Players are no longer knocked out on entering the " + location.sectionName + " " + location.zoneName + " section!";
+                        message.append("Players are no longer knocked out on entering the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section!");
                     }
                 }
+                break;
             }
         }
-        return message;
+        return message.toString();
     }
 
     public OnDeathInternalRemoveEffect(String type) {

@@ -95,8 +95,6 @@ import javax.xml.xpath.XPathFactory;
 public class SettingsScreen extends AppCompatActivity
 {
 
-    private int numPlayers ;
-    private String shipName;
     private EditText shipNameEntry;
     private EditText playerCount;
     private Spinner difficultySpinner;
@@ -300,8 +298,8 @@ public class SettingsScreen extends AppCompatActivity
             progressLabel.setVisibility(View.INVISIBLE);
             progressUpdateText.setVisibility(View.INVISIBLE);
             progressBar.setProgress(0);
-            numPlayers = Integer.valueOf(playerCount.getText().toString());
-            shipName = shipNameEntry.getText().toString();
+            int numPlayers = Integer.valueOf(playerCount.getText().toString());
+            String shipName = shipNameEntry.getText().toString();
             MainActivity.game.SetupGame(numPlayers, shipName,threatNames,internalNames,allThreats,internalThreats,externalThreats);
             Intent intent = new Intent(context,GameSetup.class);
             startActivity(intent);
@@ -525,6 +523,7 @@ public class SettingsScreen extends AppCompatActivity
                     }
                     case "changeDeck": {
                         effects.add(new ActionInternalTurboLift());
+                        break;
                     }
                     case "damageShip": {
                         XPathExpression expression = xPath.compile("./target");
@@ -626,6 +625,7 @@ public class SettingsScreen extends AppCompatActivity
                         XPathExpression expression = xPath.compile("./target");
                         String target = (String) expression.evaluate(item, XPathConstants.STRING);
                         effects.add(new ActionInternalDelayPlayers(target));
+                        break;
                     }
 
                 }
@@ -808,6 +808,7 @@ public class SettingsScreen extends AppCompatActivity
                 }
                 default:
                     effect = null;
+                    break;
             }
             return effect;
         }

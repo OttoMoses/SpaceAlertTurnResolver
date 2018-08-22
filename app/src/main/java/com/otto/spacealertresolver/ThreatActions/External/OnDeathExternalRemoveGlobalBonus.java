@@ -22,6 +22,7 @@ public class OnDeathExternalRemoveGlobalBonus extends OnDeathExternal
                 {
                     game.globalDamageBuff -= value;
                     message += "The attack value of external threats is no longer being increased by the " + t.name + "!";
+                    break;
                 }
                 case "shield" :
                 {
@@ -33,6 +34,7 @@ public class OnDeathExternalRemoveGlobalBonus extends OnDeathExternal
                         }
                     }
                     message += "The shield value of external threats is no longer being increased by the " + t.name + "!";
+                    break;
                 }
             }
         }

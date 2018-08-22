@@ -234,7 +234,7 @@ public class Game {
     }
 
 
-    public void StartGame() throws IOException, SAXException, ParserConfigurationException {
+    public void StartGame() {
         // set game state starting values
         computerMaintained = false;
         currentRound = 0;
@@ -679,7 +679,7 @@ public class Game {
             }
             if(((ThreatExternal) t).damageAction.getClass() == OnDamageExternalToggle.class)
             {
-                if(((ThreatExternal) t).damageAction.getClass() == OnDamageExternalSelfToggle.class && ((ThreatExternal) t).toggle);
+                if(((ThreatExternal) t).damageAction.getClass() == OnDamageExternalSelfToggle.class && ((ThreatExternal) t).toggle)
                 {
                     invalid.add(t);
                 }
@@ -1028,15 +1028,15 @@ public class Game {
     }
 
     public String ShipDamage(int zone, int damage, boolean bypassBonus, boolean internal, boolean plural) {
-        String damageMessage = "";
+        StringBuilder damageMessage = new StringBuilder();
         int realDamage = damage + globalDamageBuff;
         ArrayList<DamageToken> tokens = null;
         if (plural) {
-            damageMessage += " attack";
+            damageMessage.append(" attack");
         } else {
-            damageMessage += " attacks";
+            damageMessage.append(" attacks");
         }
-        damageMessage += " the " + colors[zone] + " zone for " + realDamage + " damage!";
+        damageMessage.append(" the ").append(colors[zone]).append(" zone for ").append(realDamage).append(" damage!");
         Section shield = ship[zone][1];
         switch (zone) {
             case 0:
@@ -1051,19 +1051,19 @@ public class Game {
         }
         if (shield.powerCubes != 0 && !internal) {
             if (shield.powerCubes >= realDamage) {
-                damageMessage += "The shield in the " + shield.zoneName + " zone blocks all the damage!";
+                damageMessage.append("The shield in the ").append(shield.zoneName).append(" zone blocks all the damage!");
                 shield.powerCubes -= realDamage;
                 realDamage = 0;
                 if (shield.powerCubes != 0) {
-                    damageMessage += "\nThere is " + shield.powerCubes + " power left in the " + shield.zoneName + " zone shield.";
+                    damageMessage.append("\nThere is ").append(shield.powerCubes).append(" power left in the ").append(shield.zoneName).append(" zone shield.");
                 } else {
-                    damageMessage += "\nThere is no power remaining in the " + shield.zoneName + " zone shield!";
+                    damageMessage.append("\nThere is no power remaining in the ").append(shield.zoneName).append(" zone shield!");
                 }
             } else {
                 realDamage -= shield.powerCubes;
-                damageMessage += "The " + shield.zoneName + " zone shield blocked " + shield.powerCubes + " damage!";
+                damageMessage.append("The ").append(shield.zoneName).append(" zone shield blocked ").append(shield.powerCubes).append(" damage!");
                 shield.powerCubes = 0;
-                damageMessage += "\nThere is no power remaining in the " + shield.zoneName + " zone shield!";
+                damageMessage.append("\nThere is no power remaining in the ").append(shield.zoneName).append(" zone shield!");
             }
 
         }
@@ -1072,25 +1072,25 @@ public class Game {
         }
         if ((fissureMod == 1 && zone == 0) || fissureMod == 2) {
             realDamage = realDamage * 2;
-            damageMessage += "\n Damage is doubled by the fissure!";
+            damageMessage.append("\n Damage is doubled by the fissure!");
         }
         for (int i = 0; i < realDamage; i++) {
             if (tokens != null)
             {
-                damageMessage += "\n";
+                damageMessage.append("\n");
                 if (tokens.size() != 0)
                 {
                     DamageToken d = tokens.get(0);
-                    damageMessage += d.doDamage(zone, ship);
+                    damageMessage.append(d.doDamage(zone, ship));
                     tokens.remove(d);
                 }
                 else {
-                    damageMessage += "\nThe Ship is destroyed!";
+                    damageMessage.append("\nThe Ship is destroyed!");
                     break;
                 }
             }
         }
-        return damageMessage;
+        return damageMessage.toString();
     }
 
     public String EndGame(boolean dead)

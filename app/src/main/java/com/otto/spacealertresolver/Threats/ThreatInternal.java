@@ -81,7 +81,7 @@ public class ThreatInternal extends Threat
     {
         String message = "";
         message += damageEffect.Execute(ship,this,players);
-        if(message == "")
+        if(message.equals(""))
         {
             return message;
         }

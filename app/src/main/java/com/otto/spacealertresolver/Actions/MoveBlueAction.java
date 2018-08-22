@@ -38,7 +38,7 @@ public class MoveBlueAction extends PlayerAction
         {
             message += player.Delay(game.currentRound);
         }
-        if(location.specialKnockout)
+        if(location != null && location.specialKnockout)
         {
             player.unconscious = true;
             message += player.playerName + " is knocked out!";

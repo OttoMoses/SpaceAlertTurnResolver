@@ -70,6 +70,7 @@ public class ActionExternalDamageShip extends ActionEffectExternal
                     {
                         actionText = "Because the " + threat.name + " has at least " + value + " damage it skips its attack!";
                     }
+                    break;
                 }
         }
         return actionText;

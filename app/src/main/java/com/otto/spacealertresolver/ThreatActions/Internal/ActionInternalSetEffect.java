@@ -24,9 +24,10 @@ public class ActionInternalSetEffect extends ActionEffectInternal
                    if(!location.specialKnockout)
                    {
                        location.specialKnockout = true;
-                       message.append("\nPlayers entering the " + location.sectionName + " " + location.zoneName + " section will be knocked out!");
+                       message.append("\nPlayers entering the ").append(location.sectionName).append(" ").append(location.zoneName).append(" section will be knocked out!");
                    }
                }
+                break;
             }
         }
         return message.toString();

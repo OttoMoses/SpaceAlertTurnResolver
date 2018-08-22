@@ -61,7 +61,7 @@ public class ActionInternalMoveToPlayerCount extends ActionEffectInternal
             }
 
         });
-        if(options.get(0).first != options.get(1).first)
+        if(!options.get(0).first.equals(options.get(1).first))
         {
             Pair<Integer,Integer> choice = options.get(0).second;
             ship[choice.first][choice.second].combatThreat = true;

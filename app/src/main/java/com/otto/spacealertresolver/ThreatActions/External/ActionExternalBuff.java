@@ -13,11 +13,12 @@ public class ActionExternalBuff extends ActionEffectExternal
 {
     private String stat;
     private String amount;
-    private int value;
+
     @Override
     public String Execute(Section[][] ship, ThreatExternal threat)
     {
         String actionText = "";
+        int value;
         switch (amount)
         {
             case "halfHealth":

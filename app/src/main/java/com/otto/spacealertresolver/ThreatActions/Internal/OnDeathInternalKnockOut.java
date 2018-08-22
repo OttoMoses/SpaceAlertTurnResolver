@@ -13,29 +13,31 @@ public class OnDeathInternalKnockOut extends OnDeathInternal
     @Override
     public String Execute(ThreatInternal threat)
     {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         switch (target)
         {
             case "lateralReactors":
             {
-                message += "The " + threat.name + " attacks players in the lower red and blue sections!\n";
+                message.append("The ").append(threat.name).append(" attacks players in the lower red and blue sections!\n");
                 for(Player p : game.players)
                 {
                     if((p.zonePosition == 0 && p.sectionPosition == 0) ||(p.zonePosition == 2 && p.sectionPosition == 0))
                     {
                         p.unconscious = true;
-                        message += p.playerName + " Is knocked out!";
+                        message.append(p.playerName).append(" Is knocked out!");
                     }
                 }
+                break;
             }
             case "lastHit" :
             {
-                message += "The " + threat.name + " attacks the player who killed it!\n";
+                message.append("The ").append(threat.name).append(" attacks the player who killed it!\n");
                 game.players[game.currentPlayer].unconscious = true;
-                message += game.players[game.currentPlayer].playerName + " Is knocked out!";
+                message.append(game.players[game.currentPlayer].playerName).append(" Is knocked out!");
             }
+            break;
         }
-        return message;
+        return message.toString();
     }
 
     public OnDeathInternalKnockOut(String target)

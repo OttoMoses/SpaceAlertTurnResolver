@@ -21,7 +21,7 @@ public class TurboLiftAction extends PlayerAction {
         System.out.println("Do " + name);
         String message = "";
         Section startLocation = MainActivity.game.ship[player.zonePosition][player.sectionPosition];
-        Section endLocation = null;
+        Section endLocation;
             if(player.sectionPosition == 1)
             {
                 startLocation.playerCount--;
