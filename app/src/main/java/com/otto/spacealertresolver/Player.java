@@ -58,7 +58,6 @@ public class Player
                     {
                         actions[roundCount - 1] = actions[roundCount - 2];
                     }
-                    System.out.println(playerName + "'s action at T+" + roundCount + " was " + previous + " is now " + actions[roundCount].name);
                 }
                 delayed = true;
                 message +="\n" +  playerName + " delays their actions starting at T + " + round;

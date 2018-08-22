@@ -43,7 +43,6 @@ public class OnDamageInternalMalfSingle extends OnDamageInternal
             }
             default :
             {
-                System.out.print(threat.name + " has an error in it's damage action");
                 break;
             }
         }

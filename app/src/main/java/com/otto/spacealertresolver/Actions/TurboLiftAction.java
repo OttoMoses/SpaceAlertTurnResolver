@@ -18,7 +18,6 @@ public class TurboLiftAction extends PlayerAction {
     @Override
     public String Execute(Player player)
     {
-        System.out.println("Do " + name);
         String message = "";
         Section startLocation = MainActivity.game.ship[player.zonePosition][player.sectionPosition];
         Section endLocation;

@@ -17,7 +17,6 @@ public class MoveBlueAction extends PlayerAction
     }
     public  String Execute(Player player)
     {
-        System.out.println("Do " + name);
         String message = "";
         Section location = null;
         if(player.zonePosition != 2)
