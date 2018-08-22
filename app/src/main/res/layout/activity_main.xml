@@ -16,4 +16,10 @@
         android:layout_height="wrap_content"
         android:id="@+id/NewGameButton" />
 
+    <Button
+        android:id="@+id/CreditsButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Credits" />
+
 </LinearLayout>

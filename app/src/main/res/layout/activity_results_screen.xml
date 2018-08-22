@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
-        android:text="Game Results"
-        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:id="@+id/ResultsLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:id="@+id/ResultsLabel" />
+        android:text="Game Results"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Button
+        android:id="@+id/AdvanceTurn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Advance Turn" />
 
     <Button
         android:id="@+id/FinishButton"
@@ -18,19 +26,14 @@
         android:text="Finish"
         android:visibility="gone" />
 
-    <Button
-        android:id="@+id/AdvanceTurn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Advance Turn" />
-
-
     <TextView
         android:id="@+id/ResultsView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="15sp"
+        android:gravity="bottom"
         android:scrollbars="vertical"
-        android:gravity="bottom"/>
-        </LinearLayout>
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="15sp" />
+
+
+</LinearLayout>

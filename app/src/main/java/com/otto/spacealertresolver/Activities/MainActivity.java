@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
         //get controls
         Button newGameButton = findViewById(R.id.NewGameButton);
+        Button creditsButtom = findViewById(R.id.CreditsButton);
 
         //set up listeners
         newGameButton.setOnClickListener(new View.OnClickListener() {
@@ -30,6 +31,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                     game = new Game();
                 Intent intent = new Intent(context, SettingsScreen.class);
+                startActivity(intent);
+            }
+        });
+        creditsButtom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, CreditsScreen.class);
                 startActivity(intent);
             }
         });

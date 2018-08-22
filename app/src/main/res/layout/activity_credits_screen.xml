@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.CreditsScreen">
+
+    <TextView
+        android:id="@+id/CodeCredit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Programming by Otto Moses"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/GameCredit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Space Alert is owned by  Czech Games Edition  and was designed by Vlaada Chvátil "
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/IconCredit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="App icon credited to Delapouite on game-icons.net"
+        android:textSize="18sp" />
+</LinearLayout>

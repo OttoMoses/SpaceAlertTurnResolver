@@ -25,6 +25,7 @@
         <activity android:name=".Activities.ThreatTrackEdit" />
         <activity android:name=".Activities.ThreatsList" />
         <activity android:name=".Activities.ThreatDetail" />
+        <activity android:name=".Activities.CreditsScreen"></activity>
     </application>
 
 </manifest>

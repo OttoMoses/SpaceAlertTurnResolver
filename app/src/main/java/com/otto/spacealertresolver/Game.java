@@ -354,7 +354,7 @@ public class Game {
         }
         //special text for last round
         if (currentRound == numRounds) {
-            roundMessage += "\n" + shipName + " Hyperspace jumps back to known space!";
+            roundMessage += "\n" + shipName + " Hyperspace jumps back to known space!\n";
         }
 
         return roundMessage;
@@ -983,7 +983,7 @@ public class Game {
         }
         if (shield.powerCubes != 0 && !internal) {
             if (shield.powerCubes >= realDamage) {
-                damageMessage.append("The shield in the ").append(shield.zoneName).append(" zone blocks all the damage!");
+                damageMessage.append("\nThe shield in the ").append(shield.zoneName).append(" zone blocks all the damage!");
                 shield.powerCubes -= realDamage;
                 realDamage = 0;
                 if (shield.powerCubes != 0) {
@@ -993,7 +993,7 @@ public class Game {
                 }
             } else {
                 realDamage -= shield.powerCubes;
-                damageMessage.append("The ").append(shield.zoneName).append(" zone shield blocked ").append(shield.powerCubes).append(" damage!");
+                damageMessage.append("\nThe ").append(shield.zoneName).append(" zone shield blocked ").append(shield.powerCubes).append(" damage!");
                 shield.powerCubes = 0;
                 damageMessage.append("\nThere is no power remaining in the ").append(shield.zoneName).append(" zone shield!");
             }
@@ -1102,7 +1102,7 @@ public class Game {
         } else {
             endMessage += "\nFinal score: 0! \nDestroyed ships don't score points!";
         }
-        endMessage += "\nThanks for playing!";
+        endMessage += "\nThanks for playing!\n";
         return endMessage;
     }
 }
