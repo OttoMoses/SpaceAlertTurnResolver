@@ -150,7 +150,10 @@ public class ThreatDetail extends AppCompatActivity
             @Override
             public void onClick(View view)
             {
-                game.selectedNames.remove(game.threatNames.get(game.selectedThreatStrings[threatTurn].threatID));
+                if(game.selectedThreatStrings[threatTurn].threatID != game.threatNames.size() + 1)
+                {
+                    game.selectedNames.remove(game.threatNames.get(game.selectedThreatStrings[threatTurn].threatID));
+                }
                 game.selectedThreatStrings[threatTurn].trackNum = 4;
                 game.selectedThreatStrings[threatTurn].threatID = game.threatNames.size() + 1;
                 finish();

@@ -30,11 +30,11 @@ public class SuperHeavyLaserStation extends ActionStation
                 message += "fires the super heavy laser cannon in the " + location.sectionName + " " + location.zoneName + " section";
                 if(powerSource.powerCubes != 0)
                 {
-                    message += "\n" + "The central reactor has " + powerSource.powerCubes + " power remaining";
+                    message += "\n" + "The main reactor has " + powerSource.powerCubes + " power remaining";
                 }
                 else
                 {
-                    message += "\n" + "The central reactor has no power remaining";
+                    message += "\n" + "The main reactor has no power remaining";
                 }
             }
             else

@@ -23,9 +23,9 @@ public class HeavyShieldStation extends ActionStation {
                 location.powerCubes += shieldDiff;
                 message += " powers the shields in " + location.sectionName + " " + location.zoneName + " section" + " to its max capacity of " + location.getMaxPower();
                 if (powerSource.powerCubes != 0) {
-                    message += "\n" + "The central reactor has " + powerSource.powerCubes + " power remaining";
+                    message += "\n" + "The main reactor has " + powerSource.powerCubes + " power remaining";
                 } else {
-                    message += "\n" + "The central reactor has no power remaining";
+                    message += "\n" + "The main reactor has no power remaining";
                 }
             } else if (powerSource.powerCubes != 0) {
                 location.powerCubes += powerSource.powerCubes;

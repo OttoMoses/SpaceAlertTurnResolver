@@ -16,26 +16,26 @@ public class ActionInternalLeakPower extends ActionEffectInternal
         {
             case "centralReactor" :
             {
-                message += LeakPower(threat,ship[1][1]);
+                message += LeakPower(threat,ship[1][0],ship);
                 break;
             }
             case "allReactors" :
             {
-                message+= LeakPower(threat,ship[0][1]) + "\n";
-                message+= LeakPower(threat,ship[1][1]) + "\n";
-                message+= LeakPower(threat,ship[2][1]);
+                message+= LeakPower(threat,ship[0][0],ship) + "\n\n";
+                message+= LeakPower(threat,ship[1][0],ship) + "\n\n";
+                message+= LeakPower(threat,ship[2][0],ship);
                 break;
             }
             case "centralShield" :
             {
-                message += LeakPower(threat,ship[1][0]);
+                message += LeakPower(threat,ship[1][1],ship);
                 break;
             }
         }
         return message;
     }
 
-    private String LeakPower(ThreatInternal threat,Section location)
+    private String LeakPower(ThreatInternal threat,Section location,Section[][] ship)
     {
         String message = "";
         switch (condition)
@@ -43,18 +43,31 @@ public class ActionInternalLeakPower extends ActionEffectInternal
             case "transfer" :
             {
                 int power = location.powerCubes;
-                int transferValue = location.getMaxPower() - location.powerCubes;
+                Section destination = ship[location.zonePos][1];
+                int transferValue = destination.getMaxPower() - destination.powerCubes;
                 if(power <= transferValue)
                 {
                     location.powerCubes += power;
-                    message += "The " + threat.name + " transfer " + power + " power to the Heavy Shield in the upper white section!";
+                    location.powerCubes -= transferValue;
+                    message += "The " + threat.name + " transfers " + power + " power to the " + destination.BSystem.name;
+                    if (location.powerCubes != 0) {
+                        message += "\n" + "The central reactor has " + location.powerCubes + " power remaining";
+                    } else {
+                        message += "\n" + "The central reactor has no power remaining";
+                    }
                 }
                 else
                 {
                     int damage = power - transferValue;
-                    location.powerCubes += transferValue;
-                    message += "The " + threat.name + " transfer " + transferValue + " power to the" + location.BSystem.name + " in the " + location.sectionName + " " + location.zoneName + " section!";
+                    destination.powerCubes += transferValue;
+                    location.powerCubes -= transferValue;
+                    message += "The " + threat.name + " transfer " + transferValue + " power to the " + destination.BSystem.name + " in the " + destination.sectionName + " " + destination.zoneName + " section!\n";
                     message += "The " + threat.name + MainActivity.game.ShipDamage(location.zonePos,damage,false,true,true);
+                    if (location.powerCubes != 0) {
+                        message += "\n" + "The main reactor has " + location.powerCubes + " power remaining";
+                    } else {
+                        message += "\n" + "The main reactor has no power remaining";
+                    }
                 }
                 break;
             }
@@ -62,6 +75,22 @@ public class ActionInternalLeakPower extends ActionEffectInternal
             {
                 int damage = location.powerCubes;
                 message += "The " + threat.name + MainActivity.game.ShipDamage(location.zonePos,damage,false,true,true);
+                if(location.BSystem.name.equals("main reactor"))
+                {
+                    if (location.powerCubes != 0) {
+                        message += "\n" + "The main reactor has " + location.powerCubes + " power remaining";
+                    } else {
+                        message += "\n" + "The main reactor has no power remaining";
+                    }
+                }
+                else
+                {
+                    if (location.powerCubes != 0) {
+                        message += "\n" + "The " + location.zoneName + " lateral reactor has " + location.powerCubes + " power remaining";
+                    } else {
+                        message += "\n" + "The " + location.zoneName + " lateral reactor has no power remaining";
+                    }
+                }
             }
         }
         return message;

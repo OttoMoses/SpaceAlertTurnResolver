@@ -46,7 +46,6 @@ public class Section
     {
         this.zoneName = zoneName;
         this.sectionName = sectionName;
-        LiftDamaged = false;
         this.powerX = powerX;
         this.powerY = powerY;
         this.maxPower = maxPower;
@@ -70,6 +69,7 @@ public class Section
         liftUsed = false;
         specialDelay = false;
         specialKnockout = false;
+        LiftDamaged = false;
     }
     public int getMaxPower()
     {

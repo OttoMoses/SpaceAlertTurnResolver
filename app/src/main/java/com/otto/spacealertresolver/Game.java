@@ -569,6 +569,7 @@ public class Game {
                 s.combatDamage = null;
                 s.malfCDamage = null;
                 s.malfBDamage= null;
+                s.liftUsed = false;
             }
         }
 
@@ -1010,9 +1011,7 @@ public class Game {
         for (Threat t : targets) {
             if (t.damage >= t.health) {
                 if(t.getClass() == ThreatExternal.class)
-                {
-                    message.append("\n");
-                }
+                message.append("\n");
                 t.ExecuteDeathAction(ship, players);
                 deadThreats.add(t);
                 if (t.getClass().equals(ThreatInternal.class) && ((ThreatInternal) t).plural) {
@@ -1079,11 +1078,13 @@ public class Game {
             if (tokens != null)
             {
                 damageMessage += "\n";
-                if (tokens.size() != 0) {
+                if (tokens.size() != 0)
+                {
                     DamageToken d = tokens.get(0);
                     damageMessage += d.doDamage(zone, ship);
                     tokens.remove(d);
-                } else {
+                }
+                else {
                     damageMessage += "\nThe Ship is destroyed!";
                     break;
                 }
