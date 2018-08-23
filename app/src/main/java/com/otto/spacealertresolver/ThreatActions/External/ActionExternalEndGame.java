@@ -10,7 +10,7 @@ public class ActionExternalEndGame extends ActionEffectExternal
     public String Execute(Section[][] ship, ThreatExternal threat)
     {
 
-        String message = "The " + threat.name + " destroys the ship!";
+        String message = "The " + threat.name + " destroys the ship!\n";
         message += MainActivity.game.EndGame(true);
         return message;
     }

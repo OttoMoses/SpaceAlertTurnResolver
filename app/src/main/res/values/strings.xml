@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">SpaceAlertResolver</string>
+    <string name="app_name">Space Alert Turn Resolver</string>
 
     <string-array name="difficulty_array">
         <item>Basic</item>
@@ -19,7 +19,7 @@
 
     <string-array name="colors_array">
         <item>Red</item>
-        <item>white</item>
+        <item>White</item>
         <item>Blue</item>
         <item>Internal</item>
     </string-array>

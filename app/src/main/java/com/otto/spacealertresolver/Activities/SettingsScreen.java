@@ -65,6 +65,7 @@ import com.otto.spacealertresolver.ThreatActions.Internal.OnDamageInternalMalfSi
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternal;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternalKnockOut;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternalRemoveEffect;
+import com.otto.spacealertresolver.ThreatActions.Internal.OnDeathInternalRemoveGlobalDamageModifier;
 import com.otto.spacealertresolver.ThreatActions.Internal.OnSpawnSetHealth;
 import com.otto.spacealertresolver.ThreatActions.Internal.SetInternalPosition;
 import com.otto.spacealertresolver.ThreatActions.Internal.ThreatActionInternal;
@@ -799,6 +800,11 @@ public class SettingsScreen extends AppCompatActivity
                     XPathExpression expression = xPath.compile("./target");
                     String target = (String) expression.evaluate(deathType, XPathConstants.STRING);
                     effect = new OnDeathInternalKnockOut(target);
+                    break;
+                }
+                case "removeGlobalDamageMod":
+                {
+                    effect = new OnDeathInternalRemoveGlobalDamageModifier();
                     break;
                 }
                 default:

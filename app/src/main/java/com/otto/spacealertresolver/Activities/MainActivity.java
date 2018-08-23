@@ -7,8 +7,10 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
 
+import com.crashlytics.android.Crashlytics;
 import com.otto.spacealertresolver.Game;
 import com.otto.spacealertresolver.R;
+import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
     public static Game game;
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Fabric.with(this, new Crashlytics());
 
         //set content view
         setContentView(R.layout.activity_main);

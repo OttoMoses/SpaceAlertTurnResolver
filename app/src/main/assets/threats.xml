@@ -1774,7 +1774,7 @@
         <speed>2</speed>
         <firesBack>false</firesBack>
         <locations>
-            <location section="1" zone="1"/>
+            <location section="0" zone="1"/>
         </locations>
         <threatType>combat</threatType>
         <xAction>
@@ -1813,7 +1813,7 @@
         <speed>2</speed>
         <firesBack>false</firesBack>
         <locations>
-            <location section="0" zone="0"/>
+            <location section="1" zone="0"/>
         </locations>
         <threatType>malfC</threatType>
         <xAction>
@@ -1827,7 +1827,7 @@
         </zAction>
         <damageAction type="malfSingle">C</damageAction>
         <deathAction>
-                <effect type="none">
+                <effect type="removeGlobalDamageMod">
                 </effect>
             </deathAction>
         <spawnAction>
@@ -1848,7 +1848,7 @@
         <speed>3</speed>
         <firesBack>false</firesBack>
         <locations>
-            <location section="0" zone="1"/>
+            <location section="1" zone="1"/>
         </locations>
         <threatType>malfB</threatType>
         <xAction>

@@ -27,7 +27,7 @@ public class ActionInternalEndGame extends ActionEffectInternal {
                 break;
             }
         }
-        message += MainActivity.game.EndGame(true);
+        message += "\n" + MainActivity.game.EndGame(true);
         return message;
     }
 }

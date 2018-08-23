@@ -541,8 +541,8 @@ public class Game {
                 message += t.ExecuteSpawnAction(ship);
             }
         }
-        if (message.equals("\n")) {
-            message += "No threats spawned this turn.\n";
+        if (message.equals("")) {
+            message += "\nNo threats spawned this turn.\n";
         } else {
             message += "\n";
         }
@@ -982,7 +982,8 @@ public class Game {
                 break;
         }
         if (shield.powerCubes != 0 && !internal) {
-            if (shield.powerCubes >= realDamage) {
+            if (shield.powerCubes >= realDamage)
+            {
                 damageMessage.append("\nThe shield in the ").append(shield.zoneName).append(" zone blocks all the damage!");
                 shield.powerCubes -= realDamage;
                 realDamage = 0;
@@ -991,7 +992,9 @@ public class Game {
                 } else {
                     damageMessage.append("\nThere is no power remaining in the ").append(shield.zoneName).append(" zone shield!");
                 }
-            } else {
+            }
+            else
+                {
                 realDamage -= shield.powerCubes;
                 damageMessage.append("\nThe ").append(shield.zoneName).append(" zone shield blocked ").append(shield.powerCubes).append(" damage!");
                 shield.powerCubes = 0;
@@ -999,12 +1002,20 @@ public class Game {
             }
 
         }
-        if (bypassBonus) {
+        if (bypassBonus)
+        {
+            damageMessage.append("\nDamage Which passed the shields is doubled!");
             realDamage = realDamage * 2;
         }
-        if ((fissureMod == 1 && zone == 0) || fissureMod == 2) {
+        if ((fissureMod == 1 && zone == 0))
+        {
             realDamage = realDamage * 2;
-            damageMessage.append("\n Damage is doubled by the fissure!");
+            damageMessage.append("\nDamage which passed the shields is doubled by the fissure!");
+        }
+        else if(fissureMod > 1)
+        {
+            realDamage = realDamage * 2;
+            damageMessage.append("\nDamage which passed the shields is doubled by the fissure!");
         }
         for (int i = 0; i < realDamage; i++) {
             if (tokens != null)
@@ -1017,7 +1028,8 @@ public class Game {
                     tokens.remove(d);
                 }
                 else {
-                    damageMessage.append("\nThe Ship is destroyed!");
+                    damageMessage.append("\nThe Ship is destroyed!\n");
+                    damageMessage.append(EndGame(true));
                     break;
                 }
             }

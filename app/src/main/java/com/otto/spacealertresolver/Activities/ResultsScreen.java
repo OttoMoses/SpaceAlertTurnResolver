@@ -50,11 +50,10 @@ public class ResultsScreen extends AppCompatActivity {
                     finish.setVisibility(View.VISIBLE);
                     result.append(MainActivity.game.EndGame(false));
                 }
-                else if(turnText.contains("The Ship is destroyed!"))
+                else if(turnText.contains("End Game Scoring"))
                 {
                     advanceTurn.setVisibility(View.GONE);
                     finish.setVisibility(View.VISIBLE);
-                    result.append(MainActivity.game.EndGame(true));
                 }
             }
         });
