@@ -87,7 +87,7 @@ public class Section
         if(powerCubes > damage)
         {
             message += "drains " + damage + " power from the ";
-            powerCubes =- damage;
+            powerCubes -= damage;
         }
         else
         {
@@ -100,22 +100,19 @@ public class Section
         }
         message += " " + BSystem.name;
 
-        message += "\n";
-
         if(powerCubes != 0)
         {
-            message += "The " + BSystem.name + " has " + powerCubes + " power remaining!";
+            message += "\nThe " + BSystem.name + " has " + powerCubes + " power remaining!";
         }
         else
         {
-            message += "The ";
+            message += "\nThe ";
             if(zonePos != 1)
             {
                 message += zoneName + " ";
             }
             message += BSystem.name + " has no power remaining!";
         }
-        message += "\n";
         return message;
     }
 }

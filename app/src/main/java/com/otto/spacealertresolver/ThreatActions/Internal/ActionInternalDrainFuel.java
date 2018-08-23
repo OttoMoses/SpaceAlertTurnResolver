@@ -13,7 +13,8 @@ public class ActionInternalDrainFuel extends ActionEffectInternal
         if(((MainReactorStation)ship[1][0].BSystem).fuelRods != 0)
         {
             ((MainReactorStation)ship[1][0].BSystem).fuelRods--;
-            message += "The " + threat.name + " consumes a fuel rod from the main reactor!";
+            message += "The " + threat.name + " consumes a fuel rod from the main reactor!\nThere are " + ((MainReactorStation)ship[1][0].BSystem).fuelRods + " fuel rods left" ;
+
         }
         else
         {

@@ -24,7 +24,7 @@ public class ActionInternalEnergyDrain extends ActionEffectInternal
             case "self":
             {
                 Section location = ship[threat.locations.get(0).first][threat.locations.get(0).second];
-                message.append("\n").append(DrainPower(location, threat));
+                message.append(DrainPower(location, threat));
                 break;
             }
             case "selfMult":
@@ -32,52 +32,48 @@ public class ActionInternalEnergyDrain extends ActionEffectInternal
                 for (Pair<Integer,Integer> p : threat.locations)
                 {
                     Section location = ship[p.first][p.second];
-                    message.append("\n").append(DrainPower(location, threat));
+                    message.append(DrainPower(location, threat));
                 }
                 break;
             }
             case "allReactors" :
             {
-                ArrayList<Pair<Integer,Integer>> locations = new ArrayList<>();
-                locations.add(new Pair<>(0, 0));
-                locations.add(new Pair<>(1, 0));
-                locations.add(new Pair<>(2, 0));
-                for (Pair<Integer,Integer> p :locations)
-                {
-                    Section location = ship[p.first][p.second];
-                    message.append("\n").append(DrainPower(location, threat));
-                }
+                Section location;
+                location = ship[0][0];
+                message.append(DrainPower(location, threat));
+                location = ship[1][0];
+                message.append("\n").append(DrainPower(location, threat));
+                location = ship[2][0];
+                message.append("\n").append(DrainPower(location, threat));
                 break;
             }
             case "allShields" :
             {
-                ArrayList<Pair<Integer,Integer>> locations = new ArrayList<>();
-                locations.add(new Pair<>(0, 1));
-                locations.add(new Pair<>(1, 1));
-                locations.add(new Pair<>(2, 1));
-                for (Pair<Integer,Integer> p :locations)
-                {
-                    Section location = ship[p.first][p.second];
-                    message.append("\n").append(DrainPower(location, threat));
-                }
+                Section location;
+                location = ship[0][1];
+                message.append(DrainPower(location, threat));
+                location = ship[1][1];
+                message.append("\n").append(DrainPower(location, threat));
+                location = ship[2][1];
+                message.append("\n").append(DrainPower(location, threat));
                 break;
             }
             case "selfReactor" :
             {
                 Section location = ship[threat.locations.get(0).first][0];
-                message.append("\n").append(DrainPower(location, threat));
+                message.append(DrainPower(location, threat));
                 break;
             }
             case "selfShield" :
             {
                 Section location = ship[threat.locations.get(0).first][1];
-                message.append("\n").append(DrainPower(location, threat));
+                message.append(DrainPower(location, threat));
                 break;
             }
             case "mainReactor" :
             {
                 Section location = ship[1][0];
-                message.append("\n").append(DrainPower(location, threat));
+                message.append(DrainPower(location, threat));
                 break;
             }
         }
@@ -113,17 +109,17 @@ public class ActionInternalEnergyDrain extends ActionEffectInternal
                 }
                 else
                 {
-                    message += "The " + location.DrainPower(damage);
+                    message += "The "  +  threat.name + " " + location.DrainPower(damage);
                 }
                 break;
             }
             case "none":
             {
-                message += "The " + location.DrainPower(damage);
+                message += "The " +  threat.name + " " + location.DrainPower(damage);
                 break;
             }
         }
-        return message + "\n";
+        return message;
     }
     public ActionInternalEnergyDrain(String target, String condition, String damValue)
     {
