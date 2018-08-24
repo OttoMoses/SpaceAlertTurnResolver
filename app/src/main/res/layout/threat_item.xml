@@ -11,19 +11,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="10dp"/>
 
     <TextView
         android:text="Medium Text"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/ThreatNameText" />
+        android:id="@+id/ThreatNameText"
+        android:paddingLeft="10dp"/>
 
     <TextView
         android:id="@+id/ThreatTrackText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Medium Text"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:paddingLeft="10dp"/>
 </LinearLayout>

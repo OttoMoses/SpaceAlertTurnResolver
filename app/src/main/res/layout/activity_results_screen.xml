@@ -33,5 +33,6 @@
         android:gravity="bottom"
         android:scrollbars="vertical"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textSize="15sp"/>
+        android:textSize="15sp"
+        android:paddingLeft="10dp"/>
 </LinearLayout>
