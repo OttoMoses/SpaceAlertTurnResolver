@@ -5,6 +5,7 @@
     <string-array name="difficulty_array">
         <item>Basic</item>
         <item>Advanced</item>
+        <item>Basic + Advanced</item>
     </string-array>
 
     <string-array name="tracks_array">
@@ -22,5 +23,12 @@
         <item>White</item>
         <item>Blue</item>
         <item>Internal</item>
+    </string-array>
+    <string-array name="scenarios_array">
+        <item>None</item>
+        <item>First Test Run</item>
+        <item>Second Test Run</item>
+        <item>Simulation</item>
+        <item>Advanced Simulation</item>
     </string-array>
 </resources>

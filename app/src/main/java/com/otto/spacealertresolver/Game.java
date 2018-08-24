@@ -54,7 +54,7 @@ import java.util.List;
  */
 
 public class Game {
-    public final PlayerAction[] actions;
+    public  PlayerAction[] actions;
     public ArrayList<String> threatNames;
     public Player[] players;
     public int numRounds;
@@ -104,32 +104,50 @@ public class Game {
                         "Blue",
                         "Internal",
                 };
-        //create array of all action object flyweights
-        actions = new PlayerAction[]
-                {
-                        new BlankAction(),
-                        new MoveRedAction(),
-                        new MoveBlueAction(),
-                        new HeroicMoveAction(),
-                        new AAction(),
-                        new BAction(),
-                        new CAction(),
-                        new BattleBotsAction(),
-                        new HeroicAAction(),
-                        new HeroicBAction(),
-                        new HeroicBattlebotsAction(),
-                        new TurboLiftAction()
-                };
         observationScore = new int[]{0, 1, 2, 3, 5, 7};
     }
 
     //Public method to set game-wide variables when starting a new session
-    public void SetupGame(int numPlayers, String name,ArrayList<String> threatNames,ArrayList<String> internalNames,ArrayList<Threat> allThreats,ArrayList<Threat> internalThreats,ArrayList<Threat> externalThreats) {
+    public void SetupGame(int numPlayers, String name,ArrayList<String> threatNames,ArrayList<String> internalNames,ArrayList<Threat> allThreats,ArrayList<Threat> internalThreats,ArrayList<Threat> externalThreats,String scenario) {
         shipName = name;
         //set variables that depend on game type
 
-        gameType = 2;
-        numRounds = 12;
+        switch (scenario)
+        {
+            case "First Test Run":
+            {
+                gameType = 1;
+                break;
+            }
+            case "Second Test Run":
+            {
+                gameType = 2;
+                break;
+            }
+            case "Simulation":
+            {
+                gameType = 3;
+                break;
+            }
+            case "Advanced Simulation":
+            {
+                gameType = 4;
+                break;
+            }
+            default:
+            {
+                gameType = 5;
+                break;
+            }
+        }
+        if(gameType < 3)
+        {
+            numRounds = 7;
+        }
+        else
+        {
+            numRounds = 12;
+        }
         threatTracks = new ThreatTrack[4];
 
         //import xml data
@@ -148,6 +166,40 @@ public class Game {
         selectedThreatStrings = new ThreatString[8];
         Arrays.fill(selectedThreatStrings, new ThreatString(threatNames.size() + 1, 4));
 
+        //create array of all action object flyweights
+        if(gameType > 4)
+        {
+            actions = new PlayerAction[]
+                    {
+                            new BlankAction(),
+                            new MoveRedAction(),
+                            new MoveBlueAction(),
+                            new HeroicMoveAction(),
+                            new AAction(),
+                            new BAction(),
+                            new CAction(),
+                            new BattleBotsAction(),
+                            new TurboLiftAction(),
+                            new HeroicAAction(),
+                            new HeroicBAction(),
+                            new HeroicBattlebotsAction()
+                    };
+        }
+        else
+        {
+            actions = new PlayerAction[]
+                    {
+                            new BlankAction(),
+                            new MoveRedAction(),
+                            new MoveBlueAction(),
+                            new AAction(),
+                            new BAction(),
+                            new CAction(),
+                            new BattleBotsAction(),
+                            new TurboLiftAction()
+                    };
+        }
+
         //create creates an array to store players, populates it with unnamed players, and populates their action arrays with blank actions
         players = new Player[numPlayers];
         for (int i = 0; i < numPlayers; i++) {
@@ -159,6 +211,57 @@ public class Game {
             p.playerID = i;
         }
         InitializeShip();
+        if(gameType == 1)
+        {
+            selectedThreatStrings[0] = new ThreatString(0,2);
+            selectedThreatStrings[1] = new ThreatString(1,1);
+            selectedThreatStrings[2] = new ThreatString(2,0);
+            ThreatTrack track;
+            track = threatTracks[0];
+            track.XSpace = new int[]{6};
+            track.YSpaces = new int[]{9,13};
+            track.EndSpace = new int[]{15};
+            track.rangeTwo = 5;
+            track.rangeOne = 10;
+            track = threatTracks[1];
+            track.XSpace = new int[]{4};
+            track.YSpaces = new int[]{};
+            track.EndSpace = new int[]{11};
+            track.rangeTwo = 1;
+            track.rangeOne = 6;
+            track = threatTracks[2];
+            track.XSpace = new int[]{5};
+            track.YSpaces = new int[]{9};
+            track.EndSpace = new int[]{13};
+            track.rangeTwo = 3;
+            track.rangeOne = 8;
+        }
+        if(gameType == 2)
+        {
+            selectedThreatStrings[0] = new ThreatString(0,1);
+            selectedThreatStrings[1] = new ThreatString(1,0);
+            selectedThreatStrings[3] = new ThreatString(2,2);
+            ThreatTrack track;
+            track = threatTracks[0];
+            track.XSpace = new int[]{4};
+            track.YSpaces = new int[]{};
+            track.EndSpace = new int[]{11};
+            track.rangeTwo = 1;
+            track.rangeOne = 6;
+            track = threatTracks[1];
+            track.XSpace = new int[]{4};
+            track.YSpaces = new int[]{8};
+            track.EndSpace = new int[]{14};
+            track.rangeTwo = 4;
+            track.rangeOne = 9;
+            track = threatTracks[2];
+            track.XSpace = new int[]{6};
+            track.YSpaces = new int[]{};
+            track.EndSpace = new int[]{10};
+            track.rangeTwo = 0;
+            track.rangeOne = 5;
+        }
+
     }
 
 
@@ -334,7 +437,10 @@ public class Game {
         }
 
         roundMessage += "At T + " + currentRound + ":\n";
-        roundMessage += MaintenanceCheck();
+        if(gameType > 2)
+        {
+            roundMessage += MaintenanceCheck();
+        }
         roundMessage += "\n----Threat Spawn Step----\n";
         roundMessage += SpawnThreats(currentRound);
         roundMessage += "\n----Player Action Step----\n";
@@ -1017,7 +1123,8 @@ public class Game {
             realDamage = realDamage * 2;
             damageMessage.append("\nDamage which passed the shields is doubled by the fissure!");
         }
-        for (int i = 0; i < realDamage; i++) {
+        for (int i = 0; i < realDamage; i++)
+        {
             if (tokens != null)
             {
                 damageMessage.append("\n");
@@ -1027,11 +1134,23 @@ public class Game {
                     damageMessage.append(d.doDamage(zone, ship));
                     tokens.remove(d);
                 }
-                else {
+                else
+                {
                     damageMessage.append("\nThe Ship is destroyed!\n");
                     damageMessage.append(EndGame(true));
                     break;
                 }
+            }
+        }
+        if(tokens != null && tokens.size() != 0)
+        {
+            if(tokens.size() != 1)
+            {
+                damageMessage.append("\nThere are ").append(tokens.size()).append(" damage tokens left in the ").append(colors[zone]).append(" stack!");
+            }
+            else
+            {
+                damageMessage.append("\nThere is only 1 damage token left in the ").append(colors[zone]).append(" stack!");
             }
         }
         return damageMessage.toString();

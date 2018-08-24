@@ -13,13 +13,17 @@ import com.otto.spacealertresolver.Adapters.ThreatAdapter;
 import com.otto.spacealertresolver.R;
 import com.otto.spacealertresolver.ThreatString;
 
+import static com.otto.spacealertresolver.Activities.MainActivity.game;
+
 public class ThreatsList extends AppCompatActivity
 {
     private ListView threatsListView;
     private final Context context = this;
+    ThreatString[] threatStrings;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_threats_list);
         threatsListView = findViewById(R.id.ThreatsList);
@@ -34,12 +38,13 @@ public class ThreatsList extends AppCompatActivity
                 startActivity(threatData);
             }
         });
+
     }
     @Override
     protected  void onResume()
     {
         super.onResume();
-        ThreatString[] threatStrings = MainActivity.game.selectedThreatStrings;
+        threatStrings = game.selectedThreatStrings;
         ThreatAdapter threatAdapter = new ThreatAdapter(this, threatStrings);
         threatsListView.setAdapter(threatAdapter);
     }

@@ -3,6 +3,8 @@ package com.otto.spacealertresolver.Stations;
 import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.Player;
 
+import static com.otto.spacealertresolver.Activities.MainActivity.game;
+
 /**
  * Created by Otto on 1/28/2018.
  */
@@ -13,24 +15,31 @@ public class InterceptorStation extends ActionStation
     public String Activate(Player player, boolean heroic)
     {
         String message = "";
-        if(player.leadingBots)
+        if(game.gameType > 3)
         {
-            if(MainActivity.game.interceptorsDocked)
+            if(player.leadingBots)
             {
-                player.flyingInterceptors = true;
-                MainActivity.game.interceptorsDocked = false;
-                MainActivity.game.strafingRun = true;
-                message += " takes off in interceptors with their squad of battlebots and performs a strafing run";
-                //code for strafing run here
+                if(game.interceptorsDocked)
+                {
+                    player.flyingInterceptors = true;
+                    game.interceptorsDocked = false;
+                    game.strafingRun = true;
+                    message += " takes off in interceptors with their squad of battlebots and performs a strafing run";
+                    //code for strafing run here
+                }
+                else
+                {
+                    message += "tries to take off in interceptors but they aren't docked";
+                }
             }
             else
             {
-                message += "tries to take off in interceptors but they aren't docked";
+                message += "tries to take off in interceptors but has no battlebots to lead";
             }
         }
         else
         {
-            message += "tries to take off in interceptors but has no battlebots to lead";
+            message += "does nothing";
         }
         return message;
     }

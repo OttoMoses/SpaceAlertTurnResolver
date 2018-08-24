@@ -45,6 +45,19 @@
         android:maxLength="1" />
 
     <TextView
+        android:id="@+id/ScenarioLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Select the training scenario to use if any"
+        android:textAppearance="?android:attr/textAppearanceMedium" />
+
+    <Spinner
+        android:id="@+id/ScenarioSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
         android:id="@+id/difficultyLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

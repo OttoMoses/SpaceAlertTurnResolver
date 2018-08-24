@@ -3,7 +3,6 @@ package com.otto.spacealertresolver.ThreatActions.External;
 import com.otto.spacealertresolver.Section;
 import com.otto.spacealertresolver.ThreatActions.External.ActionEffectExternal;
 import com.otto.spacealertresolver.Threats.ThreatExternal;
-import com.otto.spacealertresolver.enums.Stats;
 
 /**
  * Created by Otto on 3/4/2018.
@@ -32,17 +31,17 @@ public class ActionExternalBuff extends ActionEffectExternal
                 break;
             }
         }
-        switch (Stats.valueOf(stat))
+        switch (stat)
         {
-            case shieldBuff:
+            case "shieldBuff":
                 threat.shieldBoost += value;
                 actionText += "The " + threat.name + " raises its shield by " + value + "!";
                 break;
-            case speed:
+            case "speed":
                 threat.speedBoost += value;
                 actionText += "The " + threat.name + " raises its speed by " + value + "!";
                 break;
-            case damage:
+            case "damage":
                 int damage = threat.damage;
                 if(threat.damage == 0)
                 {
@@ -61,7 +60,7 @@ public class ActionExternalBuff extends ActionEffectExternal
                     actionText += "The " + threat.name + " Heals " + value + " damage!";
                 }
                 break;
-            case shieldSet:
+            case "shieldSet":
                 threat.shield = value;
                 actionText += "The " + threat.name + " sets its shield to " + value + "!";
         }

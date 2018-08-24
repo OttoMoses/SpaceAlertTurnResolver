@@ -98,10 +98,12 @@ public class SettingsScreen extends AppCompatActivity
     private EditText shipNameEntry;
     private EditText playerCount;
     private Spinner difficultySpinner;
+    private Spinner scenarioSpinner;
     private Button setupGame;
     private ProgressBar progressBar;
     private TextView progressLabel;
     private TextView progressUpdateText;
+    private TextView difficultyLabel;
     private XMLTask task;
     private Context context;
     @Override
@@ -114,18 +116,49 @@ public class SettingsScreen extends AppCompatActivity
         progressBar = findViewById(R.id.progressBar);
         progressLabel = findViewById(R.id.ProgressLabel);
         progressUpdateText = findViewById(R.id.progressTextUpdate);
+        difficultyLabel = findViewById(R.id.difficultyLabel);
 
         //Get Controls
         shipNameEntry = findViewById(R.id.ShipNameEntry);
         playerCount = findViewById(R.id.PlayerCountEntry);
         setupGame = findViewById(R.id.SetupGameButton);
         difficultySpinner = findViewById(R.id.difficultySpinner);
+        scenarioSpinner = findViewById(R.id.ScenarioSpinner);
         context = this;
 
         //setup spinner
         final ArrayAdapter difficultyAdapter = ArrayAdapter.createFromResource(this,R.array.difficulty_array,android.R.layout.simple_spinner_item);
         difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         difficultySpinner.setAdapter(difficultyAdapter);
+
+        final ArrayAdapter scenarioAdapter = ArrayAdapter.createFromResource(this,R.array.scenarios_array,android.R.layout.simple_spinner_item);
+        difficultyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        scenarioSpinner.setAdapter(scenarioAdapter);
+
+        scenarioSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener()
+        {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l)
+            {
+                if(i != 0)
+                {
+                    difficultySpinner.setEnabled(false);
+                    difficultyLabel.setText("The card set will be determined by your tutorial scenario.");
+
+                }
+                else
+                {
+                    difficultySpinner.setEnabled(true);
+                    difficultyLabel.setText("Select which cards to use.");
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView)
+            {
+
+            }
+        });
         //setup button
         setupGame.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -201,13 +234,43 @@ public class SettingsScreen extends AppCompatActivity
                 threatNames = new ArrayList<>();
                 internalNames = new ArrayList<>();
                 XPathExpression expression;
-                if(difficulty.equals("Basic"))
+                switch (scenarioSpinner.getSelectedItem().toString())
                 {
-                    expression = xPath.compile("/Threats/threat[difficulty='basic']");
-                }
-                else
-                {
-                    expression = xPath.compile("/Threats/threat");
+                    case "First Test Run":
+                    {
+                        expression = xPath.compile("/Threats/threat[position()<4]");
+                        break;
+                    }
+                    case "Second Test Run":
+                    {
+                        expression = xPath.compile("/Threats/threat[(position()>3) and (position()<7)]");
+                        break;
+                    }
+                    case "Simulation":
+                    {
+                        expression = xPath.compile("/Threats/threat[(type='external') and (difficulty='basic')]");
+                        break;
+                    }
+                    case "Advanced Simulation":
+                    {
+                        expression = xPath.compile("/Threats/threat[difficulty='basic']");
+                        break;
+                    }
+                    default:
+                    {
+                        switch (difficulty)
+                        {
+                            case "Basic":
+                                expression = xPath.compile("/Threats/threat[difficulty='basic']");
+                                break;
+                            case "Advanced":
+                                expression = xPath.compile("/Threats/threat[difficulty='advanced']");
+                                break;
+                            default:
+                                expression = xPath.compile("/Threats/threat");
+                                break;
+                        }
+                    }
                 }
                 NodeList threatList = (NodeList)expression.evaluate(document, XPathConstants.NODESET);
                 int maxProgress = threatList.getLength();
@@ -300,7 +363,7 @@ public class SettingsScreen extends AppCompatActivity
             progressBar.setProgress(0);
             int numPlayers = Integer.valueOf(playerCount.getText().toString());
             String shipName = shipNameEntry.getText().toString();
-            MainActivity.game.SetupGame(numPlayers, shipName,threatNames,internalNames,allThreats,internalThreats,externalThreats);
+            MainActivity.game.SetupGame(numPlayers, shipName,threatNames,internalNames,allThreats,internalThreats,externalThreats,scenarioSpinner.getSelectedItem().toString());
             Intent intent = new Intent(context,GameSetup.class);
             startActivity(intent);
         }

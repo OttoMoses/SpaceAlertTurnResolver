@@ -38,7 +38,7 @@ public class ActionAdapter extends BaseAdapter
         PlayerAction item = actions[position];
         View view = context.getLayoutInflater().inflate(R.layout.action_item,viewGroup,false);
         TextView txtName = view.findViewById(R.id.ActionNameText);
-        String nameText = "T+ " + (position + 1) + ": " + item.name;
+        String nameText = "T + " + (position + 1) + ": " + item.name;
         txtName.setText(nameText);
         return view;
     }

@@ -65,9 +65,9 @@ public class GameSetup extends AppCompatActivity
         });
 
 
-        if(MainActivity.game.gameType < 2)
+        if(MainActivity.game.gameType < 3)
         {
-            title.setText("Threats are predefined for tutorial scenarios");
+            title.setText("Threats and threat tracks are predefined for this tutorial scenario");
             threatTracksButton.setEnabled(false);
             threatsButton.setEnabled(false);
 

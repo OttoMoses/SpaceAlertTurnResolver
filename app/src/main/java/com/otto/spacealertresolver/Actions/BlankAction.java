@@ -14,6 +14,6 @@ public class BlankAction extends PlayerAction
     }
     public  String Execute(Player player)
     {
-        return "Does Nothing.";
+        return "does nothing.";
     }
 }

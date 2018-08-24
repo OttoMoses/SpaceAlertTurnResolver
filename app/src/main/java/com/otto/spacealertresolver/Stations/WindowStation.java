@@ -3,6 +3,8 @@ package com.otto.spacealertresolver.Stations;
 import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.Player;
 
+import static com.otto.spacealertresolver.Activities.MainActivity.game;
+
 /**
  * Created by Otto on 1/28/2018.
  */
@@ -13,48 +15,55 @@ public class WindowStation extends ActionStation {
     {
         int count;
         String message = "";
-            switch (MainActivity.game.phase)
+        if(game.gameType > 4)
+        {
+            switch (game.phase)
             {
-                case 1:
-                    count = MainActivity.game.observationOne;
-                    if(count < 5)
-                    {
-                        count++;
-                        message += "looks out the window and visually confirms the scanner data";
-                    }
-                    else
-                    {
-                        message += "looks out the window but all the data this phase already been confirmed!";
-                    }
-                    MainActivity.game.observationOne = count;
-                    break;
-                case 2:
-                    count = MainActivity.game.observationTwo;
-                    if(count < 5)
-                    {
-                        count++;
-                        message += "looks out the window and visually confirms the scanner data";
-                    }
-                    else
-                    {
-                        message += "looks out the window but all the data this phase already been confirmed!";
-                    }
-                    MainActivity.game.observationTwo = count;
-                    break;
-                case 3:
-                    count = MainActivity.game.observationThree;
-                    if(count < 5)
-                    {
-                        count++;
-                        message += "looks out the window and visually confirms the scanner data";
-                    }
-                    else
-                    {
-                        message += "looks out the window but all the data this phase already been confirmed!";
-                    }
-                    MainActivity.game.observationThree = count;
-                    break;
+            case 1:
+                count = game.observationOne;
+                if(count < 5)
+                {
+                    count++;
+                    message += "looks out the window and visually confirms the scanner data";
+                }
+                else
+                {
+                    message += "looks out the window but all the data this phase already been confirmed!";
+                }
+                game.observationOne = count;
+                break;
+            case 2:
+                count = game.observationTwo;
+                if(count < 5)
+                {
+                    count++;
+                    message += "looks out the window and visually confirms the scanner data";
+                }
+                else
+                {
+                    message += "looks out the window but all the data this phase already been confirmed!";
+                }
+                game.observationTwo = count;
+                break;
+            case 3:
+                count = game.observationThree;
+                if(count < 5)
+                {
+                    count++;
+                    message += "looks out the window and visually confirms the scanner data";
+                }
+                else
+                {
+                    message += "looks out the window but all the data this phase already been confirmed!";
+                }
+                game.observationThree = count;
+                break;
             }
+        }
+        else
+        {
+            message += "does nothing";
+        }
         return  message;
     }
 

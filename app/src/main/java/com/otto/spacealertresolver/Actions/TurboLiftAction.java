@@ -37,21 +37,23 @@ public class TurboLiftAction extends PlayerAction {
                 endLocation.playerCount++;
                 message += "moves to the " + endLocation.sectionName + " " + endLocation.zoneName + " section";
             }
-        if(startLocation.liftUsed || startLocation.LiftDamaged)
+        if(game.gameType > 2)
         {
-           message += player.Delay(MainActivity.game.currentRound);
+            if(startLocation.liftUsed || startLocation.LiftDamaged)
+            {
+                message += player.Delay(MainActivity.game.currentRound);
+            }
+            if(endLocation.specialDelay)
+            {
+                message += player.Delay(game.currentRound);
+            }
+            if(endLocation.specialKnockout)
+            {
+                player.unconscious = true;
+                message += player.playerName + " is knocked out!";
+            }
+            startLocation.liftUsed = true;
         }
-        if(endLocation.specialDelay)
-        {
-            message += player.Delay(game.currentRound);
-        }
-        if(endLocation.specialKnockout)
-        {
-            player.unconscious = true;
-            message += player.playerName + " is knocked out!";
-        }
-        startLocation.liftUsed = true;
-        startLocation.liftUsed = true;
         return message;
 
     }

@@ -3,6 +3,8 @@ package com.otto.spacealertresolver;
 import com.otto.spacealertresolver.Actions.PlayerAction;
 import com.otto.spacealertresolver.Activities.MainActivity;
 
+import static com.otto.spacealertresolver.Activities.MainActivity.game;
+
 /**
  * Created by Otto on 1/22/2018.
  */
@@ -48,11 +50,11 @@ public class Player
                     String previous = actions[roundCount].name;
                     if(roundCount == actions.length - 1)
                     {
-                        actions[actions.length - 1] = MainActivity.game.actions[0];
+                        actions[actions.length - 1] = game.actions[0];
                     }
                     else if(roundCount == round)
                     {
-                        actions[roundCount - 1] = MainActivity.game.actions[0];
+                        actions[roundCount - 1] = game.actions[0];
                     }
                     else
                     {
