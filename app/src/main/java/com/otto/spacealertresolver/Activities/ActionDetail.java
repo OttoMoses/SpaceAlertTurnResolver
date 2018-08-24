@@ -11,6 +11,7 @@ import com.otto.spacealertresolver.Actions.HeroicMoveAction;
 import com.otto.spacealertresolver.Actions.PlayerAction;
 import com.otto.spacealertresolver.Activities.MainActivity;
 import com.otto.spacealertresolver.Adapters.ActionAdapter;
+import com.otto.spacealertresolver.Adapters.ActionChoiceAdapter;
 import com.otto.spacealertresolver.R;
 
 public class ActionDetail extends AppCompatActivity
@@ -110,7 +111,7 @@ public class ActionDetail extends AppCompatActivity
 {
     super.onResume();
     actionOptions = MainActivity.game.actions;
-    ActionAdapter actionList = new ActionAdapter(this, actionOptions);
+    ActionChoiceAdapter actionList = new ActionChoiceAdapter(this, actionOptions);
     actionListView.setAdapter(actionList);
     heroicMoves = new String[]{"Upper Red","Lower Red","Upper White","Lower White","Upper Blue","Lower Blue"};
 }

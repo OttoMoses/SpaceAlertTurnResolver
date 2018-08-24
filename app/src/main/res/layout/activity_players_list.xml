@@ -10,6 +10,16 @@
         android:layout_height="wrap_content"
         android:id="@+id/PlayerListLabel"
         android:gravity="center" />
+
+    <TextView
+        android:id="@+id/playerListLabel2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Players should be listed in clockwise order from the captain"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="14sp" />
+
     <ListView
         android:minWidth="25px"
         android:minHeight="25px"

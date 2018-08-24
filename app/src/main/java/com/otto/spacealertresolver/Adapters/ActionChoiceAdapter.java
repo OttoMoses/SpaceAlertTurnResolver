@@ -13,7 +13,7 @@ import com.otto.spacealertresolver.R;
  * Created by Otto on 1/28/2018.
  */
 
-public class ActionAdapter extends BaseAdapter
+public class ActionChoiceAdapter extends BaseAdapter
 {
     private final PlayerAction[] actions;
     private final Activity context;
@@ -38,12 +38,11 @@ public class ActionAdapter extends BaseAdapter
         PlayerAction item = actions[position];
         View view = context.getLayoutInflater().inflate(R.layout.action_item,viewGroup,false);
         TextView txtName = view.findViewById(R.id.ActionNameText);
-        String nameText = "T+ " + (position + 1) + ": " + item.name;
-        txtName.setText(nameText);
+        txtName.setText(item.name);
         return view;
     }
 
-    public ActionAdapter(Activity context, PlayerAction[] actions)
+    public ActionChoiceAdapter(Activity context, PlayerAction[] actions)
     {
         this.context = context;
         this.actions = actions;
