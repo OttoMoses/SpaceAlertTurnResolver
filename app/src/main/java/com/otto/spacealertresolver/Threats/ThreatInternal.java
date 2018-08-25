@@ -161,7 +161,7 @@ public class ThreatInternal extends Threat
         speedBoost = 0;
         damage = 0;
         firesBack = firesBackDefault;
-        position = 0;
+        position = 1;
     }
 
 }

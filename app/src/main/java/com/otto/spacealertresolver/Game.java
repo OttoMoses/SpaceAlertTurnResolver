@@ -531,7 +531,7 @@ public class Game {
                     }
                 }
                 for (int space : track.EndSpace) {
-                    if (space < newPosition || space == newPosition) {
+                    if ((space < newPosition && space > t.position) || space == newPosition) {
                         message.append(t.ExecuteZAction(ship, players));
                         if(!gameEnd)
                         {
@@ -572,7 +572,7 @@ public class Game {
                     }
                     else {
                         if (t.getClass().equals(ThreatExternal.class)) {
-                            message.append("The ").append(t.name).append(" is now ").append(threatTracks[t.track].EndSpace[0] - t.position).append(" space away from the ship!\n");
+                            message.append("The ").append(t.name).append(" is now ").append(threatTracks[t.track].EndSpace[0] - newPosition).append(" space away from the ship!\n");
                         } else {
                             message.append("The ").append(t.name);
                             if (((ThreatInternal) t).plural) {
@@ -580,7 +580,7 @@ public class Game {
                             } else {
                                 message.append(" is now ");
                             }
-                            message.append(threatTracks[t.track].EndSpace[0] - t.position).append(" space away from escaping!\n");
+                            message.append(threatTracks[t.track].EndSpace[0] - newPosition).append(" space away from escaping!\n");
                         }
                         t.position = newPosition;
                     }
@@ -997,7 +997,7 @@ public class Game {
         for (Threat t : targets) {
             if (t.getClass().equals(ThreatExternal.class)) {
                 if (((ThreatExternal) t).bundle != null) {
-                    message.append(((ThreatExternal) t).ExecuteDamageAction());
+                    message.append("\n").append(((ThreatExternal) t).ExecuteDamageAction());
                 }
             }
         }

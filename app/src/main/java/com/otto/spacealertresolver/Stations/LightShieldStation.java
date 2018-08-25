@@ -30,7 +30,7 @@ public class LightShieldStation extends ActionStation
                 }
             } else if (powerSource.powerCubes != 0) {
                 location.powerCubes += powerSource.powerCubes;
-                message += " transfers " + powerSource.powerCubes + " power to the shields in " + location.sectionName + " " + location.zoneName;
+                message += " transfers " + powerSource.powerCubes + " power to the shields in the " + location.sectionName + " " + location.zoneName + " section";
                 powerSource.powerCubes = 0;
                 message += "\n\n" + "The " + powerSource.zoneName + "lateral reactor has no power remaining";
             } else {

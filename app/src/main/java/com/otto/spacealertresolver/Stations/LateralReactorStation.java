@@ -25,7 +25,7 @@ public class LateralReactorStation extends ActionStation
             {
                 location.powerCubes += powerDiff;
                 powerSource.powerCubes -= powerDiff;
-                message += "powers the lateral reactor in the " +  location.sectionName+ " " + location.zoneName + " section"  + "to it's maximum capacity of " + location.getMaxPower() + "\n";
+                message += "powers the lateral reactor in the " +  location.sectionName+ " " + location.zoneName + " section to it's maximum capacity of " + location.getMaxPower() + "\n";
                 if (powerSource.powerCubes != 0)
                 {
                     message += "\n" + "The main reactor has " + powerSource.powerCubes + " power remaining";
@@ -39,7 +39,7 @@ public class LateralReactorStation extends ActionStation
             {
                 location.powerCubes += powerDiff;
                 powerSource.powerCubes -= powerDiff;
-                message += "powers the lateral reactor in the " + location.sectionName+ " " + location.zoneName + " section" + "to it's maximum capacity of " + location.getMaxPower() + " and adds a heroic bonus of 1 power for free" + "\n";
+                message += "powers the lateral reactor in the " + location.sectionName+ " " + location.zoneName + " section to it's maximum capacity of " + location.getMaxPower() + " and adds a heroic bonus of 1 power for free" + "\n";
                 if (powerSource.powerCubes != 0)
                 {
                     message += "The main reactor has " + powerSource.powerCubes + " power remaining";

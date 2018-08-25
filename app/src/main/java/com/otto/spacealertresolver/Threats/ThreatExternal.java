@@ -142,7 +142,7 @@ public class ThreatExternal extends Threat
         shieldBoost = 0;
         speedBoost = 0;
         toggle = false;
-        position = 0;
+        position = 1;
     }
 
     public String ExecuteDamageAction()
