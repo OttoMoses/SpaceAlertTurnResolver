@@ -34,7 +34,7 @@ public class MoveBlueAction extends PlayerAction
         }
         if(location != null && location.specialDelay)
         {
-            message += player.Delay(game.currentRound);
+            message += player.Delay((game.currentRound + 1));
         }
         if(location != null && location.specialKnockout)
         {

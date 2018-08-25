@@ -45,20 +45,22 @@ public class Player
             }
             else
             {
+                int roundCard;
                 for(int roundCount = actions.length - 1; roundCount >= round; roundCount--)
                 {
                     String previous = actions[roundCount].name;
-                    if(roundCount == actions.length - 1)
+                    roundCard = roundCount - 1;
+                    if(roundCount == round)
                     {
-                        actions[actions.length - 1] = game.actions[0];
+                        actions[roundCard] = game.actions[0];
                     }
-                    else if(roundCount == round)
+                    else if(roundCard == 0)
                     {
-                        actions[roundCount - 1] = game.actions[0];
+                        actions[roundCard] = game.actions[0];
                     }
                     else
                     {
-                        actions[roundCount - 1] = actions[roundCount - 2];
+                        actions[roundCard] = actions[roundCard - 1];
                     }
                 }
                 delayed = true;
@@ -67,7 +69,7 @@ public class Player
         }
         else
         {
-            message += playerName + " can't be delayed because they are already knocked out!";
+            message += playerName + " can't be delayed because they were already delayed this turn!";
         }
         return message;
     }

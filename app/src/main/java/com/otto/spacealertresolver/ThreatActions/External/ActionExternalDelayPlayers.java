@@ -20,7 +20,7 @@ public class ActionExternalDelayPlayers extends ActionEffectExternal
                 message.append("The ").append(threat.name).append(" attacks all players on the ship delaying their actions!");
                 for (Player p : game.players)
                 {
-                message.append(p.Delay(game.currentRound));
+                message.append(p.Delay((game.currentRound + 1)));
                 }
                 break;
             }
@@ -32,7 +32,7 @@ public class ActionExternalDelayPlayers extends ActionEffectExternal
                 {
                     if(p.zonePosition == threat.track)
                     {
-                        message.append(p.Delay(game.currentRound));
+                        message.append(p.Delay((game.currentRound + 1)));
                     }
                 }
                 break;

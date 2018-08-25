@@ -41,11 +41,11 @@ public class TurboLiftAction extends PlayerAction {
         {
             if(startLocation.liftUsed || startLocation.LiftDamaged)
             {
-                message += player.Delay(MainActivity.game.currentRound);
+                message += player.Delay((game.currentRound + 1));
             }
             if(endLocation.specialDelay)
             {
-                message += player.Delay(game.currentRound);
+                message += player.Delay((game.currentRound + 1));
             }
             if(endLocation.specialKnockout)
             {
@@ -53,6 +53,7 @@ public class TurboLiftAction extends PlayerAction {
                 message += player.playerName + " is knocked out!";
             }
             startLocation.liftUsed = true;
+            endLocation.liftUsed = true;
         }
         return message;
 

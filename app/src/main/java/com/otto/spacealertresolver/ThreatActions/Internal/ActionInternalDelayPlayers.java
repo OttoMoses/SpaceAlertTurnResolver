@@ -22,7 +22,7 @@ public class ActionInternalDelayPlayers extends ActionEffectInternal
                 message.append("The ").append(threat.name).append(" attacks all players on the ship delaying their actions!");
                 for(Player p : game.players)
                 {
-                    message.append(p.Delay(game.currentRound));
+                    message.append(p.Delay((game.currentRound + 1)));
                 }
                 break;
             }
@@ -43,7 +43,7 @@ public class ActionInternalDelayPlayers extends ActionEffectInternal
                     {
                         if(p.zonePosition == (Integer)pair.first && p.sectionPosition == (Integer)pair.second)
                         {
-                            message.append(p.Delay(game.currentRound));
+                            message.append(p.Delay((game.currentRound + 1)));
                         }
                     }
                 }
